@@ -16,3 +16,4 @@ export interface SummaryDataItem {
   change: number;
   unit?: string;
 }
+
