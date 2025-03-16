@@ -30,7 +30,11 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
     return <EmptyReportState />;
   }
 
-  // Always show the full report content regardless of premium status
+  // Show login prompt for premium reports when user is not logged in
+  if (report.premium && !user) {
+    return <LoginPrompt report={report} />;
+  }
+
   const renderTabbedContent = () => {
     return (
       <Tabs defaultValue="highlights" value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -83,7 +87,20 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   return (
     <div className="p-6 md:p-8 overflow-y-auto h-full">
       <div className="max-w-4xl mx-auto">
-        {renderContent()}
+        {report.premium ? (
+          <PremiumContent 
+            content={{
+              title: "Premium Financial Insights",
+              description: "This premium report includes detailed financial analysis, expert insights, and future outlook projections.",
+              unlockPrice: "$9.99"
+            }}
+            requireAuth={true}
+          >
+            {renderContent()}
+          </PremiumContent>
+        ) : (
+          renderContent()
+        )}
       </div>
     </div>
   );
