@@ -18,7 +18,7 @@ const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialRep
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   
   const filteredReports = financialReports.filter(report => {
-    // Apply search filter
+    // Apply search filter (company name or ticker)
     const matchesSearch = 
       report.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       report.ticker.toLowerCase().includes(searchTerm.toLowerCase());
@@ -36,6 +36,12 @@ const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialRep
     setActiveFilter(filter);
   };
 
+  // Check if search appears to be a ticker (all uppercase or contains $)
+  const isTickerSearch = searchTerm && (
+    searchTerm === searchTerm.toUpperCase() || 
+    searchTerm.includes('$')
+  );
+
   return (
     <div className="h-full flex flex-col">
       <div className="px-4 pt-6 pb-4">
@@ -46,7 +52,7 @@ const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialRep
           </div>
           <Input
             type="search"
-            placeholder="Search companies..."
+            placeholder="Search by company or ticker (e.g., AAPL)..."
             className="pl-10 bg-secondary/50 border-secondary"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -84,6 +90,12 @@ const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialRep
             Annual
           </div>
         </div>
+        
+        {isTickerSearch && (
+          <div className="mb-4 text-sm text-primary">
+            Filtering by ticker: {searchTerm}
+          </div>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 pb-4">
