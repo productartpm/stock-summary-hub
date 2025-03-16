@@ -89,19 +89,11 @@ const FinancialReportsList = ({
           <ul className="divide-y divide-border">
             {filteredReports.map((report) => (
               <li key={report.id} className="hover:bg-muted/50">
-                <Button 
-                  variant="ghost" 
-                  className={`w-full justify-between p-4 h-auto ${selectedReportId === report.id ? 'bg-muted' : ''}`}
+                <CompanyItem 
+                  report={report} 
+                  isSelected={selectedReportId === report.id}
                   onClick={() => onSelectReport(report)}
-                >
-                  <CompanyItem report={report} />
-                  <div className="flex items-center gap-2">
-                    {report.premium && (
-                      <Lock className="h-4 w-4 text-amber-500" />
-                    )}
-                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                </Button>
+                />
               </li>
             ))}
           </ul>
