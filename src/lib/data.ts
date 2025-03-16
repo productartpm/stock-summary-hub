@@ -1,4 +1,3 @@
-
 import type { SummaryDataItem } from './types';
 
 export interface FinancialReport {
@@ -13,6 +12,7 @@ export interface FinancialReport {
   reportCategory: string[];
   summaryData: Record<string, SummaryDataItem>;
   keyHighlights: string[];
+  financialPeriod?: string;
   outlook?: {
     statement: string;
     guidanceRevenue?: {
@@ -46,7 +46,6 @@ export const formatPercentage = (value: number): string => {
   return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
 };
 
-// Added this function for CompanyItem component
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
@@ -67,6 +66,7 @@ export const financialReports: FinancialReport[] = [
     publicationDate: '2024-11-15',
     title: 'Quarterly Financial Report - Columbus Energy Q3 2024',
     reportCategory: ['Energy', 'Renewable Energy', 'Solar Power', 'Green Tech', 'ESG'],
+    financialPeriod: '9M 2024',
     summaryData: {
       revenue: {
         value: 233.86,
@@ -136,6 +136,7 @@ export const financialReports: FinancialReport[] = [
     publicationDate: '2024-10-11',
     title: 'JPMorgan Chase Reports Third Quarter 2024 Financial Results',
     reportCategory: ['Banking', 'Financial Services', 'Investment Banking', 'Consumer Banking'],
+    financialPeriod: 'Q3 2024',
     summaryData: {
       revenue: {
         value: 43.32,
@@ -201,6 +202,7 @@ export const financialReports: FinancialReport[] = [
     publicationDate: '2024-10-29',
     title: 'PayPal Holdings, Inc. Q3 2024 Results',
     reportCategory: ['Fintech', 'Payment Processing', 'E-commerce', 'Digital Payments'],
+    financialPeriod: 'Q3 2024',
     summaryData: {
       revenue: {
         value: 8.12,
@@ -265,6 +267,7 @@ export const financialReports: FinancialReport[] = [
     publicationDate: '2024-11-07',
     title: 'The Walt Disney Company Reports Fourth Quarter and Full Year Earnings for Fiscal 2024',
     reportCategory: ['Entertainment', 'Media', 'Streaming', 'Theme Parks'],
+    financialPeriod: 'Q4 2024',
     summaryData: {
       revenue: {
         value: 22.8,
@@ -325,6 +328,7 @@ export const financialReports: FinancialReport[] = [
     publicationDate: '2024-11-13',
     title: 'Cisco Reports First Quarter Earnings for Fiscal Year 2025',
     reportCategory: ['Technology', 'Networking', 'Cybersecurity', 'Infrastructure'],
+    financialPeriod: 'Q1 2025',
     summaryData: {
       revenue: {
         value: 13.9,

@@ -10,3 +10,9 @@ export interface ShareOptions {
   title: string;
   description: string;
 }
+
+export interface SummaryDataItem {
+  value: number;
+  change: number;
+  unit?: string;
+}
