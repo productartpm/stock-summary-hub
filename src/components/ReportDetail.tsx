@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { ChevronUp, ChevronDown, Calendar, LineChart, Eye, Download, ExternalLink, BarChart3, TrendingUp, AlertTriangle, Info, PieChart, ArrowUpRight, DollarSign, Users, FileText, Target, Share2 } from 'lucide-react';
 import { formatNumber, formatPercentage } from '@/lib/data';
@@ -656,4 +657,601 @@ const ReportDetail = ({ report, onShare }: ReportDetailProps) => {
                   <div className="text-2xl font-semibold mb-1">6.8%</div>
                   <p className="text-xs text-muted-foreground">Growing markets with focus on photovoltaic installations</p>
                 </div>
-                <
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium text-sm mb-2">Other Markets</h4>
+                  <div className="text-2xl font-semibold mb-1">3.5%</div>
+                  <p className="text-xs text-muted-foreground">Exploratory markets including Germany and Ukraine</p>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="trends" className="mt-4">
+            <div className="mb-8 bg-card rounded-lg p-5 border border-border/60">
+              <h3 className="text-lg font-semibold mb-4">Market Trends</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Analysis of key market and industry trends affecting Columbus Energy's business and future prospects.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium mb-2 flex items-center">
+                    <TrendingUp className="h-4 w-4 mr-2 text-primary" />
+                    Renewable Energy Market Dynamics
+                  </h4>
+                  <p className="text-sm">
+                    The Polish renewable energy market faced significant challenges in 2023-2024, 
+                    with regulatory uncertainty and reduced incentives impacting consumer demand. 
+                    The suspension of the "My Electricity" program and delays in implementing the 
+                    "My Heat" program contributed to a market slowdown.
+                  </p>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium mb-2 flex items-center">
+                    <BarChart3 className="h-4 w-4 mr-2 text-primary" />
+                    Competitive Landscape
+                  </h4>
+                  <p className="text-sm">
+                    The market has seen increased competition and price pressure, particularly 
+                    in the photovoltaic segment. Many smaller competitors have exited the market 
+                    due to financial constraints, potentially creating opportunities for well-capitalized 
+                    firms like Columbus Energy to gain market share as the sector consolidates.
+                  </p>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium mb-2 flex items-center">
+                    <AlertTriangle className="h-4 w-4 mr-2 text-primary" />
+                    Regulatory Environment
+                  </h4>
+                  <p className="text-sm">
+                    Changes in the net-metering system to net-billing have significantly altered 
+                    the economic proposition for residential solar installations. The European 
+                    Union's REPowerEU plan aims to accelerate renewable energy adoption, potentially 
+                    benefiting companies with established capabilities in these markets.
+                  </p>
+                </div>
+              </div>
+              
+              <PremiumContent
+                content={premiumContent.trends}
+              >
+                <div className="text-center py-4">
+                  <p className="text-sm text-muted-foreground">
+                    Unlock detailed market analysis, including industry comparisons and future outlook.
+                  </p>
+                </div>
+              </PremiumContent>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-card rounded-lg p-5 border border-border/60">
+                <h3 className="text-lg font-semibold mb-4">Employee Trends</h3>
+                <div className="h-72 w-full">
+                  <ChartContainer 
+                    config={chartConfig}
+                  >
+                    <BarChart data={employeeData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="year" />
+                      <YAxis />
+                      <Tooltip content={<ChartTooltipContent />} />
+                      <Bar 
+                        dataKey="count" 
+                        fill="var(--color-employees)" 
+                        name="Employee Count" 
+                        radius={[4, 4, 0, 0]}
+                      />
+                    </BarChart>
+                  </ChartContainer>
+                </div>
+                
+                <div className="mt-4">
+                  <h4 className="font-medium text-sm mb-2">Workforce Changes</h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex justify-between items-center border-b border-border/30 pb-2">
+                      <span>Peak workforce (2022)</span>
+                      <span className="font-medium">412 employees</span>
+                    </li>
+                    <li className="flex justify-between items-center border-b border-border/30 pb-2">
+                      <span>Current workforce (Q3 2024)</span>
+                      <span className="font-medium">379 employees</span>
+                    </li>
+                    <li className="flex justify-between items-center border-b border-border/30 pb-2">
+                      <span>Change from peak</span>
+                      <span className="font-medium text-red-500">-8.0%</span>
+                    </li>
+                  </ul>
+                  <p className="text-xs text-muted-foreground mt-4">
+                    The company has optimized its workforce through strategic reorganization 
+                    while maintaining core capabilities across all business segments.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="bg-card rounded-lg p-5 border border-border/60">
+                <h3 className="text-lg font-semibold mb-4">Technology & Innovation</h3>
+                <div className="space-y-4">
+                  <div className="bg-secondary/40 rounded-lg p-4">
+                    <h4 className="font-medium text-sm mb-2">Energy Storage Systems</h4>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      Columbus Energy has increased its focus on energy storage solutions, 
+                      developing new product offerings and partnerships to capitalize on 
+                      growing market demand.
+                    </p>
+                    <div className="mt-2 flex items-center justify-between">
+                      <div className="text-sm font-medium">Market potential</div>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-gray-300"></span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-secondary/40 rounded-lg p-4">
+                    <h4 className="font-medium text-sm mb-2">Virtual Power Plants</h4>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      The company is developing capabilities to aggregate distributed energy 
+                      resources into virtual power plants, creating new revenue streams from 
+                      grid services and energy trading.
+                    </p>
+                    <div className="mt-2 flex items-center justify-between">
+                      <div className="text-sm font-medium">Implementation stage</div>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-gray-300"></span>
+                        <span className="w-3 h-3 rounded-full bg-gray-300"></span>
+                        <span className="w-3 h-3 rounded-full bg-gray-300"></span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-secondary/40 rounded-lg p-4">
+                    <h4 className="font-medium text-sm mb-2">Energy Management Software</h4>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      Columbus Energy is enhancing its proprietary software platform to 
+                      provide advanced energy management capabilities for customers with 
+                      solar installations and storage systems.
+                    </p>
+                    <div className="mt-2 flex items-center justify-between">
+                      <div className="text-sm font-medium">Development progress</div>
+                      <div className="flex items-center space-x-1">
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span className="w-3 h-3 rounded-full bg-gray-300"></span>
+                        <span className="w-3 h-3 rounded-full bg-gray-300"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="future" className="mt-4">
+            <div className="bg-card rounded-lg p-5 border border-border/60 mb-6">
+              <h3 className="text-lg font-semibold mb-4">Strategic Initiatives & Future Plans</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Overview of Columbus Energy's strategic direction and key initiatives for 2024-2025.
+              </p>
+              
+              <div className="space-y-4 mb-6">
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">Business Model Evolution</h4>
+                  <p className="text-sm">
+                    Columbus Energy is transitioning from a pure installation company to an 
+                    integrated energy solutions provider, with increased focus on recurring 
+                    revenue streams from services, maintenance, and energy trading.
+                  </p>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">Geographic Expansion</h4>
+                  <p className="text-sm">
+                    While maintaining its core presence in Poland, the company plans to 
+                    accelerate growth in the Czech Republic and Slovakia markets, 
+                    leveraging existing capabilities and brand recognition.
+                  </p>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">Product Portfolio Diversification</h4>
+                  <p className="text-sm">
+                    The company intends to expand its energy storage offerings and develop 
+                    new solutions for commercial and industrial clients, reducing dependence 
+                    on the residential photovoltaic market.
+                  </p>
+                </div>
+              </div>
+              
+              <PremiumContent
+                content={premiumContent.future}
+              >
+                <div className="text-center py-4">
+                  <p className="text-sm text-muted-foreground">
+                    Unlock detailed future plans including financial targets and expansion roadmap.
+                  </p>
+                </div>
+              </PremiumContent>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-card rounded-lg p-5 border border-border/60">
+                <h3 className="text-lg font-semibold mb-4">Short-Term Priorities (Next 12 Months)</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      1
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Operational Efficiency</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Continue cost optimization efforts to maintain positive EBITDA trend, 
+                        focusing on streamlining operations and reducing overhead expenses.
+                      </p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      2
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Diversify Revenue Sources</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Accelerate growth in energy storage and service segments to mitigate 
+                        impact of fluctuations in the photovoltaic installation market.
+                      </p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Debt Restructuring</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Finalize the restructuring of the company's debt profile to improve 
+                        financial flexibility and reduce interest expenses.
+                      </p>
+                    </div>
+                  </li>
+                  
+                  <li className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      4
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Commercial Segment Expansion</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Increase focus on commercial and small business clients to capitalize 
+                        on more stable demand and higher-value projects.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="bg-card rounded-lg p-5 border border-border/60">
+                <h3 className="text-lg font-semibold mb-4">Financial Targets</h3>
+                <div className="space-y-4">
+                  <div className="bg-secondary/40 rounded-lg p-4">
+                    <div className="text-sm text-muted-foreground mb-2">Revenue Growth</div>
+                    <div className="text-lg font-medium mb-1">10-15%</div>
+                    <p className="text-xs text-muted-foreground">Projected year-over-year growth for FY 2025</p>
+                    <div className="mt-2 h-1.5 w-full bg-background rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-green-500" style={{ width: "12%" }}></div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-secondary/40 rounded-lg p-4">
+                    <div className="text-sm text-muted-foreground mb-2">EBITDA Margin Target</div>
+                    <div className="text-lg font-medium mb-1">12-15%</div>
+                    <p className="text-xs text-muted-foreground">Medium-term target (2025-2026)</p>
+                    <div className="mt-2 h-1.5 w-full bg-background rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-green-500" style={{ width: "13.5%" }}></div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-secondary/40 rounded-lg p-4">
+                    <div className="text-sm text-muted-foreground mb-2">Net Profitability</div>
+                    <div className="text-lg font-medium mb-1">Positive</div>
+                    <p className="text-xs text-muted-foreground">Expected to achieve positive net profit in FY 2025</p>
+                    <div className="mt-2 flex items-center text-xs">
+                      <span className="text-green-500 font-medium">Current: -9.39%</span>
+                      <ArrowUpRight className="h-3 w-3 mx-1 text-green-500" />
+                      <span className="text-green-500 font-medium">Target: &gt;0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="risks" className="mt-4">
+            <div className="bg-card rounded-lg p-5 border border-border/60 mb-6">
+              <h3 className="text-lg font-semibold mb-4">Key Risk Factors</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Major risks and challenges that could impact Columbus Energy's business performance and outlook.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium">Regulatory Risk</h4>
+                    <Badge variant="outline" className="bg-red-500/10 text-red-500 border-red-500/20">High</Badge>
+                  </div>
+                  <p className="text-sm mb-3">
+                    Continued changes in renewable energy regulations, incentive programs, 
+                    and net-billing systems could significantly impact consumer demand and 
+                    the economic attractiveness of photovoltaic installations.
+                  </p>
+                  <div className="text-xs text-muted-foreground">
+                    Mitigation: Active engagement with regulatory bodies, diversification of 
+                    product offerings, and expansion into multiple markets with different 
+                    regulatory frameworks.
+                  </div>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium">Market Competition</h4>
+                    <Badge variant="outline" className="bg-amber-500/10 text-amber-500 border-amber-500/20">Medium</Badge>
+                  </div>
+                  <p className="text-sm mb-3">
+                    Increased competition in the renewable energy market, particularly from 
+                    larger utility companies and international players entering the Polish market, 
+                    could pressure margins and market share.
+                  </p>
+                  <div className="text-xs text-muted-foreground">
+                    Mitigation: Focus on service quality, brand strengthening, and expansion 
+                    of value-added services that differentiate Columbus Energy from competitors.
+                  </div>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium">Financial Risk</h4>
+                    <Badge variant="outline" className="bg-amber-500/10 text-amber-500 border-amber-500/20">Medium</Badge>
+                  </div>
+                  <p className="text-sm mb-3">
+                    The company's debt structure and ongoing negative net income could limit 
+                    financial flexibility and ability to invest in growth opportunities or 
+                    withstand prolonged market downturns.
+                  </p>
+                  <div className="text-xs text-muted-foreground">
+                    Mitigation: Continued focus on achieving positive EBITDA, debt restructuring 
+                    initiatives, and careful cash flow management to ensure operational stability.
+                  </div>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium">Supply Chain Disruptions</h4>
+                    <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20">Low</Badge>
+                  </div>
+                  <p className="text-sm mb-3">
+                    While global supply chain issues have stabilized, potential disruptions 
+                    in component availability or pricing could impact the company's ability 
+                    to fulfill orders or maintain margins.
+                  </p>
+                  <div className="text-xs text-muted-foreground">
+                    Mitigation: Diversified supplier relationships, strategic inventory management, 
+                    and long-term partnership agreements with key component manufacturers.
+                  </div>
+                </div>
+                
+                <div className="bg-secondary/40 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium">Economic Conditions</h4>
+                    <Badge variant="outline" className="bg-amber-500/10 text-amber-500 border-amber-500/20">Medium</Badge>
+                  </div>
+                  <p className="text-sm mb-3">
+                    Broader economic factors including inflation, interest rates, and consumer 
+                    confidence affect willingness to invest in renewable energy systems, particularly 
+                    in the residential segment.
+                  </p>
+                  <div className="text-xs text-muted-foreground">
+                    Mitigation: Development of flexible financing options, focus on value proposition 
+                    and long-term energy savings, and increased emphasis on the commercial segment.
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-card rounded-lg p-5 border border-border/60">
+              <h3 className="text-lg font-semibold mb-4">Risk Trend Analysis</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-medium text-sm mb-3">Improving Risk Factors</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-center p-2 bg-green-500/5 rounded-lg">
+                      <ChevronDown className="h-4 w-4 text-green-500 mr-2" />
+                      <span className="text-sm">Supply chain constraints</span>
+                    </li>
+                    <li className="flex items-center p-2 bg-green-500/5 rounded-lg">
+                      <ChevronDown className="h-4 w-4 text-green-500 mr-2" />
+                      <span className="text-sm">Interest rate environment</span>
+                    </li>
+                    <li className="flex items-center p-2 bg-green-500/5 rounded-lg">
+                      <ChevronDown className="h-4 w-4 text-green-500 mr-2" />
+                      <span className="text-sm">Operating cost pressure</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 className="font-medium text-sm mb-3">Worsening Risk Factors</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-center p-2 bg-red-500/5 rounded-lg">
+                      <ChevronUp className="h-4 w-4 text-red-500 mr-2" />
+                      <span className="text-sm">Regulatory uncertainty</span>
+                    </li>
+                    <li className="flex items-center p-2 bg-red-500/5 rounded-lg">
+                      <ChevronUp className="h-4 w-4 text-red-500 mr-2" />
+                      <span className="text-sm">Market competition</span>
+                    </li>
+                    <li className="flex items-center p-2 bg-red-500/5 rounded-lg">
+                      <ChevronUp className="h-4 w-4 text-red-500 mr-2" />
+                      <span className="text-sm">Consumer demand volatility</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="mt-6">
+                <h4 className="font-medium text-sm mb-3">Risk Management Focus Areas</h4>
+                <p className="text-sm text-muted-foreground mb-4">
+                  The company has identified the following key areas for enhanced risk management:
+                </p>
+                <ul className="list-disc pl-5 text-sm space-y-2">
+                  <li>Regulatory compliance and advocacy</li>
+                  <li>Financial stability and debt management</li>
+                  <li>Product and service diversification</li>
+                  <li>Geographic market expansion</li>
+                  <li>Operational efficiency improvements</li>
+                </ul>
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="experts" className="mt-4">
+            <div className="bg-card rounded-lg p-5 border border-border/60 mb-6">
+              <h3 className="text-lg font-semibold mb-4">Analyst Perspectives</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Expert opinions and analysis on Columbus Energy's performance and outlook.
+              </p>
+              
+              <PremiumContent
+                content={premiumContent.experts}
+              >
+                <div className="text-center py-8">
+                  <Users className="h-12 w-12 mx-auto mb-4 text-muted-foreground/40" />
+                  <h4 className="text-lg font-medium mb-2">Expert Analysis Available</h4>
+                  <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                    Unlock access to detailed expert analysis, including analyst ratings, 
+                    peer comparisons, and professional insights on Columbus Energy's 
+                    performance and future prospects.
+                  </p>
+                </div>
+              </PremiumContent>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-card rounded-lg p-5 border border-border/60">
+                <h3 className="text-lg font-semibold mb-4">Consensus Ratings</h3>
+                <div className="bg-secondary/40 rounded-lg p-4 mb-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium text-sm">Average Target Price</h4>
+                    <span className="font-medium">PLN 13.70</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium text-sm">Current Price</h4>
+                    <span className="font-medium">PLN 11.26</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <h4 className="font-medium text-sm">Upside Potential</h4>
+                    <span className="font-medium text-green-500">+21.7%</span>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-3 mb-4 text-center">
+                  <div className="bg-green-500/10 rounded-lg p-2">
+                    <div className="text-lg font-medium text-green-500">3</div>
+                    <div className="text-xs text-muted-foreground">Buy</div>
+                  </div>
+                  <div className="bg-secondary/60 rounded-lg p-2">
+                    <div className="text-lg font-medium">2</div>
+                    <div className="text-xs text-muted-foreground">Hold</div>
+                  </div>
+                  <div className="bg-red-500/10 rounded-lg p-2">
+                    <div className="text-lg font-medium text-red-500">1</div>
+                    <div className="text-xs text-muted-foreground">Sell</div>
+                  </div>
+                </div>
+                
+                <div className="text-xs text-muted-foreground">
+                  Analyst consensus data is based on the opinions of 6 research analysts covering Columbus Energy as of October 15, 2024.
+                </div>
+              </div>
+              
+              <div className="bg-card rounded-lg p-5 border border-border/60">
+                <h3 className="text-lg font-semibold mb-4">Key Investment Considerations</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <ChevronUp className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Market Position Strength</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Despite market challenges, Columbus Energy maintains a strong brand position and market share in the Polish renewable energy sector.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <ChevronUp className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Financial Turnaround Progress</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Positive EBITDA trend and reduced net loss indicate improving financial health and successful cost optimization efforts.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Debt Structure Concerns</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Current debt levels may limit growth potential and increase vulnerability to market downturns.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <ChevronUp className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Product Diversification</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Strategic shift toward energy storage and services offers growth potential and reduced dependence on installation revenues.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="h-6 w-6 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Regulatory Uncertainty</h4>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Changing renewable energy policies and incentives create significant near-term revenue visibility challenges.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+};
+
+export default ReportDetail;
