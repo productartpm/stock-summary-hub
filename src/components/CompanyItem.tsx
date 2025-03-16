@@ -4,7 +4,7 @@ import { formatDate } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { Tag } from 'lucide-react';
+import { Tag, FileText } from 'lucide-react';
 
 interface CompanyItemProps {
   report: FinancialReport;
@@ -44,6 +44,12 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
       {/* Date and time first */}
       <div className="text-xs text-muted-foreground mb-2">
         {formatDate(report.publicationDate)}
+      </div>
+
+      {/* Report Title */}
+      <div className="flex items-center mb-3">
+        <FileText className="h-4 w-4 text-primary mr-2" />
+        <h4 className="font-semibold text-sm">{report.title}</h4>
       </div>
 
       <div className="flex items-center space-x-4">

@@ -25,8 +25,8 @@ const Index = () => {
       
       {/* Main content */}
       <main className="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full">
-        {/* Left column: Company list - increased width from w-96 to w-[400px] */}
-        <div className="w-full md:w-[400px] border-r border-border/60 overflow-hidden">
+        {/* Left column: Company list - increased width from w-[400px] to w-[450px] */}
+        <div className="w-full md:w-[450px] border-r border-border/60 overflow-hidden">
           <FinancialReportsList 
             onSelectReport={setSelectedReport} 
             selectedReportId={selectedReport?.id || null}
