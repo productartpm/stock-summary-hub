@@ -46,6 +46,16 @@ export const formatPercentage = (value: number): string => {
   return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
 };
 
+// Added this function for CompanyItem component
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+};
+
 export const financialReports: FinancialReport[] = [
   {
     id: 'columbus-energy-q3-2024',
@@ -112,7 +122,7 @@ export const financialReports: FinancialReport[] = [
     },
     analystReactions: [
       'Analysts recognize the significant improvement in operational efficiency, as demonstrated by the return to positive EBITDA and reduced net loss.',
-      'The market response has been cautiously positive, with most analysts maintaining HOLD ratings while acknowledging the company's progress in restructuring.',
+      'The market response has been cautiously positive, with most analysts maintaining HOLD ratings while acknowledging the company\'s progress in restructuring.',
       'Concerns remain about the declining revenue trajectory in core business segments, but the strategic shift towards higher-margin services and Columbus ONE development is viewed favorably.'
     ]
   },
