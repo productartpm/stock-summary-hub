@@ -4,9 +4,15 @@ import FinancialReportsList from '@/components/FinancialReportsList';
 import ReportDetail from '@/components/ReportDetail';
 import { financialReports } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
+import { ShareReport } from '@/components/ShareReport';
 
 const Index = () => {
   const [selectedReport, setSelectedReport] = useState<FinancialReport | null>(null);
+  const [isShareOpen, setIsShareOpen] = useState(false);
+
+  const handleShare = () => {
+    setIsShareOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -35,9 +41,20 @@ const Index = () => {
         
         {/* Right column: Report detail */}
         <div className="flex-1 overflow-hidden">
-          <ReportDetail report={selectedReport} />
+          <ReportDetail 
+            report={selectedReport} 
+            onShare={handleShare}
+          />
         </div>
       </main>
+
+      {selectedReport && (
+        <ShareReport 
+          isOpen={isShareOpen} 
+          onClose={() => setIsShareOpen(false)} 
+          report={selectedReport}
+        />
+      )}
     </div>
   );
 };
