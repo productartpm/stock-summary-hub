@@ -383,5 +383,413 @@ export const financialReports: FinancialReport[] = [
       }
     },
     premium: true
+  },
+  {
+    id: 'apple-q2-2024',
+    companyName: 'Apple Inc.',
+    ticker: 'AAPL',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q2 2024',
+    publicationDate: '2024-05-02',
+    title: 'Apple Reports Second Quarter Results',
+    reportCategory: ['Technology', 'Consumer Electronics', 'Hardware', 'Services'],
+    financialPeriod: 'Q2 2024',
+    summaryData: {
+      revenue: {
+        value: 94.83,
+        change: 3.8,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 29.48,
+        change: 2.3,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 23.64,
+        change: 5.2,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 1.53,
+        change: 6.3,
+        unit: 'USD'
+      },
+      cashFlow: {
+        value: 28.33,
+        change: 1.1,
+        unit: 'B USD'
+      },
+      iPhoneRevenue: {
+        value: 46.28,
+        change: 5.5,
+        unit: 'B USD'
+      }
+    },
+    keyHighlights: [
+      'iPhone revenue increased 5.5% to $46.28 billion, exceeding expectations.',
+      'Services revenue hit a record high of $23.87 billion, up 14.3% year-over-year.',
+      'Gross margin improved to 46.6%, up from 45.3% in the same quarter last year.',
+      'Board approved $110 billion in additional share repurchases and a 4% increase in quarterly dividend.',
+      'Wearables, Home, and Accessories segment declined 7.6% to $7.91 billion.',
+      'Cash and marketable securities totaled $167.2 billion at the end of the quarter.'
+    ],
+    outlook: {
+      statement: 'Apple expects continued growth in iPhone and Services segments in the third quarter of fiscal 2024, with revenue growth rates similar to the second quarter. However, the company anticipates that supply constraints for certain components may impact Mac and iPad sales in the near term.',
+      guidanceRevenue: {
+        min: 90.0,
+        max: 93.0,
+        unit: 'B USD'
+      },
+      guidanceEps: {
+        min: 1.48,
+        max: 1.52,
+        unit: 'USD'
+      }
+    },
+    analystReactions: [
+      'Analysts were particularly impressed by the performance of the Services segment, seeing it as a key driver for future growth and margin expansion.',
+      'Several investment banks raised their price targets following the better-than-expected results, with an average increase of approximately 7%.',
+      'Some concerns were raised about the weakness in the Wearables segment, which may indicate slower adoption of newer products.'
+    ],
+    premium: true
+  },
+  {
+    id: 'tesla-annual-2023',
+    companyName: 'Tesla, Inc.',
+    ticker: 'TSLA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Tesla_Motors_logo.svg/1280px-Tesla_Motors_logo.svg.png',
+    reportType: 'Annual',
+    quarterOrYear: 'FY 2023',
+    publicationDate: '2024-01-24',
+    title: 'Tesla Annual Report 2023',
+    reportCategory: ['Automotive', 'Electric Vehicles', 'Energy Generation', 'Storage', 'Clean Energy'],
+    financialPeriod: 'FY 2023',
+    summaryData: {
+      revenue: {
+        value: 96.77,
+        change: 18.8,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 13.65,
+        change: -13.4,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 14.99,
+        change: 19.5,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 4.29,
+        change: 18.0,
+        unit: 'USD'
+      },
+      vehicleDeliveries: {
+        value: 1.8,
+        change: 38.0,
+        unit: 'M'
+      },
+      energyStorage: {
+        value: 14.7,
+        change: 125.0,
+        unit: 'GWh'
+      }
+    },
+    keyHighlights: [
+      'Record vehicle deliveries of 1.8 million units in 2023, representing a 38% increase year-over-year.',
+      'Energy storage deployments more than doubled to 14.7 GWh, driving a 54% increase in Energy Generation and Storage revenue.',
+      'Gross margin decreased to 18.2% from 23.8% in 2022, primarily due to vehicle price reductions.',
+      'Automotive revenue grew by 15% to $82.4 billion, while automotive regulatory credits reached $1.8 billion.',
+      'Cumulative Supercharger stations increased to 5,117 globally, with 48,082 connectors.',
+      'Cash and cash equivalents totaled $29.1 billion at year-end.'
+    ],
+    outlook: {
+      statement: 'Tesla expects vehicle volume growth in 2024 to be notably lower than the growth rate achieved in 2023, as the company works on the launch of next-generation vehicles at Gigafactory Texas. Energy storage deployments are projected to grow approximately 75% in 2024, supported by the ramp of the 40 GWh Megapack factory in Lathrop.',
+      guidanceEps: {
+        min: 3.80,
+        max: 4.50,
+        unit: 'USD'
+      }
+    },
+    analystReactions: [
+      'Wall Street expressed mixed reactions to Tesla\'s forward guidance, with concerns about reduced growth rates for vehicle deliveries affecting long-term valuation models.',
+      'Many analysts highlighted the Energy business as a bright spot, with expectations that it could become a more significant contributor to overall profitability in the coming years.',
+      'The lack of specific timeline for new models and the Robotaxi program disappointed some analysts who were looking for more concrete plans.'
+    ]
+  },
+  {
+    id: 'nvidia-q1-2025',
+    companyName: 'NVIDIA Corporation',
+    ticker: 'NVDA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Nvidia_logo.svg/1280px-Nvidia_logo.svg.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q1 2025',
+    publicationDate: '2024-05-22',
+    title: 'NVIDIA Announces Financial Results for First Quarter Fiscal 2025',
+    reportCategory: ['Technology', 'Semiconductors', 'AI Computing', 'Graphics Processing', 'Data Center'],
+    financialPeriod: 'Q1 FY2025',
+    summaryData: {
+      revenue: {
+        value: 26.04,
+        change: 262.0,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 16.09,
+        change: 655.0,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 14.88,
+        change: 632.0,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 5.98,
+        change: 629.0,
+        unit: 'USD'
+      },
+      dataCenter: {
+        value: 22.60,
+        change: 427.0,
+        unit: 'B USD'
+      },
+      grossMargin: {
+        value: 78.4,
+        change: 12.3,
+        unit: '%'
+      }
+    },
+    keyHighlights: [
+      'Record Data Center revenue of $22.6 billion, up 427% from a year ago, driven by accelerating demand for NVIDIA Hopper architecture products.',
+      'Achieved record gross margin of 78.4%, up 12.3 percentage points year-over-year.',
+      'Gaming revenue of $2.6 billion, up 18% from a year ago.',
+      'Professional Visualization revenue of $418 million, up 75% from a year ago.',
+      'Automotive revenue of $306 million, up 4% from a year ago.',
+      'Returned $7.7 billion to shareholders through share repurchases and cash dividends.'
+    ],
+    outlook: {
+      statement: 'For the second quarter of fiscal 2025, NVIDIA expects unprecedented demand to continue for its AI computing platforms. The company anticipates Data Center revenue to grow significantly sequentially, while Gaming revenue is expected to be relatively flat quarter-over-quarter.',
+      guidanceRevenue: {
+        min: 28.0,
+        max: 30.0,
+        unit: 'B USD'
+      }
+    },
+    analystReactions: [
+      'Analysts described the results as "mind-blowing" and "spectacular," with many raising their price targets substantially following the earnings release.',
+      'The strength in Data Center revenue and the outlook for continued sequential growth surpassed even the most optimistic expectations.',
+      'Some analysts questioned the sustainability of the current growth rates and high gross margins in the long term, but most agreed that NVIDIA\'s near-term momentum remains exceptionally strong.'
+    ],
+    premium: true
+  },
+  {
+    id: 'amazon-annual-2023',
+    companyName: 'Amazon.com, Inc.',
+    ticker: 'AMZN',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png',
+    reportType: 'Annual',
+    quarterOrYear: 'FY 2023',
+    publicationDate: '2024-02-01',
+    title: 'Amazon.com Announces Full Year 2023 Financial Results',
+    reportCategory: ['E-commerce', 'Cloud Computing', 'Digital Content', 'Logistics', 'Retail'],
+    financialPeriod: 'FY 2023',
+    summaryData: {
+      revenue: {
+        value: 574.78,
+        change: 12.0,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 36.86,
+        change: 218.0,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 30.43,
+        change: 2334.0,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 2.90,
+        change: 2248.0,
+        unit: 'USD'
+      },
+      awsRevenue: {
+        value: 90.8,
+        change: 13.0,
+        unit: 'B USD'
+      },
+      freeShipping: {
+        value: 1.53,
+        change: 14.0,
+        unit: 'B Units'
+      }
+    },
+    keyHighlights: [
+      'Net sales increased 12% to $574.8 billion, compared with $514.0 billion in 2022.',
+      'Operating income increased to $36.9 billion, compared with $12.2 billion in 2022.',
+      'AWS operating income increased to $25.4 billion, compared with $22.8 billion in 2022.',
+      'North America segment returned to profitability with $14.9 billion in operating income, compared with a loss of $2.8 billion in 2022.',
+      'International segment reduced operating loss to $3.5 billion, compared with $7.7 billion in 2022.',
+      'Operating cash flow increased 82% to $98.8 billion for the trailing twelve months.'
+    ],
+    outlook: {
+      statement: 'For the first quarter of 2024, Amazon expects net sales to be between $138.0 billion and $143.5 billion, representing growth of 8-13% compared to first quarter 2023. The company anticipates continued investment in AWS, including significant advancements in AI capabilities, while maintaining discipline on capital expenditures.',
+      guidanceRevenue: {
+        min: 138.0,
+        max: 143.5,
+        unit: 'B USD'
+      }
+    },
+    analystReactions: [
+      'Wall Street reacted positively to Amazon\'s significant improvement in profitability across all business segments, particularly in North America and AWS.',
+      'Analysts highlighted the company\'s effective cost-cutting measures, which helped transform a net loss in 2022 to substantial net income in 2023.',
+      'The expected continued investment in AI capabilities was seen as strategically important for maintaining AWS\'s competitive position in the cloud market.'
+    ]
+  },
+  {
+    id: 'pfizer-q3-2024',
+    companyName: 'Pfizer Inc.',
+    ticker: 'PFE',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Pfizer_logo.svg/2560px-Pfizer_logo.svg.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q3 2024',
+    publicationDate: '2024-10-29',
+    title: 'Pfizer Reports Third Quarter 2024 Results',
+    reportCategory: ['Healthcare', 'Pharmaceuticals', 'Biotechnology', 'Vaccines', 'Drug Manufacturing'],
+    financialPeriod: 'Q3 2024',
+    summaryData: {
+      revenue: {
+        value: 17.84,
+        change: 3.5,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 5.76,
+        change: 8.3,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 4.67,
+        change: 12.6,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 0.82,
+        change: 13.9,
+        unit: 'USD'
+      },
+      rndExpense: {
+        value: 2.82,
+        change: 5.6,
+        unit: 'B USD'
+      },
+      nonCovid: {
+        value: 16.53,
+        change: 9.8,
+        unit: 'B USD'
+      }
+    },
+    keyHighlights: [
+      'Non-COVID product revenue grew 9.8% operationally to $16.53 billion, driven by strong performance from key brands.',
+      'Oncology portfolio revenue increased 15.3% to $3.87 billion, including 42% growth from recently launched products.',
+      'Prevnar family of vaccines revenue increased 12.7% to $2.32 billion globally.',
+      'R&D expenses increased 5.6% to $2.82 billion, reflecting continued investment in the pipeline.',
+      'Completed three acquisitions in targeted therapeutic areas, strengthening the company\'s long-term growth prospects.',
+      'COVID-19 products (Comirnaty and Paxlovid) generated $1.31 billion in Q3, down from expectations due to lower vaccination rates.'
+    ],
+    outlook: {
+      statement: 'Pfizer narrowed its full-year 2024 revenue guidance to $69.0-$71.0 billion, reflecting strong performance from the non-COVID portfolio offset by lower COVID-19 product revenues. The company expects continued momentum from new product launches and remains on track to deliver on its cost-reduction initiatives of approximately $4 billion by the end of 2024.',
+      guidanceRevenue: {
+        min: 69.0,
+        max: 71.0,
+        unit: 'B USD'
+      },
+      guidanceEps: {
+        min: 2.45,
+        max: 2.65,
+        unit: 'USD'
+      }
+    },
+    analystReactions: [
+      'Analysts viewed the quarter positively, with particular focus on the strength of the non-COVID portfolio offsetting the expected decline in COVID-19 product revenues.',
+      'Several equity research teams maintained their "buy" ratings, citing the company\'s robust pipeline and successful integration of recent acquisitions.',
+      'Some concerns persisted about patent expirations for key drugs in the coming years, though these were partially offset by optimism about the company\'s R&D productivity.'
+    ]
+  },
+  {
+    id: 'microsoft-annual-2024',
+    companyName: 'Microsoft Corporation',
+    ticker: 'MSFT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png',
+    reportType: 'Annual',
+    quarterOrYear: 'FY 2024',
+    publicationDate: '2024-07-30',
+    title: 'Microsoft Annual Report Fiscal Year 2024',
+    reportCategory: ['Technology', 'Software', 'Cloud Computing', 'AI', 'Enterprise Solutions'],
+    financialPeriod: 'FY 2024',
+    summaryData: {
+      revenue: {
+        value: 245.08,
+        change: 14.9,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 109.55,
+        change: 21.8,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 89.34,
+        change: 18.7,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 11.98,
+        change: 18.4,
+        unit: 'USD'
+      },
+      azureRevenue: {
+        value: 91.24,
+        change: 31.2,
+        unit: 'B USD'
+      },
+      aiRevenue: {
+        value: 12.67,
+        change: 183.4,
+        unit: 'B USD'
+      }
+    },
+    keyHighlights: [
+      'Revenue increased 14.9% to a record $245.1 billion, driven by strong cloud and AI services growth.',
+      'Intelligent Cloud revenue, including Azure, grew 22% to $114.8 billion.',
+      'Microsoft 365 consumer subscribers increased to 82.5 million, up 12% year-over-year.',
+      'AI services revenue, though starting from a smaller base, grew by 183% to $12.7 billion.',
+      'Operating margin expanded to 44.7%, improving by 2.5 percentage points from fiscal year 2023.',
+      'Returned $67.3 billion to shareholders through dividends and share repurchases.'
+    ],
+    outlook: {
+      statement: 'Looking ahead to fiscal year 2025, Microsoft expects continued momentum in its cloud and AI businesses. The company anticipates double-digit revenue and operating income growth, with particular strength in Azure and AI services. Capital expenditures are expected to increase significantly as the company continues to build out AI infrastructure to meet growing demand.',
+      guidanceRevenue: {
+        min: 271.0,
+        max: 277.0,
+        unit: 'B USD'
+      },
+      guidanceEps: {
+        min: 13.15,
+        max: 13.55,
+        unit: 'USD'
+      }
+    },
+    analystReactions: [
+      'Wall Street analysts widely praised Microsoft\'s performance, with many highlighting the company\'s leadership position in enterprise AI solutions.',
+      'The strong growth in Azure, particularly the AI components, reinforced confidence in Microsoft\'s long-term growth trajectory.',
+      'Some analysts expressed concerns about the planned increase in capital expenditures, but most acknowledged the necessity of these investments to maintain Microsoft\'s competitive advantage in cloud and AI.'
+    ],
+    premium: true
   }
 ];
