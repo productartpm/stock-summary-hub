@@ -12,6 +12,22 @@ interface CompanyItemProps {
 
 const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  
+  // Generate a one-sentence summary based on the report data
+  const generateSummary = (report: FinancialReport): string => {
+    const revenueChange = report.summaryData.revenue.change;
+    const incomeChange = report.summaryData.netIncome.change;
+    
+    if (revenueChange > 0 && incomeChange > 0) {
+      return `${report.companyName} reported strong growth with revenue up ${report.summaryData.revenue.change}% and net income up ${report.summaryData.netIncome.change}%.`;
+    } else if (revenueChange < 0 && incomeChange < 0) {
+      return `${report.companyName} reported challenges with revenue down ${Math.abs(report.summaryData.revenue.change)}% and net income down ${Math.abs(report.summaryData.netIncome.change)}%.`;
+    } else if (revenueChange > 0) {
+      return `${report.companyName} reported revenue growth of ${report.summaryData.revenue.change}% despite net income ${incomeChange >= 0 ? 'changes' : 'decline'}.`;
+    } else {
+      return `${report.companyName} reported ${revenueChange >= 0 ? 'steady' : 'declining'} revenue with ${incomeChange >= 0 ? 'improved' : 'decreased'} profitability.`;
+    }
+  };
 
   return (
     <div 
@@ -23,6 +39,11 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
         isSelected ? "bg-secondary border-primary/20" : "bg-card hover:bg-secondary/80"
       )}
     >
+      {/* Date and time first */}
+      <div className="text-xs text-muted-foreground mb-2">
+        {formatDate(report.publicationDate)}
+      </div>
+
       <div className="flex items-center space-x-4">
         <div className="relative w-12 h-12 bg-secondary/50 rounded-lg overflow-hidden flex items-center justify-center">
           {!imageLoaded && (
@@ -55,8 +76,10 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
               {report.financialPeriod}
             </div>
           </div>
-          <div className="mt-2 text-xs text-muted-foreground">
-            {formatDate(report.publicationDate)}
+          
+          {/* One sentence summary */}
+          <div className="mt-2 text-sm line-clamp-2">
+            {generateSummary(report)}
           </div>
         </div>
       </div>
