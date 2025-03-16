@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FinancialReportsList from '@/components/FinancialReportsList';
 import ReportDetail from '@/components/ReportDetail';
 import { financialReports } from '@/lib/data';
@@ -17,26 +16,35 @@ const Index = () => {
   const isMobile = useIsMobile();
   const [showListOnMobile, setShowListOnMobile] = useState(true);
   const { user } = useAuth();
+  const [processedReports, setProcessedReports] = useState<FinancialReport[]>([]);
 
-  // Filter reports based on authentication status
-  const availableReports = financialReports.filter(report => {
-    // If premium AND requires auth, only show to logged-in users
+  useEffect(() => {
+    const reportsCopy = JSON.parse(JSON.stringify(financialReports)) as FinancialReport[];
+    const reportsWithRandomPremium = reportsCopy.map(report => {
+      if (report.premium) return report;
+      const shouldBePremium = Math.random() < 0.3;
+      return {
+        ...report,
+        premium: shouldBePremium
+      };
+    });
+    setProcessedReports(reportsWithRandomPremium);
+  }, []);
+
+  const availableReports = processedReports.filter(report => {
     if (report.premium && !user) {
       return false;
     }
     return true;
   });
 
-  // Handle report selection
   const handleSelectReport = (report: FinancialReport) => {
     setSelectedReport(report);
-    // On mobile, switch to detail view when a report is selected
     if (isMobile) {
       setShowListOnMobile(false);
     }
   };
 
-  // Handle back button click on mobile
   const handleBackToList = () => {
     setShowListOnMobile(true);
   };
@@ -47,7 +55,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
       <header className="border-b border-border/60 py-4 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <h1 className="text-xl font-semibold">Stock Summary Hub</h1>
@@ -63,20 +70,17 @@ const Index = () => {
         </div>
       </header>
       
-      {/* Main content */}
       <main className="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full">
-        {/* List view (always visible on desktop, conditional on mobile) */}
         {(!isMobile || (isMobile && showListOnMobile)) && (
           <div className="w-full md:w-[450px] border-r border-border/60 overflow-hidden">
             <FinancialReportsList 
-              reports={availableReports}
+              reports={processedReports}
               onSelectReport={handleSelectReport} 
               selectedReportId={selectedReport?.id || null}
             />
           </div>
         )}
         
-        {/* Detail view (always visible on desktop, conditional on mobile) */}
         {(!isMobile || (isMobile && !showListOnMobile)) && (
           <div className="flex-1 overflow-hidden">
             {isMobile && selectedReport && (
