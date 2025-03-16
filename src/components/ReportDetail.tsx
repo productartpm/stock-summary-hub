@@ -1,10 +1,7 @@
 
 import { PremiumContent } from '@/components/PremiumContent';
-import { formatDate, type FinancialReport } from '@/lib/data';
-import { Share } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { type FinancialReport } from '@/lib/data';
 import { User } from '@/hooks/useAuth';
-import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { EmptyReportState } from './report/EmptyReportState';
 import { LoginPrompt } from './report/LoginPrompt';
@@ -13,6 +10,7 @@ import { ReportHighlights } from './report/ReportHighlights';
 import { ReportOutlook } from './report/ReportOutlook';
 import { ReportAnalystReactions } from './report/ReportAnalystReactions';
 import { ReportMobileTabs } from './report/ReportMobileTabs';
+import { ReportHeader } from './report/ReportHeader';
 
 interface ReportDetailProps {
   report: FinancialReport | null;
@@ -45,18 +43,8 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const renderContent = () => {
     return (
       <>
-        <div className="mb-6 space-y-1">
-          <h1 className="text-2xl md:text-3xl font-bold">{report.companyName} ({report.ticker})</h1>
-          <p className="text-muted-foreground">{report.title}</p>
-          <div className="flex items-center text-sm text-muted-foreground">
-            <span>Published: {formatDate(report.publicationDate)}</span>
-            <span className="mx-2">•</span>
-            <span>{report.reportType} Report</span>
-          </div>
-        </div>
-
+        <ReportHeader report={report} onShare={onShare} />
         <ReportSummaryMetrics report={report} />
-
         {isMobile ? <ReportMobileTabs report={report} /> : renderDesktopContent()}
       </>
     );
@@ -65,13 +53,6 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   return (
     <div className="p-6 md:p-8 overflow-y-auto h-full">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-end mb-4">
-          <Button variant="outline" size="sm" onClick={onShare}>
-            <Share className="mr-2 h-4 w-4" />
-            Share Report
-          </Button>
-        </div>
-
         {report.premium ? (
           <PremiumContent 
             content={{
