@@ -11,13 +11,30 @@ interface FinancialReportsListProps {
   selectedReportId: string | null;
 }
 
+type FilterType = 'all' | 'quarterly' | 'annual';
+
 const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialReportsListProps) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   
-  const filteredReports = financialReports.filter(report => 
-    report.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    report.ticker.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredReports = financialReports.filter(report => {
+    // Apply search filter
+    const matchesSearch = 
+      report.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      report.ticker.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Apply report type filter
+    const matchesType = 
+      activeFilter === 'all' ||
+      (activeFilter === 'quarterly' && report.reportType === 'Quarterly') ||
+      (activeFilter === 'annual' && report.reportType === 'Annual');
+    
+    return matchesSearch && matchesType;
+  });
+
+  const handleFilterClick = (filter: FilterType) => {
+    setActiveFilter(filter);
+  };
 
   return (
     <div className="h-full flex flex-col">
@@ -36,13 +53,34 @@ const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialRep
           />
         </div>
         <div className="mb-4 flex space-x-2">
-          <div className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
+          <div 
+            className={`text-xs px-2 py-1 rounded-full cursor-pointer ${
+              activeFilter === 'all' 
+                ? 'bg-primary/10 text-primary' 
+                : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
+            }`}
+            onClick={() => handleFilterClick('all')}
+          >
             All Reports
           </div>
-          <div className="text-xs px-2 py-1 bg-secondary text-muted-foreground rounded-full cursor-pointer hover:bg-secondary/80">
+          <div 
+            className={`text-xs px-2 py-1 rounded-full cursor-pointer ${
+              activeFilter === 'quarterly' 
+                ? 'bg-primary/10 text-primary' 
+                : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
+            }`}
+            onClick={() => handleFilterClick('quarterly')}
+          >
             Quarterly
           </div>
-          <div className="text-xs px-2 py-1 bg-secondary text-muted-foreground rounded-full cursor-pointer hover:bg-secondary/80">
+          <div 
+            className={`text-xs px-2 py-1 rounded-full cursor-pointer ${
+              activeFilter === 'annual' 
+                ? 'bg-primary/10 text-primary' 
+                : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
+            }`}
+            onClick={() => handleFilterClick('annual')}
+          >
             Annual
           </div>
         </div>
