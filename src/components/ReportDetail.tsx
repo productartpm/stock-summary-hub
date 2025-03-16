@@ -10,6 +10,9 @@ import { ReportHighlights } from './report/ReportHighlights';
 import { ReportOutlook } from './report/ReportOutlook';
 import { ReportAnalystReactions } from './report/ReportAnalystReactions';
 import { ReportHeader } from './report/ReportHeader';
+import { ReportTrends } from './report/ReportTrends';
+import { ReportRisks } from './report/ReportRisks';
+import { ReportFinancialPredictions } from './report/ReportFinancialPredictions';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useState } from 'react';
 
@@ -35,9 +38,12 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const renderTabbedContent = () => {
     return (
       <Tabs defaultValue="highlights" value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className={`grid ${isMobile ? 'grid-cols-3' : 'grid-cols-3 max-w-md'} mb-4`}>
+        <TabsList className={`grid ${isMobile ? 'grid-cols-3' : 'grid-cols-6 max-w-3xl'} mb-4`}>
           <TabsTrigger value="highlights">Highlights</TabsTrigger>
-          <TabsTrigger value="outlook">Outlook</TabsTrigger>
+          <TabsTrigger value="trends">Market Trends</TabsTrigger>
+          <TabsTrigger value="outlook">Future Plans</TabsTrigger>
+          <TabsTrigger value="risks">Risks</TabsTrigger>
+          <TabsTrigger value="predictions">Predictions</TabsTrigger>
           <TabsTrigger value="analysis">Analysis</TabsTrigger>
         </TabsList>
 
@@ -45,8 +51,20 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
           <ReportHighlights report={report} />
         </TabsContent>
 
+        <TabsContent value="trends" className="space-y-4">
+          <ReportTrends report={report} />
+        </TabsContent>
+
         <TabsContent value="outlook" className="space-y-4">
           <ReportOutlook report={report} />
+        </TabsContent>
+
+        <TabsContent value="risks" className="space-y-4">
+          <ReportRisks report={report} />
+        </TabsContent>
+
+        <TabsContent value="predictions" className="space-y-4">
+          <ReportFinancialPredictions report={report} />
         </TabsContent>
 
         <TabsContent value="analysis" className="space-y-4">
