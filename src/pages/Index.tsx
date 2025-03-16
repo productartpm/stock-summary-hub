@@ -8,12 +8,24 @@ import { ShareReport } from '@/components/ShareReport';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AuthButtons } from '@/components/AuthButtons';
+import { useAuth } from '@/hooks/useAuth';
 
 const Index = () => {
   const [selectedReport, setSelectedReport] = useState<FinancialReport | null>(null);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const isMobile = useIsMobile();
   const [showListOnMobile, setShowListOnMobile] = useState(true);
+  const { user } = useAuth();
+
+  // Filter reports based on authentication status
+  const availableReports = financialReports.filter(report => {
+    // If premium AND requires auth, only show to logged-in users
+    if (report.premium && !user) {
+      return false;
+    }
+    return true;
+  });
 
   // Handle report selection
   const handleSelectReport = (report: FinancialReport) => {
@@ -39,12 +51,15 @@ const Index = () => {
       <header className="border-b border-border/60 py-4 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <h1 className="text-xl font-semibold">Stock Summary Hub</h1>
-          <nav className="flex space-x-4 text-sm">
-            <a href="#" className="text-primary">Reports</a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Markets</a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Watchlist</a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Insights</a>
-          </nav>
+          <div className="flex items-center space-x-6">
+            <nav className="hidden md:flex space-x-4 text-sm">
+              <a href="#" className="text-primary">Reports</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Markets</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Watchlist</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Insights</a>
+            </nav>
+            <AuthButtons />
+          </div>
         </div>
       </header>
       
@@ -54,6 +69,7 @@ const Index = () => {
         {(!isMobile || (isMobile && showListOnMobile)) && (
           <div className="w-full md:w-[450px] border-r border-border/60 overflow-hidden">
             <FinancialReportsList 
+              reports={availableReports}
               onSelectReport={handleSelectReport} 
               selectedReportId={selectedReport?.id || null}
             />
@@ -78,6 +94,7 @@ const Index = () => {
             <ReportDetail 
               report={selectedReport} 
               onShare={handleShare}
+              user={user}
             />
           </div>
         )}

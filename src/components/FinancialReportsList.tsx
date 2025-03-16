@@ -1,117 +1,110 @@
 
-import { useState } from 'react';
-import CompanyItem from './CompanyItem';
-import { financialReports } from '@/lib/data';
-import type { FinancialReport } from '@/lib/data';
-import { Search } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { CreditCard, Search, ChevronRight, Lock } from 'lucide-react';
+import { financialReports, type FinancialReport } from '@/lib/data';
+import CompanyItem from '@/components/CompanyItem';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface FinancialReportsListProps {
   onSelectReport: (report: FinancialReport) => void;
   selectedReportId: string | null;
+  reports?: FinancialReport[];
 }
 
-type FilterType = 'all' | 'quarterly' | 'annual';
+const FinancialReportsList = ({ 
+  onSelectReport, 
+  selectedReportId,
+  reports = financialReports
+}: FinancialReportsListProps) => {
+  const [filterType, setFilterType] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredReports, setFilteredReports] = useState<FinancialReport[]>([]);
 
-const FinancialReportsList = ({ onSelectReport, selectedReportId }: FinancialReportsListProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
-  
-  const filteredReports = financialReports.filter(report => {
-    // Apply search filter (company name or ticker)
-    const matchesSearch = 
-      report.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      report.ticker.toLowerCase().includes(searchTerm.toLowerCase());
+  // Apply filters when dependencies change
+  useEffect(() => {
+    let results = [...reports];
     
-    // Apply report type filter
-    const matchesType = 
-      activeFilter === 'all' ||
-      (activeFilter === 'quarterly' && report.reportType === 'Quarterly') ||
-      (activeFilter === 'annual' && report.reportType === 'Annual');
+    // Filter by report type
+    if (filterType !== 'all') {
+      results = results.filter(report => 
+        report.reportType.toLowerCase() === filterType.toLowerCase()
+      );
+    }
     
-    return matchesSearch && matchesType;
-  });
-
-  const handleFilterClick = (filter: FilterType) => {
-    setActiveFilter(filter);
-  };
-
-  // Check if search appears to be a ticker (all uppercase or contains $)
-  const isTickerSearch = searchTerm && (
-    searchTerm === searchTerm.toUpperCase() || 
-    searchTerm.includes('$')
-  );
+    // Filter by search query (ticker)
+    if (searchQuery.trim() !== '') {
+      const query = searchQuery.toLowerCase();
+      results = results.filter(report => 
+        report.ticker.toLowerCase().includes(query)
+      );
+    }
+    
+    setFilteredReports(results);
+  }, [filterType, searchQuery, reports]);
 
   return (
     <div className="h-full flex flex-col">
-      <div className="px-4 pt-6 pb-4">
-        <h2 className="text-xl font-semibold mb-6">Financial Reports</h2>
-        <div className="relative mb-6">
-          <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-muted-foreground" />
-          </div>
-          <Input
-            type="search"
-            placeholder="Search by company or ticker (e.g., AAPL)..."
-            className="pl-10 bg-secondary/50 border-secondary"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <div className="mb-4 flex space-x-2">
-          <div 
-            className={`text-xs px-2 py-1 rounded-full cursor-pointer ${
-              activeFilter === 'all' 
-                ? 'bg-primary/10 text-primary' 
-                : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
-            }`}
-            onClick={() => handleFilterClick('all')}
-          >
-            All Reports
-          </div>
-          <div 
-            className={`text-xs px-2 py-1 rounded-full cursor-pointer ${
-              activeFilter === 'quarterly' 
-                ? 'bg-primary/10 text-primary' 
-                : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
-            }`}
-            onClick={() => handleFilterClick('quarterly')}
-          >
-            Quarterly
-          </div>
-          <div 
-            className={`text-xs px-2 py-1 rounded-full cursor-pointer ${
-              activeFilter === 'annual' 
-                ? 'bg-primary/10 text-primary' 
-                : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
-            }`}
-            onClick={() => handleFilterClick('annual')}
-          >
-            Annual
+      <div className="p-4 border-b border-border/60">
+        <div className="mb-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+            <Input
+              className="pl-10"
+              placeholder="Search by ticker symbol..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
         </div>
-        
-        {isTickerSearch && (
-          <div className="mb-4 text-sm text-primary">
-            Filtering by ticker: {searchTerm}
-          </div>
-        )}
+
+        <Tabs 
+          defaultValue="all" 
+          value={filterType} 
+          onValueChange={setFilterType}
+          className="w-full"
+        >
+          <TabsList className="w-full">
+            <TabsTrigger value="all" className="flex-1">All</TabsTrigger>
+            <TabsTrigger value="quarterly" className="flex-1">Quarterly</TabsTrigger>
+            <TabsTrigger value="annual" className="flex-1">Annual</TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 pb-4">
-        {filteredReports.length > 0 ? (
-          filteredReports.map(report => (
-            <CompanyItem
-              key={report.id}
-              report={report}
-              isSelected={report.id === selectedReportId}
-              onClick={() => onSelectReport(report)}
-            />
-          ))
-        ) : (
-          <div className="text-center py-6 text-muted-foreground">
-            No reports found for "{searchTerm}"
+      <div className="flex-1 overflow-y-auto">
+        {searchQuery && (
+          <div className="px-4 py-2 bg-muted text-sm">
+            Showing results for: <strong>{searchQuery}</strong>
           </div>
+        )}
+        
+        {filteredReports.length === 0 ? (
+          <div className="p-6 text-center text-muted-foreground">
+            <p>No reports found. Try adjusting your filters.</p>
+          </div>
+        ) : (
+          <ul className="divide-y divide-border">
+            {filteredReports.map((report) => (
+              <li key={report.id} className="hover:bg-muted/50">
+                <Button 
+                  variant="ghost" 
+                  className={`w-full justify-between p-4 h-auto ${selectedReportId === report.id ? 'bg-muted' : ''}`}
+                  onClick={() => onSelectReport(report)}
+                >
+                  <CompanyItem report={report} />
+                  <div className="flex items-center gap-2">
+                    {report.premium && (
+                      <Lock className="h-4 w-4 text-amber-500" />
+                    )}
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                </Button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>
