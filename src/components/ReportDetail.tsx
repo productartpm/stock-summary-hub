@@ -9,8 +9,9 @@ import { ReportSummaryMetrics } from './report/ReportSummaryMetrics';
 import { ReportHighlights } from './report/ReportHighlights';
 import { ReportOutlook } from './report/ReportOutlook';
 import { ReportAnalystReactions } from './report/ReportAnalystReactions';
-import { ReportMobileTabs } from './report/ReportMobileTabs';
 import { ReportHeader } from './report/ReportHeader';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { useState } from 'react';
 
 interface ReportDetailProps {
   report: FinancialReport | null;
@@ -20,6 +21,7 @@ interface ReportDetailProps {
 
 const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const isMobile = useIsMobile();
+  const [activeTab, setActiveTab] = useState('highlights');
 
   if (!report) {
     return <EmptyReportState />;
@@ -30,13 +32,27 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
     return <LoginPrompt report={report} />;
   }
 
-  const renderDesktopContent = () => {
+  const renderTabbedContent = () => {
     return (
-      <>
-        <ReportHighlights report={report} />
-        <ReportOutlook report={report} />
-        <ReportAnalystReactions report={report} />
-      </>
+      <Tabs defaultValue="highlights" value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className={`grid ${isMobile ? 'grid-cols-3' : 'grid-cols-3 max-w-md'} mb-4`}>
+          <TabsTrigger value="highlights">Highlights</TabsTrigger>
+          <TabsTrigger value="outlook">Outlook</TabsTrigger>
+          <TabsTrigger value="analysis">Analysis</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="highlights" className="space-y-4">
+          <ReportHighlights report={report} />
+        </TabsContent>
+
+        <TabsContent value="outlook" className="space-y-4">
+          <ReportOutlook report={report} />
+        </TabsContent>
+
+        <TabsContent value="analysis" className="space-y-4">
+          <ReportAnalystReactions report={report} />
+        </TabsContent>
+      </Tabs>
     );
   };
 
@@ -45,7 +61,7 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
       <>
         <ReportHeader report={report} onShare={onShare} />
         <ReportSummaryMetrics report={report} />
-        {isMobile ? <ReportMobileTabs report={report} /> : renderDesktopContent()}
+        {renderTabbedContent()}
       </>
     );
   };
