@@ -1,6 +1,27 @@
 
 import { format } from 'date-fns';
 
+export type ReportType = 
+  | 'Dywidenda'
+  | 'Działalność finansowa'
+  | 'Emisja akcji'
+  | 'Emisja lub wykup obligacji'
+  | 'Grupa kapitałowa'
+  | 'Klasyfikacje giełdowe'
+  | 'Koncesje, kontrole, regulacje'
+  | 'Pozostałe'
+  | 'Rozwój firmy'
+  | 'Skup lub zbycie akcji własnych'
+  | 'Split'
+  | 'Spory, procesy, windykacja'
+  | 'Sprawy kadrowe'
+  | 'Terminy raportów okresowych'
+  | 'Transakcje animatora'
+  | 'Transakcje insidera'
+  | 'Transakcje insidera lub znaczącego inwestora'
+  | 'Transakcje pakietowe'
+  | 'Walne Zgromadzenie';
+
 export interface FinancialReport {
   id: string;
   companyName: string;
@@ -10,6 +31,7 @@ export interface FinancialReport {
   quarterOrYear: string;
   financialPeriod: string;
   reportType: 'Quarterly' | 'Annual';
+  reportCategory: ReportType[];  // Added this field to store the report categories
   summaryData: {
     revenue: {
       value: number;
@@ -67,6 +89,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q2',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Działalność finansowa', 'Rozwój firmy'],
     summaryData: {
       revenue: {
         value: 94.84,
@@ -122,6 +145,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q3',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Grupa kapitałowa', 'Emisja akcji'],
     summaryData: {
       revenue: {
         value: 61.9,
@@ -167,6 +191,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q1',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Sprawy kadrowe', 'Spory, procesy, windykacja'],
     summaryData: {
       revenue: {
         value: 21.3,
@@ -207,6 +232,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q1',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Rozwój firmy', 'Dywidenda'],
     summaryData: {
       revenue: {
         value: 143.3,
@@ -252,6 +278,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q1',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Koncesje, kontrole, regulacje', 'Transakcje pakietowe'],
     summaryData: {
       revenue: {
         value: 80.5,
@@ -297,6 +324,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q1',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Walne Zgromadzenie', 'Klasyfikacje giełdowe'],
     summaryData: {
       revenue: {
         value: 36.5,
@@ -342,6 +370,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q1',
     financialPeriod: 'Feb-Apr 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Split', 'Transakcje insidera'],
     summaryData: {
       revenue: {
         value: 26.0,
@@ -387,6 +416,7 @@ export const financialReports: FinancialReport[] = [
     quarterOrYear: 'Q1',
     financialPeriod: 'Jan-Mar 2024',
     reportType: 'Quarterly',
+    reportCategory: ['Terminy raportów okresowych', 'Emisja lub wykup obligacji'],
     summaryData: {
       revenue: {
         value: 9.37,

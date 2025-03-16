@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { formatDate } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
 import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
+import { Tag } from 'lucide-react';
 
 interface CompanyItemProps {
   report: FinancialReport;
@@ -75,6 +77,20 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             )}>
               {report.financialPeriod}
             </div>
+          </div>
+          
+          {/* Report categories */}
+          <div className="mt-2 flex flex-wrap gap-1">
+            {report.reportCategory.map((category, index) => (
+              <Badge 
+                key={index} 
+                variant={isSelected ? "default" : "secondary"}
+                className="text-[10px] py-0 h-5 flex items-center gap-1"
+              >
+                <Tag className="h-3 w-3" />
+                {category}
+              </Badge>
+            ))}
           </div>
           
           {/* One sentence summary */}
