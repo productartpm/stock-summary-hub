@@ -219,11 +219,11 @@ export const ReportOutlook = ({ report }: ReportOutlookProps) => {
                 </li>
                 <li className="flex items-center">
                   <span className="h-2 w-2 bg-amber-400 rounded-full mr-1.5"></span>
-                  Zwrot z kapitału (ROE): >15%
+                  Zwrot z kapitału (ROE): &gt;15%
                 </li>
                 <li className="flex items-center">
                   <span className="h-2 w-2 bg-amber-400 rounded-full mr-1.5"></span>
-                  Wskaźnik zadłużenia: <0,3
+                  Wskaźnik zadłużenia: &lt;0,3
                 </li>
               </ul>
             </div>
