@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import FinancialReportsList from '@/components/FinancialReportsList';
 import ReportDetail from '@/components/ReportDetail';
@@ -31,12 +32,8 @@ const Index = () => {
     setProcessedReports(reportsWithRandomPremium);
   }, []);
 
-  const availableReports = processedReports.filter(report => {
-    if (report.premium && !user) {
-      return false;
-    }
-    return true;
-  });
+  // Filter to show ALL reports in the list, but mark premium ones
+  // Premium reports will be handled by the ReportDetail component
 
   const handleSelectReport = (report: FinancialReport) => {
     setSelectedReport(report);
