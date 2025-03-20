@@ -41,15 +41,34 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const renderTabbedContent = () => {
     return (
       <Tabs defaultValue="financial-data" value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className={`grid ${isMobile ? 'grid-cols-2 gap-1' : 'grid-cols-7'} mb-4 overflow-x-auto bg-neutral-800 text-amber-400`}>
-          <TabsTrigger value="financial-data" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">1. Dane Finansowe</TabsTrigger>
-          <TabsTrigger value="trends" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">2. Trendy Rynkowe</TabsTrigger>
-          <TabsTrigger value="outlook" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">3. Plany na Przyszłość</TabsTrigger>
-          <TabsTrigger value="risks" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">4. Ryzyka</TabsTrigger>
-          <TabsTrigger value="predictions" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">5. Predykcje Finansowe</TabsTrigger>
-          <TabsTrigger value="stock" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">6. Predykcje Kursu</TabsTrigger>
-          <TabsTrigger value="technical" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">7. Analiza Techniczna</TabsTrigger>
-        </TabsList>
+        <div className="mb-4 bg-neutral-800 p-1 rounded-md">
+          <TabsList className="grid grid-cols-4 w-full bg-transparent">
+            <TabsTrigger value="financial-data" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              1. Dane Finansowe
+            </TabsTrigger>
+            <TabsTrigger value="trends" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              2. Trendy Rynkowe
+            </TabsTrigger>
+            <TabsTrigger value="outlook" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              3. Plany na Przyszłość
+            </TabsTrigger>
+            <TabsTrigger value="risks" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              4. Ryzyka
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsList className="grid grid-cols-3 w-full mt-1 bg-transparent">
+            <TabsTrigger value="predictions" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              5. Predykcje Finansowe
+            </TabsTrigger>
+            <TabsTrigger value="stock" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              6. Predykcje Kursu
+            </TabsTrigger>
+            <TabsTrigger value="technical" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+              7. Analiza Techniczna
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="financial-data" className="space-y-4">
           <ReportFinancialData report={report} />
