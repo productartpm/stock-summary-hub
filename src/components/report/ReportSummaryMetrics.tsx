@@ -8,21 +8,36 @@ interface ReportSummaryMetricsProps {
 }
 
 export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
+  // Function to translate key names to Polish
+  const translateKey = (key: string) => {
+    const translations: Record<string, string> = {
+      revenue: "Przychody",
+      netIncome: "Zysk Netto",
+      operatingProfit: "Zysk Operacyjny",
+      eps: "Zysk na Akcję",
+      marketCap: "Kapitalizacja",
+      peRatio: "Wskaźnik P/E",
+      dividendYield: "Stopa Dywidendy"
+    };
+    
+    return translations[key] || key.replace(/([A-Z])/g, ' $1').trim();
+  };
+  
   return (
     <div className="mb-6">
-      <h2 className="text-xl font-semibold mb-3">Financial Summary</h2>
+      <h2 className="text-xl font-semibold mb-3 text-neutral-800">Podsumowanie Finansowe</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         {Object.entries(report.summaryData).map(([key, data]) => (
-          <div key={key} className="bg-card rounded-lg p-4 border border-border">
-            <div className="text-sm font-medium mb-1 capitalize">
-              {key.replace(/([A-Z])/g, ' $1').trim()}
+          <div key={key} className="bg-neutral-800 rounded-lg p-4 border border-amber-400 text-white">
+            <div className="text-sm font-medium mb-1 capitalize text-amber-300">
+              {translateKey(key)}
             </div>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-bold text-white">
               {typeof data.value === 'number' 
                 ? formatNumber(data.value, data.unit) 
                 : data.value}
             </div>
-            <div className={`text-sm ${data.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+            <div className={`text-sm ${data.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
               {formatPercentage(data.change)}
             </div>
           </div>
@@ -30,8 +45,8 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
       </div>
       
       {report.financialPeriod && (
-        <div className="text-sm text-muted-foreground mb-2">
-          Financial period: {report.financialPeriod}
+        <div className="text-sm text-neutral-600 mb-2">
+          Okres finansowy: {report.financialPeriod}
         </div>
       )}
     </div>
