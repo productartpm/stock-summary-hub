@@ -13,6 +13,9 @@ import { ReportHeader } from './report/ReportHeader';
 import { ReportTrends } from './report/ReportTrends';
 import { ReportRisks } from './report/ReportRisks';
 import { ReportFinancialPredictions } from './report/ReportFinancialPredictions';
+import { ReportFinancialData } from './report/ReportFinancialData';
+import { ReportStockPredictions } from './report/ReportStockPredictions';
+import { ReportTechnicalAnalysis } from './report/ReportTechnicalAnalysis';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useState } from 'react';
 
@@ -24,7 +27,7 @@ interface ReportDetailProps {
 
 const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const isMobile = useIsMobile();
-  const [activeTab, setActiveTab] = useState('highlights');
+  const [activeTab, setActiveTab] = useState('financial-data');
 
   if (!report) {
     return <EmptyReportState />;
@@ -37,18 +40,19 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
 
   const renderTabbedContent = () => {
     return (
-      <Tabs defaultValue="highlights" value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className={`grid ${isMobile ? 'grid-cols-3' : 'grid-cols-6 max-w-3xl'} mb-4`}>
-          <TabsTrigger value="highlights">Highlights</TabsTrigger>
-          <TabsTrigger value="trends">Market Trends</TabsTrigger>
-          <TabsTrigger value="outlook">Future Plans</TabsTrigger>
-          <TabsTrigger value="risks">Risks</TabsTrigger>
-          <TabsTrigger value="predictions">Predictions</TabsTrigger>
-          <TabsTrigger value="analysis">Analysis</TabsTrigger>
+      <Tabs defaultValue="financial-data" value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className={`grid ${isMobile ? 'grid-cols-2 gap-1' : 'grid-cols-7'} mb-4 overflow-x-auto`}>
+          <TabsTrigger value="financial-data">1. Financial Data</TabsTrigger>
+          <TabsTrigger value="trends">2. Market Trends</TabsTrigger>
+          <TabsTrigger value="outlook">3. Future Plans</TabsTrigger>
+          <TabsTrigger value="risks">4. Risks</TabsTrigger>
+          <TabsTrigger value="predictions">5. Financial Predictions</TabsTrigger>
+          <TabsTrigger value="stock">6. Stock Price Predictions</TabsTrigger>
+          <TabsTrigger value="technical">7. Technical Analysis</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="highlights" className="space-y-4">
-          <ReportHighlights report={report} />
+        <TabsContent value="financial-data" className="space-y-4">
+          <ReportFinancialData report={report} />
         </TabsContent>
 
         <TabsContent value="trends" className="space-y-4">
@@ -67,8 +71,12 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
           <ReportFinancialPredictions report={report} />
         </TabsContent>
 
-        <TabsContent value="analysis" className="space-y-4">
-          <ReportAnalystReactions report={report} />
+        <TabsContent value="stock" className="space-y-4">
+          <ReportStockPredictions report={report} />
+        </TabsContent>
+
+        <TabsContent value="technical" className="space-y-4">
+          <ReportTechnicalAnalysis report={report} />
         </TabsContent>
       </Tabs>
     );
