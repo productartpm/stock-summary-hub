@@ -35,6 +35,23 @@ export interface StockData {
   sharesOutstanding: number;
   averageDailyVolume: number;
   volatility: number;
+  rsi?: number;
+  macd?: {
+    value: number;
+    signal: number;
+    histogram: number;
+  };
+  bollinger?: {
+    upper: number;
+    middle: number;
+    lower: number;
+  };
+  stochastic?: {
+    k: number;
+    d: number;
+  };
+  atr?: number;
+  obv?: number;
 }
 
 export interface ReportSummary {
@@ -43,4 +60,3 @@ export interface ReportSummary {
   marketContext?: string;
   keyFactors?: string[];
 }
-
