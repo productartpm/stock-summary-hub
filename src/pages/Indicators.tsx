@@ -3,9 +3,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, Activity, ArrowUp, ArrowDown, Calendar } from 'lucide-react';
+import { TrendingUp, TrendingDown, Activity, ArrowUp, ArrowDown, Calendar, Lock } from 'lucide-react';
 import { format } from 'date-fns';
 import { pl } from 'date-fns/locale';
+import { useAuth } from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { useToast } from '@/components/ui/use-toast';
 
 // Types for indicators
 interface StockWithIndicator {
@@ -129,6 +133,22 @@ const volumeIncreaseDown: StockWithIndicator[] = [
 
 const IndicatorsPage = () => {
   const [activeTab, setActiveTab] = useState('tab1');
+  const { user } = useAuth();
+  const { toast } = useToast();
+  
+  const premiumTabs = ['tab7', 'tab8', 'tab9', 'tab10', 'tab11', 'tab12'];
+  
+  const handlePremiumTabClick = (tabValue: string) => {
+    if (!user && premiumTabs.includes(tabValue)) {
+      toast({
+        title: "Funkcja wymaga logowania",
+        description: "Zaloguj się, aby zobaczyć zaawansowane wskaźniki.",
+        duration: 3000,
+      });
+    } else {
+      setActiveTab(tabValue);
+    }
+  };
   
   const renderStockList = (stocks: StockWithIndicator[], showIndicator = false, indicatorLabel = 'Indicator') => {
     return (
@@ -194,7 +214,7 @@ const IndicatorsPage = () => {
         
         <Tabs 
           value={activeTab} 
-          onValueChange={setActiveTab} 
+          onValueChange={tabValue => handlePremiumTabClick(tabValue)} 
           className="space-y-4"
         >
           <div className="overflow-auto">
@@ -223,29 +243,102 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">6</span>
                 5 sesji spadkowych
               </TabsTrigger>
-              <TabsTrigger value="tab7" className="px-4 py-2">
+              
+              <TabsTrigger 
+                value="tab7" 
+                className={`px-4 py-2 ${!user && 'relative'}`}
+                disabled={!user}
+              >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">7</span>
                 MACD - kupno
+                {!user && (
+                  <>
+                    <Lock className="h-4 w-4 ml-2" />
+                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </>
+                )}
               </TabsTrigger>
-              <TabsTrigger value="tab8" className="px-4 py-2">
+              <TabsTrigger 
+                value="tab8" 
+                className={`px-4 py-2 ${!user && 'relative'}`}
+                disabled={!user}
+              >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">8</span>
                 MACD - sprzedaż
+                {!user && (
+                  <>
+                    <Lock className="h-4 w-4 ml-2" />
+                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </>
+                )}
               </TabsTrigger>
-              <TabsTrigger value="tab9" className="px-4 py-2">
+              <TabsTrigger 
+                value="tab9" 
+                className={`px-4 py-2 ${!user && 'relative'}`}
+                disabled={!user}
+              >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">9</span>
                 Złoty krzyż
+                {!user && (
+                  <>
+                    <Lock className="h-4 w-4 ml-2" />
+                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </>
+                )}
               </TabsTrigger>
-              <TabsTrigger value="tab10" className="px-4 py-2">
+              <TabsTrigger 
+                value="tab10" 
+                className={`px-4 py-2 ${!user && 'relative'}`}
+                disabled={!user}
+              >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">10</span>
                 Krzyż śmierci
+                {!user && (
+                  <>
+                    <Lock className="h-4 w-4 ml-2" />
+                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </>
+                )}
               </TabsTrigger>
-              <TabsTrigger value="tab11" className="px-4 py-2">
+              <TabsTrigger 
+                value="tab11" 
+                className={`px-4 py-2 ${!user && 'relative'}`}
+                disabled={!user}
+              >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">11</span>
                 Wolumen na wzroście
+                {!user && (
+                  <>
+                    <Lock className="h-4 w-4 ml-2" />
+                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </>
+                )}
               </TabsTrigger>
-              <TabsTrigger value="tab12" className="px-4 py-2">
+              <TabsTrigger 
+                value="tab12" 
+                className={`px-4 py-2 ${!user && 'relative'}`}
+                disabled={!user}
+              >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">12</span>
                 Wolumen na spadku
+                {!user && (
+                  <>
+                    <Lock className="h-4 w-4 ml-2" />
+                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </>
+                )}
               </TabsTrigger>
             </TabsList>
           </div>
@@ -355,7 +448,7 @@ const IndicatorsPage = () => {
             
             <TabsContent value="tab9" className="space-y-4">
               <CardHeader>
-                <CardTitle>Złoty krzyż (średnie 50 i 200 sesji)</CardTitle>
+                <CardTitle>Złoty krzyż (średnie 50 i 200 sesji)</Title>
                 <CardDescription>
                   Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od dołu, sygnalizując potencjalny trend wzrostowy.
                   Dane na dzień {formattedDate}.
@@ -368,7 +461,7 @@ const IndicatorsPage = () => {
             
             <TabsContent value="tab10" className="space-y-4">
               <CardHeader>
-                <CardTitle>Krzyż śmierci (średnie 50 i 200 sesji)</CardTitle>
+                <CardTitle>Krzyż śmierci (średnie 50 i 200 sesji)</Title>
                 <CardDescription>
                   Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od góry, sygnalizując potencjalny trend spadkowy.
                   Dane na dzień {formattedDate}.
