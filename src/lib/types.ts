@@ -25,3 +25,14 @@ export interface AuthState {
     name?: string;
   } | null;
 }
+
+export interface StockData {
+  currentPrice: number;
+  priceChange: number;
+  yearToDateChange: number;
+  low52Week: number;
+  high52Week: number;
+  sharesOutstanding: number;
+  averageDailyVolume: number;
+  volatility: number;
+}

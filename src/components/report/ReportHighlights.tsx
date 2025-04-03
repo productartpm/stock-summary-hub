@@ -1,4 +1,3 @@
-
 import { formatNumber } from "@/lib/data";
 import type { FinancialReport } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,7 +17,6 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
     let quarter;
     if (month >= 1 && month <= 3) quarter = 'Q1';
     else if (month >= 4 && month <= 6) quarter = 'Q2';
-    else if (month >= 7 && month <= 9) quarter = 'Q3';
     else quarter = 'Q4';
     
     return { quarter, fiscalYear: year };

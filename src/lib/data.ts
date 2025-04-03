@@ -1,4 +1,4 @@
-import type { SummaryDataItem } from './types';
+import type { SummaryDataItem, StockData } from './types';
 
 export interface FinancialReport {
   id: string;
@@ -8,6 +8,7 @@ export interface FinancialReport {
   reportType: 'Quarterly' | 'Annual';
   quarterOrYear: string;
   publicationDate: string;
+  reportDate: string;
   title: string;
   reportCategory: string[];
   category?: string;
@@ -29,6 +30,7 @@ export interface FinancialReport {
   };
   analystReactions?: string[];
   premium?: boolean;
+  stockData: StockData;
 }
 
 export const formatNumber = (value: number, unit?: string): string => {
@@ -94,6 +96,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-11-15',
+    reportDate: '2024-11-15',
     title: 'Raport Kwartalny - Columbus Energy Q3 2024',
     reportCategory: ['Energy', 'Renewable Energy', 'Solar Power', 'Green Tech', 'ESG'],
     category: 'Wyniki',
@@ -130,6 +133,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'mln PLN'
       }
     },
+    stockData: {
+      currentPrice: 8.95,
+      priceChange: -1.32,
+      yearToDateChange: -12.45,
+      low52Week: 7.21,
+      high52Week: 14.82,
+      sharesOutstanding: 66.5,
+      averageDailyVolume: 125000,
+      volatility: 2.1
+    },
     keyHighlights: [
       'Przychody spadły o 35,85% do 233,86 mln PLN w okresie 9 miesięcy zakończonym 30 września 2024 r., w porównaniu z analogicznym okresem 2023 r.',
       'Spółka zdołała przejść od straty operacyjnej do zysku operacyjnego w wysokości 10,38 mln PLN.',
@@ -165,6 +178,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-10-11',
+    reportDate: '2024-10-11',
     title: 'JPMorgan Chase - Wyniki Finansowe za III Kwartał 2024',
     reportCategory: ['Banking', 'Financial Services', 'Investment Banking', 'Consumer Banking'],
     category: 'Wyniki',
@@ -201,6 +215,16 @@ export const financialReports: FinancialReport[] = [
         unit: '%'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Rekordowe przychody w wysokości 43,32 mld USD za III kwartał 2024 r., wzrost o 5,2% rok do roku.',
       'Zysk netto wzrósł do 13,92 mld USD, o 6,8% w porównaniu z III kwartałem 2023 r.',
@@ -232,6 +256,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-10-29',
+    reportDate: '2024-10-29',
     title: 'PayPal Holdings, Inc. - Wyniki za III Kwartał 2024',
     reportCategory: ['Fintech', 'Payment Processing', 'E-commerce', 'Digital Payments'],
     category: 'Działalność finansowa',
@@ -268,8 +293,18 @@ export const financialReports: FinancialReport[] = [
         unit: 'M'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
-      'Przychody wzrosły o 9,3% rok do roku do 8,12 mld USD, przewyższając konsensus szacunków wynoszący 7,95 mld USD.',
+      'Przychody wzrosły o 9,3% rok do roku do 8,12 mld USD, przewyższając konsensus szacunków wynoszące 7,95 mld USD.',
       'Całkowita Wartość Płatności (TPV) wzrosła o 12,2% do 420,5 mld USD.',
       'Dodano 6,2 mln nowych aktywnych kont, osiągając łącznie 438 mln aktywnych kont.',
       'Marża transakcyjna wzrosła do 48,6%, o 70 punktów bazowych w porównaniu z poprzednim rokiem.',
@@ -298,6 +333,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q4 2024',
     publicationDate: '2024-11-07',
+    reportDate: '2024-11-07',
     title: 'The Walt Disney Company - Wyniki IV Kwartału i Całego Roku 2024',
     reportCategory: ['Entertainment', 'Media', 'Streaming', 'Theme Parks'],
     category: 'Znacząca umowa',
@@ -334,6 +370,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'B USD'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Przychody wzrosły o 3,5% rok do roku do 22,8 mld USD, nieznacznie poniżej oczekiwań wynoszących 23,1 mld USD.',
       'Segment Direct-to-Consumer osiągnął rentowność drugi kwartał z rzędu z zyskiem operacyjnym wynoszącym 380 mln USD.',
@@ -360,6 +406,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q1 2025',
     publicationDate: '2024-11-13',
+    reportDate: '2024-11-13',
     title: 'Cisco - Wyniki za Pierwszy Kwartał Roku Obrotowego 2025',
     reportCategory: ['Technology', 'Networking', 'Cybersecurity', 'Infrastructure'],
     category: 'Rozwój firmy',
@@ -396,6 +443,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'K USD'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Przychody wzrosły o 2,8% rok do roku do 13,9 mld USD, nieznacznie powyżej oczekiwań wynoszących 13,8 mld USD.',
       'Przychody z produktów wzrosły o 1,9%, a przychody z usług o 4,8%.',
@@ -427,6 +484,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q2 2024',
     publicationDate: '2024-05-02',
+    reportDate: '2024-05-02',
     title: 'Apple - Wyniki za Drugi Kwartał',
     reportCategory: ['Technology', 'Consumer Electronics', 'Hardware', 'Services'],
     category: 'Wyniki',
@@ -462,6 +520,16 @@ export const financialReports: FinancialReport[] = [
         change: 5.5,
         unit: 'B USD'
       }
+    },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
     },
     keyHighlights: [
       'Przychody z iPhone\'a wzrosły o 5,5% do 46,28 mld USD, przekraczając oczekiwania.',
@@ -499,6 +567,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Annual',
     quarterOrYear: 'FY 2023',
     publicationDate: '2024-01-24',
+    reportDate: '2024-01-24',
     title: 'Tesla - Raport Roczny 2023',
     reportCategory: ['Automotive', 'Electric Vehicles', 'Energy Generation', 'Storage', 'Clean Energy'],
     category: 'Zmiana strategii',
@@ -535,6 +604,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'GWh'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Rekordowa liczba dostarczonych pojazdów: 1,8 miliona sztuk w 2023 roku, co stanowi wzrost o 38% rok do roku.',
       'Wdrożenia magazynów energii więcej niż podwoiły się do 14,7 GWh, napędzając wzrost przychodów z Wytwarzania i Magazynowania Energii o 54%.',
@@ -565,6 +644,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q1 2025',
     publicationDate: '2024-05-22',
+    reportDate: '2024-05-22',
     title: 'NVIDIA - Wyniki Finansowe za Pierwszy Kwartał Roku Obrotowego 2025',
     reportCategory: ['Technology', 'Semiconductors', 'AI Computing', 'Graphics Processing', 'Data Center'],
     category: 'Wyniki',
@@ -601,6 +681,16 @@ export const financialReports: FinancialReport[] = [
         unit: '%'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Rekordowe przychody Centrum Danych w wysokości 22,6 mld USD, wzrost o 427% w porównaniu z rokiem poprzednim, napędzane rosnącym popytem na produkty architektury NVIDIA Hopper.',
       'Osiągnięto rekordową marżę brutto 78,4%, wzrost o 12,3 punktu procentowego rok do roku.',
@@ -632,6 +722,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Annual',
     quarterOrYear: 'FY 2023',
     publicationDate: '2024-02-01',
+    reportDate: '2024-02-01',
     title: 'Amazon.com - Wyniki Finansowe za Cały Rok 2023',
     reportCategory: ['E-commerce', 'Cloud Computing', 'Digital Content', 'Logistics', 'Retail'],
     category: 'Dywidenda',
@@ -668,6 +759,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'B Units'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Sprzedaż netto wzrosła o 12% do 574,8 mld USD, w porównaniu z 514,0 mld USD w 2022 roku.',
       'Zysk operacyjny wzrósł do 36,9 mld USD, w porównaniu z 12,2 mld USD w 2022 roku.',
@@ -698,6 +799,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-10-29',
+    reportDate: '2024-10-29',
     title: 'Pfizer - Wyniki za Trzeci Kwartał 2024',
     reportCategory: ['Healthcare', 'Pharmaceuticals', 'Biotechnology', 'Vaccines', 'Drug Manufacturing'],
     category: 'Sprawy kadrowe',
@@ -734,6 +836,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'B USD'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Przychody z produktów non-COVID wzrosły o 9,8% operacyjnie do 16,53 mld USD, napędzane silnymi wynikami kluczowych marek.',
       'Przychody z portfolio onkologicznego wzrosły o 15,3% do 3,87 mld USD, w tym 42% wzrost z niedawno wprowadzonych produktów.',
@@ -769,6 +881,7 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Annual',
     quarterOrYear: 'FY 2024',
     publicationDate: '2024-07-30',
+    reportDate: '2024-07-30',
     title: 'Microsoft - Raport Roczny za Rok Obrotowy 2024',
     reportCategory: ['Technology', 'Software', 'Cloud Computing', 'AI', 'Enterprise Solutions'],
     category: 'Koncesje, kontrole, regulacje',
@@ -805,6 +918,16 @@ export const financialReports: FinancialReport[] = [
         unit: 'B USD'
       }
     },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
     keyHighlights: [
       'Przychody wzrosły o 14,9% do rekordowych 245,1 mld USD, napędzane silnym wzrostem usług chmurowych i AI.',
       'Przychody Intelligent Cloud, w tym Azure, wzrosły o 22% do 114,8 mld USD.',
@@ -834,3 +957,22 @@ export const financialReports: FinancialReport[] = [
     premium: true
   }
 ];
+
+for (let i = 1; i < financialReports.length; i++) {
+  if (!financialReports[i].stockData) {
+    financialReports[i].stockData = {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    };
+  }
+  
+  if (!financialReports[i].reportDate) {
+    financialReports[i].reportDate = financialReports[i].publicationDate;
+  }
+}
