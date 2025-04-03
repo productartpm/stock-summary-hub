@@ -1,39 +1,6 @@
+import type { SummaryDataItem, StockData, ReportSummary, FinancialReport as FinancialReportType } from './types';
 
-import type { SummaryDataItem, StockData, ReportSummary } from './types';
-
-export interface FinancialReport {
-  id: string;
-  companyName: string;
-  ticker: string;
-  logoUrl: string;
-  reportType: 'Quarterly' | 'Annual';
-  quarterOrYear: string;
-  publicationDate: string;
-  reportDate: string;
-  title: string;
-  reportCategory: string[];
-  category?: string;
-  summaryData: Record<string, SummaryDataItem>;
-  keyHighlights: string[];
-  financialPeriod?: string;
-  outlook?: {
-    statement: string;
-    guidanceRevenue?: {
-      min: number;
-      max: number;
-      unit: string;
-    };
-    guidanceEps?: {
-      min: number;
-      max: number;
-      unit: string;
-    };
-  };
-  analystReactions?: string[];
-  premium?: boolean;
-  stockData: StockData;
-  reportSummary?: ReportSummary;
-}
+export type FinancialReport = FinancialReportType;
 
 export const formatNumber = (value: number, unit?: string): string => {
   if (value >= 1_000_000_000) {

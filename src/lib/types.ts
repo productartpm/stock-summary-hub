@@ -88,16 +88,16 @@ export interface FinancialReport {
   quarterOrYear: string;
   reportDate: string;
   publicationDate: string;
-  category: string;
+  category?: string;
   reportCategory: string[];
   premium: boolean;
   summaryData: {
     revenue: SummaryDataItem;
-    profit?: SummaryDataItem; // Made profit optional
-    operatingProfit: SummaryDataItem;
+    profit?: SummaryDataItem;
+    operatingProfit?: SummaryDataItem;
     netIncome: SummaryDataItem;
     eps?: SummaryDataItem;
-    [key: string]: SummaryDataItem | undefined; // Made value optional since some properties like eps are optional
+    [key: string]: SummaryDataItem | undefined;
   };
   stockData: StockData;
   outlook?: {
@@ -117,4 +117,5 @@ export interface FinancialReport {
   reportSummary?: ReportSummary;
   financialPeriod?: string;
   logoUrl?: string;
+  analystReactions?: string[];
 }

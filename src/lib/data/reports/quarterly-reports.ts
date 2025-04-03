@@ -77,15 +77,11 @@ export const quarterlyReports: FinancialReport[] = [
         unit: 'PLN'
       }
     },
-    analystReactions: [
-      'Analitycy dostrzegają znaczącą poprawę efektywności operacyjnej, co potwierdza powrót do dodatniej EBITDA i zmniejszenie straty netto.',
-      'Reakcja rynku była ostrożnie pozytywna, z większością analityków utrzymujących rekomendacje TRZYMAJ, jednocześnie doceniając postępy spółki w restrukturyzacji.',
-      'Obawy dotyczą nadal spadającej trajektorii przychodów w podstawowych segmentach biznesowych, ale strategiczne przesunięcie w kierunku usług o wyższej marży i rozwoju Columbus ONE jest postrzegane korzystnie.'
-    ],
     reportSummary: {
       text: 'Columbus Energy wykazuje pozytywne oznaki transformacji operacyjnej, z powrotem do dodatniej EBITDA i znaczącym zmniejszeniem straty netto pomimo spadku przychodów. Restrukturyzacja i przesunięcie w stronę usług o wyższej marży zaczyna przynosić rezultaty, ale spółka nadal jest na drodze do pełnej rentowności.',
       sentiment: 'neutral'
-    }
+    },
+    premium: false
   },
   {
     id: 'jpmorgan-q3-2024',
@@ -158,15 +154,11 @@ export const quarterlyReports: FinancialReport[] = [
         unit: 'USD'
       }
     },
-    analystReactions: [
-      'Analitycy szeroko chwalili zdolność JPMorgana do generowania silnych wyników we wszystkich segmentach biznesowych pomimo trudności gospodarczych.',
-      'Kilka zespołów badawczych podwyższyło swoje cele cenowe po ogłoszeniu wyników, ze średnim wzrostem o 8%.',
-      'Wskaźniki jakości kredytów pozostają obszarem ściśle monitorowanym, chociaż obecne poziomy są postrzegane jako możliwe do zarządzania i odpowiednio zabezpieczone.'
-    ],
     reportSummary: {
       text: 'JPMorgan Chase osiągnął rekordowe wyniki w trzecim kwartale 2024 roku, z solidnym wzrostem przychodów i zysków we wszystkich segmentach biznesowych. Bank wykazuje silną odporność na niepewność gospodarczą dzięki zdywersyfikowanemu modelowi biznesowemu i skutecznemu zarządzaniu ryzykiem.',
       sentiment: 'positive'
-    }
+    },
+    premium: false
   },
   {
     id: 'paypal-q3-2024',
@@ -247,7 +239,81 @@ export const quarterlyReports: FinancialReport[] = [
     reportSummary: {
       text: 'PayPal kontynuuje silny wzrost, z wynikami przekraczającymi oczekiwania analityków w trzecim kwartale 2024 roku. Firma skutecznie zwiększa bazę użytkowników i poprawia marże, jednocześnie inwestując w technologie AI dla dalszego rozwoju. Podniesienie prognozy na cały rok odzwierciedla rosnące zaufanie zarządu do modelu biznesowego i strategii firmy.',
       sentiment: 'positive'
-    }
+    },
+    premium: false
+  },
+  {
+    id: 'disney-q4-2024',
+    companyName: 'The Walt Disney Company',
+    ticker: 'DIS',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Walt_Disney_Studios_2023_logo.svg/2560px-Walt_Disney_Studios_2023_logo.svg.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q4 2024',
+    publicationDate: '2024-11-07',
+    reportDate: '2024-11-07',
+    title: 'The Walt Disney Company - Wyniki IV Kwartału i Całego Roku 2024',
+    reportCategory: ['Entertainment', 'Media', 'Streaming', 'Theme Parks'],
+    category: 'Znacząca umowa',
+    financialPeriod: 'Q4 2024',
+    summaryData: {
+      revenue: {
+        value: 22.8,
+        change: 3.5,
+        unit: 'B USD'
+      },
+      operatingProfit: {
+        value: 3.7,
+        change: 15.2,
+        unit: 'B USD'
+      },
+      netIncome: {
+        value: 2.4,
+        change: 28.6,
+        unit: 'B USD'
+      },
+      eps: {
+        value: 1.42,
+        change: 30.3,
+        unit: 'USD'
+      },
+      dTCSubscribers: {
+        value: 312,
+        change: 14.8,
+        unit: 'M'
+      },
+      parkRevenue: {
+        value: 9.1,
+        change: 7.2,
+        unit: 'B USD'
+      }
+    },
+    stockData: {
+      currentPrice: 100 + Math.random() * 200,
+      priceChange: (Math.random() * 10) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: (Math.random() * 30) * (Math.random() > 0.5 ? 1 : -1),
+      low52Week: 80 + Math.random() * 50,
+      high52Week: 150 + Math.random() * 200,
+      sharesOutstanding: 50 + Math.random() * 950,
+      averageDailyVolume: 100000 + Math.random() * 9900000,
+      volatility: 1 + Math.random() * 3
+    },
+    keyHighlights: [
+      'Przychody wzrosły o 3,5% rok do roku do 22,8 mld USD, nieznacznie poniżej oczekiwań wynoszących 23,1 mld USD.',
+      'Segment Direct-to-Consumer osiągnął rentowność drugi kwartał z rzędu z zyskiem operacyjnym wynoszącym 380 mln USD.',
+      'Liczba subskrybentów Disney+ wzrosła do 159 mln, a łączna liczba subskrybentów usług streamingowych (w tym Hulu i ESPN+) osiągnęła 312 mln.',
+      'Segment Parków, Doświadczeń i Produktów odnotował wzrost przychodów o 7,2% do 9,1 mld USD, przy wzroście zysku operacyjnego o 8,3%.',
+      'Przychody Studia Rozrywki spadły o 2,1% do 2,4 mld USD z powodu mniejszej liczby premier kinowych w porównaniu z poprzednim rokiem.',
+      'Osiągnięto 7,5 mld USD oszczędności kosztów, przekraczając pierwotny cel 5,5 mld USD ustalony w lutym 2023 roku.'
+    ],
+    outlook: {
+      statement: 'Disney spodziewa się, że rok obrotowy 2025 przyniesie dalszy wzrost rentowności streamingu i stabilne wyniki segmentu Parków pomimo niepewności gospodarczych. Firma przewiduje wzrost skorygowanego zysku na akcję o wysoki jednocyfrowy procent, koncentrując się na rozwijaniu swoich franczyz we wszystkich segmentach biznesowych.',
+      guidanceEps: {
+        min: 5.2,
+        max: 5.5,
+        unit: 'USD'
+      }
+    },
+    premium: true
   },
   {
     id: 'cisco-q1-2025',

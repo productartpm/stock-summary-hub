@@ -30,6 +30,9 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
       roa: "ROA",
       tpv: "Całkowita Wartość Płatności",
       activeAccounts: "Aktywne Konta",
+      netInterestIncome: "Wynik Odsetkowy",
+      roe: "Stopa Zwrotu z Kapitału",
+      gmv: "Wartość Sprzedanych Towarów",
     };
     
     return translations[key] || key.replace(/([A-Z])/g, ' $1').trim();
@@ -73,11 +76,11 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
     const incomeChange = report.summaryData.netIncome.change;
     
     let marketTrend = "";
-    if (report.category === "Technology") {
+    if (report.reportCategory.includes("Technology")) {
       marketTrend = "Sektor technologiczny wykazuje oznaki stabilizacji po okresie dynamicznego wzrostu, z większym naciskiem inwestorów na rentowność niż na same przychody.";
-    } else if (report.category === "Financial Services") {
+    } else if (report.reportCategory.includes("Financial Services") || report.reportCategory.includes("Banking")) {
       marketTrend = "Sektor finansowy zmaga się z wyzwaniami związanymi ze zmianami stóp procentowych i regulacyjnymi, co wpływa na marże operacyjne wielu instytucji.";
-    } else if (report.category === "Energy") {
+    } else if (report.reportCategory.includes("Energy")) {
       marketTrend = "Sektor energetyczny przechodzi transformację w kierunku odnawialnych źródeł energii, co wiąże się z istotnymi inwestycjami i zmianami w strukturze przychodów.";
     } else {
       marketTrend = "Obecne warunki rynkowe charakteryzują się zwiększoną zmiennością i ostrożnością inwestorów, szczególnie w kontekście inflacji i potencjalnego spowolnienia gospodarczego.";
@@ -133,18 +136,18 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
                 <h4 className="font-medium text-sm mb-2 text-neutral-700">Kluczowe czynniki wpływające na wyniki:</h4>
                 <ul className="text-neutral-600 text-sm list-disc pl-5 space-y-1">
                   {report.summaryData.revenue.change >= 0 ? (
-                    <li>Wzrost przychodów o {formatPercentage(report.summaryData.revenue.change)} dzięki {report.category === "Technology" ? "zwiększonej bazie użytkowników i nowym produktom" : "poprawie warunków rynkowych i strategiom cenowym"}</li>
+                    <li>Wzrost przychodów o {formatPercentage(report.summaryData.revenue.change)} dzięki {report.reportCategory.includes("Technology") ? "zwiększonej bazie użytkowników i nowym produktom" : "poprawie warunków rynkowych i strategiom cenowym"}</li>
                   ) : (
-                    <li>Spadek przychodów o {formatPercentage(Math.abs(report.summaryData.revenue.change))} spowodowany {report.category === "Technology" ? "zwiększoną konkurencją i nasyceniem rynku" : "trudnymi warunkami makroekonomicznymi"}</li>
+                    <li>Spadek przychodów o {formatPercentage(Math.abs(report.summaryData.revenue.change))} spowodowany {report.reportCategory.includes("Technology") ? "zwiększoną konkurencją i nasyceniem rynku" : "trudnymi warunkami makroekonomicznymi"}</li>
                   )}
                   
                   {report.summaryData.netIncome.change >= 0 ? (
-                    <li>Poprawa zysku netto o {formatPercentage(report.summaryData.netIncome.change)} dzięki {report.summaryData.operatingProfit.change >= 0 ? "efektywności operacyjnej i kontroli kosztów" : "jednorazowym pozycjom zysków nadzwyczajnych"}</li>
+                    <li>Poprawa zysku netto o {formatPercentage(report.summaryData.netIncome.change)} dzięki {report.summaryData.operatingProfit && report.summaryData.operatingProfit.change >= 0 ? "efektywności operacyjnej i kontroli kosztów" : "jednorazowym pozycjom zysków nadzwyczajnych"}</li>
                   ) : (
-                    <li>Spadek zysku netto o {formatPercentage(Math.abs(report.summaryData.netIncome.change))} wynikający z {report.summaryData.operatingProfit.change < 0 ? "rosnących kosztów operacyjnych i presji na marże" : "wyższych kosztów finansowania i podatków"}</li>
+                    <li>Spadek zysku netto o {formatPercentage(Math.abs(report.summaryData.netIncome.change))} wynikający z {report.summaryData.operatingProfit && report.summaryData.operatingProfit.change < 0 ? "rosnących kosztów operacyjnych i presji na marże" : "wyższych kosztów finansowania i podatków"}</li>
                   )}
                   
-                  <li>Obecne warunki makroekonomiczne charakteryzują się {report.category === "Financial Services" ? "zmiennością stóp procentowych i regulacjami sektora finansowego" : "presją inflacyjną i niepewnością geopolityczną"}</li>
+                  <li>Obecne warunki makroekonomiczne charakteryzują się {report.reportCategory.includes("Financial Services") || report.reportCategory.includes("Banking") ? "zmiennością stóp procentowych i regulacjami sektora finansowego" : "presją inflacyjną i niepewnością geopolityczną"}</li>
                 </ul>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import type { FinancialReport } from '@/lib/types';
 
 export const annualReports: FinancialReport[] = [
@@ -56,7 +55,6 @@ export const annualReports: FinancialReport[] = [
     },
     premium: true
   },
-  // Dodajemy 10 nowych nadchodzących raportów finansowych
   {
     id: 'apple-annual-2024',
     companyName: 'Apple Inc.',
@@ -387,7 +385,8 @@ export const annualReports: FinancialReport[] = [
       netInterestIncome: { value: 2.85, change: 10.2, unit: 'B PLN' },
       netIncome: { value: 1.32, change: 15.8, unit: 'B PLN' },
       eps: { value: 12.92, change: 15.8, unit: 'PLN' },
-      roe: { value: 12.4, change: 1.5, unit: '%' }
+      roe: { value: 12.4, change: 1.5, unit: '%' },
+      operatingProfit: { value: 1.9, change: 14.2, unit: 'B PLN' }
     },
     stockData: {
       currentPrice: 480 + Math.random() * 100,

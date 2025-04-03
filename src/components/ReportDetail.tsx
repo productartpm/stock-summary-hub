@@ -1,6 +1,6 @@
 
 import { PremiumContent } from '@/components/PremiumContent';
-import { type FinancialReport } from '@/lib/data';
+import { type FinancialReport } from '@/lib/types';
 import { User } from '@/hooks/useAuth';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { EmptyReportState } from './report/EmptyReportState';
