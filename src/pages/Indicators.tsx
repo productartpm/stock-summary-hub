@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -11,6 +10,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
+import { Header } from '@/components/Header';
 
 // Types for indicators
 interface StockWithIndicator {
@@ -129,7 +129,8 @@ const volumeIncreaseUp: StockWithIndicator[] = [
 const volumeIncreaseDown: StockWithIndicator[] = [
   { id: '1', name: 'Retail Group', ticker: 'RTGP', price: 86.40, change: -1.8, volume: 890000 },
   { id: '2', name: 'Industrial Manufacturing', ticker: 'INDM', price: 124.70, change: -2.9, volume: 760000 },
-  { id: '3', name: 'Financial Services', ticker: 'FNSV', price: 234.50, change: -0.7, volume: 930000 }
+  { id: '3', name: 'Financial Services', ticker: 'FNSV', price: 234.50, change: -0.7, volume: 930000 },
+  { id: '4', name: 'Consumer Goods', ticker: 'CNGD', price: 67.80, change: -1.2, volume: 540000 }
 ];
 
 const IndicatorsPage = () => {
@@ -191,18 +192,7 @@ const IndicatorsPage = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b border-border/60 py-4 px-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Centrum Raportów Giełdowych</h1>
-          <div className="flex items-center space-x-6">
-            <nav className="hidden md:flex space-x-4 text-sm">
-              <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">ESPI</a>
-              <a href="/calendar" className="text-muted-foreground hover:text-foreground transition-colors">Kalendarium raportów</a>
-              <a href="/indicators" className="text-primary">Wskaźniki</a>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header activeTab="indicators" />
       
       <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
         <div className="mb-6">
@@ -247,98 +237,98 @@ const IndicatorsPage = () => {
               
               <TabsTrigger 
                 value="tab7" 
-                className={`px-4 py-2 ${!user && 'relative'}`}
+                className={`px-4 py-2 ${!user ? 'relative border-2 border-dashed border-amber-500' : ''}`}
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">7</span>
-                MACD - kupno
+                <div className="flex items-center">
+                  MACD - kupno
+                  {!user && <Lock className="h-4 w-4 ml-2 text-amber-500" />}
+                </div>
                 {!user && (
-                  <>
-                    <Lock className="h-4 w-4 ml-2" />
-                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
-                      <Lock className="h-4 w-4" />
-                    </div>
-                  </>
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                    <Lock className="h-5 w-5 text-amber-500" />
+                  </div>
                 )}
               </TabsTrigger>
               <TabsTrigger 
                 value="tab8" 
-                className={`px-4 py-2 ${!user && 'relative'}`}
+                className={`px-4 py-2 ${!user ? 'relative border-2 border-dashed border-amber-500' : ''}`}
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">8</span>
-                MACD - sprzedaż
+                <div className="flex items-center">
+                  MACD - sprzedaż
+                  {!user && <Lock className="h-4 w-4 ml-2 text-amber-500" />}
+                </div>
                 {!user && (
-                  <>
-                    <Lock className="h-4 w-4 ml-2" />
-                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
-                      <Lock className="h-4 w-4" />
-                    </div>
-                  </>
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                    <Lock className="h-5 w-5 text-amber-500" />
+                  </div>
                 )}
               </TabsTrigger>
               <TabsTrigger 
                 value="tab9" 
-                className={`px-4 py-2 ${!user && 'relative'}`}
+                className={`px-4 py-2 ${!user ? 'relative border-2 border-dashed border-amber-500' : ''}`}
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">9</span>
-                Złoty krzyż
+                <div className="flex items-center">
+                  Złoty krzyż
+                  {!user && <Lock className="h-4 w-4 ml-2 text-amber-500" />}
+                </div>
                 {!user && (
-                  <>
-                    <Lock className="h-4 w-4 ml-2" />
-                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
-                      <Lock className="h-4 w-4" />
-                    </div>
-                  </>
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                    <Lock className="h-5 w-5 text-amber-500" />
+                  </div>
                 )}
               </TabsTrigger>
               <TabsTrigger 
                 value="tab10" 
-                className={`px-4 py-2 ${!user && 'relative'}`}
+                className={`px-4 py-2 ${!user ? 'relative border-2 border-dashed border-amber-500' : ''}`}
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">10</span>
-                Krzyż śmierci
+                <div className="flex items-center">
+                  Krzyż śmierci
+                  {!user && <Lock className="h-4 w-4 ml-2 text-amber-500" />}
+                </div>
                 {!user && (
-                  <>
-                    <Lock className="h-4 w-4 ml-2" />
-                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
-                      <Lock className="h-4 w-4" />
-                    </div>
-                  </>
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                    <Lock className="h-5 w-5 text-amber-500" />
+                  </div>
                 )}
               </TabsTrigger>
               <TabsTrigger 
                 value="tab11" 
-                className={`px-4 py-2 ${!user && 'relative'}`}
+                className={`px-4 py-2 ${!user ? 'relative border-2 border-dashed border-amber-500' : ''}`}
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">11</span>
-                Wolumen na wzroście
+                <div className="flex items-center">
+                  Wolumen na wzroście
+                  {!user && <Lock className="h-4 w-4 ml-2 text-amber-500" />}
+                </div>
                 {!user && (
-                  <>
-                    <Lock className="h-4 w-4 ml-2" />
-                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
-                      <Lock className="h-4 w-4" />
-                    </div>
-                  </>
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                    <Lock className="h-5 w-5 text-amber-500" />
+                  </div>
                 )}
               </TabsTrigger>
               <TabsTrigger 
                 value="tab12" 
-                className={`px-4 py-2 ${!user && 'relative'}`}
+                className={`px-4 py-2 ${!user ? 'relative border-2 border-dashed border-amber-500' : ''}`}
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">12</span>
-                Wolumen na spadku
+                <div className="flex items-center">
+                  Wolumen na spadku
+                  {!user && <Lock className="h-4 w-4 ml-2 text-amber-500" />}
+                </div>
                 {!user && (
-                  <>
-                    <Lock className="h-4 w-4 ml-2" />
-                    <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
-                      <Lock className="h-4 w-4" />
-                    </div>
-                  </>
+                  <div className="absolute inset-0 backdrop-blur-sm bg-background/30 rounded flex items-center justify-center">
+                    <Lock className="h-5 w-5 text-amber-500" />
+                  </div>
                 )}
               </TabsTrigger>
             </TabsList>

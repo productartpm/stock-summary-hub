@@ -18,6 +18,7 @@ import { ReportStockPredictions } from './report/ReportStockPredictions';
 import { ReportTechnicalAnalysis } from './report/ReportTechnicalAnalysis';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useState } from 'react';
+import { Header } from '@/components/Header';
 
 interface ReportDetailProps {
   report: FinancialReport | null;
