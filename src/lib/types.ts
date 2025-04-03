@@ -77,3 +77,40 @@ export interface CalendarEvent {
   type: 'quarterly' | 'annual';
   description: string;
 }
+
+export interface FinancialReport {
+  id: string;
+  ticker: string;
+  companyName: string;
+  title: string;
+  summary: string;
+  reportType: 'Quarterly' | 'Annual';
+  quarterOrYear: string;
+  reportDate: string;
+  publicationDate: string;
+  category: string;
+  reportCategory: string[];
+  premium: boolean;
+  summaryData: {
+    revenue: SummaryDataItem;
+    profit: SummaryDataItem;
+    operatingProfit: SummaryDataItem;
+    netIncome: SummaryDataItem;
+    eps?: SummaryDataItem;
+    [key: string]: SummaryDataItem;
+  };
+  stockData: StockData;
+  outlook?: {
+    statement: string;
+    guidanceRevenue?: {
+      min: number;
+      max: number;
+      unit: string;
+    };
+    guidanceEps?: {
+      min: number;
+      max: number;
+      unit: string;
+    };
+  };
+}
