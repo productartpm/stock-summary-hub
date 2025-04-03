@@ -81,7 +81,7 @@ export const quarterlyReports: FinancialReport[] = [
       text: 'Columbus Energy wykazuje pozytywne oznaki transformacji operacyjnej, z powrotem do dodatniej EBITDA i znaczącym zmniejszeniem straty netto pomimo spadku przychodów. Restrukturyzacja i przesunięcie w stronę usług o wyższej marży zaczyna przynosić rezultaty, ale spółka nadal jest na drodze do pełnej rentowności.',
       sentiment: 'neutral'
     },
-    premium: false
+    premium: true
   },
   {
     id: 'jpmorgan-q3-2024',
@@ -158,7 +158,7 @@ export const quarterlyReports: FinancialReport[] = [
       text: 'JPMorgan Chase osiągnął rekordowe wyniki w trzecim kwartale 2024 roku, z solidnym wzrostem przychodów i zysków we wszystkich segmentach biznesowych. Bank wykazuje silną odporność na niepewność gospodarczą dzięki zdywersyfikowanemu modelowi biznesowemu i skutecznemu zarządzaniu ryzykiem.',
       sentiment: 'positive'
     },
-    premium: false
+    premium: true
   },
   {
     id: 'paypal-q3-2024',
@@ -240,7 +240,7 @@ export const quarterlyReports: FinancialReport[] = [
       text: 'PayPal kontynuuje silny wzrost, z wynikami przekraczającymi oczekiwania analityków w trzecim kwartale 2024 roku. Firma skutecznie zwiększa bazę użytkowników i poprawia marże, jednocześnie inwestując w technologie AI dla dalszego rozwoju. Podniesienie prognozy na cały rok odzwierciedla rosnące zaufanie zarządu do modelu biznesowego i strategii firmy.',
       sentiment: 'positive'
     },
-    premium: false
+    premium: true
   },
   {
     id: 'disney-q4-2024',
