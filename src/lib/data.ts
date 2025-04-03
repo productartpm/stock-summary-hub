@@ -141,7 +141,8 @@ export const financialReports: FinancialReport[] = [
     reportSummary: {
       text: 'Columbus Energy wykazuje pozytywne oznaki transformacji operacyjnej, z powrotem do dodatniej EBITDA i znaczącym zmniejszeniem straty netto pomimo spadku przychodów. Restrukturyzacja i przesunięcie w stronę usług o wyższej marży zaczyna przynosić rezultaty, ale spółka nadal jest na drodze do pełnej rentowności.',
       sentiment: 'neutral'
-    }
+    },
+    premium: true
   },
   {
     id: 'jpmorgan-q3-2024',
@@ -216,13 +217,14 @@ export const financialReports: FinancialReport[] = [
     },
     analystReactions: [
       'Analitycy szeroko chwalili zdolność JPMorgana do generowania silnych wyników we wszystkich segmentach biznesowych pomimo trudności gospodarczych.',
-      'Kilka zespołów badawczych podwyższyło swoje cele cenowe po ogłoszeniu wyników, ze średnim wzrostem o 8%.',
+      'Kilka zespołów badawczych podwyższyło swoje cele cenowe po ogłoszeniu wyników, ze średnim wzrostem o około 8%.',
       'Wskaźniki jakości kredytów pozostają obszarem ściśle monitorowanym, chociaż obecne poziomy są postrzegane jako możliwe do zarządzania i odpowiednio zabezpieczone.'
     ],
     reportSummary: {
       text: 'JPMorgan Chase osiągnął rekordowe wyniki w trzecim kwartale 2024 roku, z solidnym wzrostem przychodów i zysków we wszystkich segmentach biznesowych. Bank wykazuje silną odporność na niepewność gospodarczą dzięki zdywersyfikowanemu modelowi biznesowemu i skutecznemu zarządzaniu ryzykiem.',
       sentiment: 'positive'
-    }
+    },
+    premium: true
   },
   {
     id: 'paypal-q3-2024',
@@ -303,7 +305,8 @@ export const financialReports: FinancialReport[] = [
     reportSummary: {
       text: 'PayPal kontynuuje silny wzrost, z wynikami przekraczającymi oczekiwania analityków w trzecim kwartale 2024 roku. Firma skutecznie zwiększa bazę użytkowników i poprawia marże, jednocześnie inwestując w technologie AI dla dalszego rozwoju. Podniesienie prognozy na cały rok odzwierciedla rosnące zaufanie zarządu do modelu biznesowego i strategii firmy.',
       sentiment: 'positive'
-    }
+    },
+    premium: true
   },
   {
     id: 'disney-q4-2024',
