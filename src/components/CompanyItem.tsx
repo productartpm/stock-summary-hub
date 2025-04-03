@@ -21,13 +21,13 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     const incomeChange = report.summaryData.netIncome.change;
     
     if (revenueChange > 0 && incomeChange > 0) {
-      return `${report.companyName} reported strong growth with revenue up ${report.summaryData.revenue.change}% and net income up ${report.summaryData.netIncome.change}%.`;
+      return `${report.companyName} zaraportowała silny wzrost z przychodami wyższymi o ${report.summaryData.revenue.change}% i zyskiem netto wyższym o ${report.summaryData.netIncome.change}%.`;
     } else if (revenueChange < 0 && incomeChange < 0) {
-      return `${report.companyName} reported challenges with revenue down ${Math.abs(report.summaryData.revenue.change)}% and net income down ${Math.abs(report.summaryData.netIncome.change)}%.`;
+      return `${report.companyName} zaraportowała wyzwania z przychodami niższymi o ${Math.abs(report.summaryData.revenue.change)}% i zyskiem netto niższym o ${Math.abs(report.summaryData.netIncome.change)}%.`;
     } else if (revenueChange > 0) {
-      return `${report.companyName} reported revenue growth of ${report.summaryData.revenue.change}% despite net income ${incomeChange >= 0 ? 'changes' : 'decline'}.`;
+      return `${report.companyName} zaraportowała wzrost przychodów o ${report.summaryData.revenue.change}% pomimo ${incomeChange >= 0 ? 'zmian' : 'spadku'} w zysku netto.`;
     } else {
-      return `${report.companyName} reported ${revenueChange >= 0 ? 'steady' : 'declining'} revenue with ${incomeChange >= 0 ? 'improved' : 'decreased'} profitability.`;
+      return `${report.companyName} zaraportowała ${revenueChange >= 0 ? 'stabilne' : 'malejące'} przychody z ${incomeChange >= 0 ? 'poprawioną' : 'zmniejszoną'} rentownością.`;
     }
   };
 
@@ -74,7 +74,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
               <div className="flex items-center text-xs text-muted-foreground space-x-2">
                 <span>{report.ticker}</span>
                 <span className="h-1 w-1 rounded-full bg-muted-foreground/40"></span>
-                <span>{report.reportType} {report.quarterOrYear}</span>
+                <span>{report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'} {report.quarterOrYear}</span>
               </div>
             </div>
             <div className={cn(
@@ -87,16 +87,16 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
           
           {/* Report categories */}
           <div className="mt-2 flex flex-wrap gap-1">
-            {report.reportCategory.map((category, index) => (
+            {report.category && (
               <Badge 
-                key={index} 
+                key="main-category"
                 variant={isSelected ? "default" : "secondary"}
                 className="text-[10px] py-0 h-5 flex items-center gap-1"
               >
                 <Tag className="h-3 w-3" />
-                {category}
+                {report.category}
               </Badge>
-            ))}
+            )}
           </div>
           
           {/* One sentence summary */}
