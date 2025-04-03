@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -448,7 +449,7 @@ const IndicatorsPage = () => {
             
             <TabsContent value="tab9" className="space-y-4">
               <CardHeader>
-                <CardTitle>Złoty krzyż (średnie 50 i 200 sesji)</Title>
+                <CardTitle>Złoty krzyż (średnie 50 i 200 sesji)</CardTitle>
                 <CardDescription>
                   Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od dołu, sygnalizując potencjalny trend wzrostowy.
                   Dane na dzień {formattedDate}.
@@ -461,7 +462,7 @@ const IndicatorsPage = () => {
             
             <TabsContent value="tab10" className="space-y-4">
               <CardHeader>
-                <CardTitle>Krzyż śmierci (średnie 50 i 200 sesji)</Title>
+                <CardTitle>Krzyż śmierci (średnie 50 i 200 sesji)</CardTitle>
                 <CardDescription>
                   Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od góry, sygnalizując potencjalny trend spadkowy.
                   Dane na dzień {formattedDate}.
