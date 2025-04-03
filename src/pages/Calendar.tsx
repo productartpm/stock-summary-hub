@@ -8,29 +8,44 @@ import { Calendar as CalendarIcon, ChevronRight } from "lucide-react";
 import { format } from "date-fns";
 import { pl } from "date-fns/locale";
 import { financialReports } from "@/lib/data";
+import { useEffect } from "react";
 
 const CalendarPage = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [eventDates, setEventDates] = useState<Record<string, number>>({});
   
   // Create a map of dates with events
-  const eventDates = financialReports.reduce<Record<string, number>>((acc, report) => {
-    const dateStr = format(new Date(report.publicationDate), 'yyyy-MM-dd');
-    acc[dateStr] = (acc[dateStr] || 0) + 1;
-    return acc;
-  }, {});
+  useEffect(() => {
+    const dates = financialReports.reduce<Record<string, number>>((acc, report) => {
+      const reportDate = new Date(report.publicationDate);
+      const dateStr = format(reportDate, 'yyyy-MM-dd');
+      acc[dateStr] = (acc[dateStr] || 0) + 1;
+      return acc;
+    }, {});
+    setEventDates(dates);
+    console.log('Event dates:', dates);
+    console.log('Financial reports:', financialReports);
+  }, []);
 
   // Get reports for the selected date
   const getReportsForDate = (date?: Date) => {
     if (!date) return [];
+    
     const dateStr = format(date, 'yyyy-MM-dd');
+    console.log('Searching for reports on date:', dateStr);
+    
     return financialReports.filter(report => {
-      const reportDateStr = format(new Date(report.publicationDate), 'yyyy-MM-dd');
+      const reportDate = new Date(report.publicationDate);
+      const reportDateStr = format(reportDate, 'yyyy-MM-dd');
       return reportDateStr === dateStr;
     });
   };
 
   const selectedDateReports = getReportsForDate(date);
   const formattedDate = date ? format(date, 'd MMMM yyyy', { locale: pl }) : '';
+  
+  console.log('Selected date reports:', selectedDateReports);
+  console.log('Current date:', date);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

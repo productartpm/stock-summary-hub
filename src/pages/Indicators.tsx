@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -235,87 +234,81 @@ const IndicatorsPage = () => {
               
               <TabsTrigger 
                 value="tab7" 
-                className="px-4 py-2 relative"
+                className="px-4 py-2"
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">7</span>
-                MACD - kupno
                 {!user && (
-                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
-                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
-                    <span className="text-foreground/80">MACD - kupno</span>
-                  </div>
+                  <span className="bg-amber-400 rounded-full h-5 w-5 flex items-center justify-center mr-2">
+                    <Lock className="h-3 w-3 text-black" />
+                  </span>
                 )}
+                MACD - kupno
               </TabsTrigger>
               <TabsTrigger 
                 value="tab8" 
-                className="px-4 py-2 relative"
+                className="px-4 py-2"
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">8</span>
-                MACD - sprzedaż
                 {!user && (
-                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
-                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
-                    <span className="text-foreground/80">MACD - sprzedaż</span>
-                  </div>
+                  <span className="bg-amber-400 rounded-full h-5 w-5 flex items-center justify-center mr-2">
+                    <Lock className="h-3 w-3 text-black" />
+                  </span>
                 )}
+                MACD - sprzedaż
               </TabsTrigger>
               <TabsTrigger 
                 value="tab9" 
-                className="px-4 py-2 relative"
+                className="px-4 py-2"
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">9</span>
-                Złoty krzyż
                 {!user && (
-                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
-                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
-                    <span className="text-foreground/80">Złoty krzyż</span>
-                  </div>
+                  <span className="bg-amber-400 rounded-full h-5 w-5 flex items-center justify-center mr-2">
+                    <Lock className="h-3 w-3 text-black" />
+                  </span>
                 )}
+                Złoty krzyż
               </TabsTrigger>
               <TabsTrigger 
                 value="tab10" 
-                className="px-4 py-2 relative"
+                className="px-4 py-2"
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">10</span>
-                Krzyż śmierci
                 {!user && (
-                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
-                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
-                    <span className="text-foreground/80">Krzyż śmierci</span>
-                  </div>
+                  <span className="bg-amber-400 rounded-full h-5 w-5 flex items-center justify-center mr-2">
+                    <Lock className="h-3 w-3 text-black" />
+                  </span>
                 )}
+                Krzyż śmierci
               </TabsTrigger>
               <TabsTrigger 
                 value="tab11" 
-                className="px-4 py-2 relative"
+                className="px-4 py-2"
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">11</span>
-                Wolumen na wzroście
                 {!user && (
-                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
-                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
-                    <span className="text-foreground/80">Wolumen na wzroście</span>
-                  </div>
+                  <span className="bg-amber-400 rounded-full h-5 w-5 flex items-center justify-center mr-2">
+                    <Lock className="h-3 w-3 text-black" />
+                  </span>
                 )}
+                Wolumen na wzroście
               </TabsTrigger>
               <TabsTrigger 
                 value="tab12" 
-                className="px-4 py-2 relative"
+                className="px-4 py-2"
                 disabled={!user}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">12</span>
-                Wolumen na spadku
                 {!user && (
-                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
-                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
-                    <span className="text-foreground/80">Wolumen na spadku</span>
-                  </div>
+                  <span className="bg-amber-400 rounded-full h-5 w-5 flex items-center justify-center mr-2">
+                    <Lock className="h-3 w-3 text-black" />
+                  </span>
                 )}
+                Wolumen na spadku
               </TabsTrigger>
             </TabsList>
           </div>
