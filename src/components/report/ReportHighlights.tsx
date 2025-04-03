@@ -1,5 +1,6 @@
+
 import { formatNumber } from "@/lib/data";
-import type { FinancialReport } from "@/lib/data";
+import type { FinancialReport } from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, TrendingDown, BarChart3, DollarSign, LineChart, PieChart, Award, ArrowUpRight, ArrowDownRight } from "lucide-react";
 
@@ -8,6 +9,11 @@ interface ReportHighlightsProps {
 }
 
 export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
+  // Function to get profit data - use netIncome if profit is not available
+  const getProfitData = () => {
+    return report.summaryData.profit || report.summaryData.netIncome;
+  };
+  
   // Generate fiscal period based on report date
   const generateFiscalPeriod = () => {
     const date = new Date(report.reportDate);
@@ -26,9 +32,10 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
   
   // Generate random financial metrics for supplementary information
   const generateFinancialInsights = () => {
+    const profitData = getProfitData();
     // Random values based on revenue and profit
-    const cashFlow = report.summaryData.profit.value * (0.8 + Math.random() * 0.6);
-    const cashFlowChange = report.summaryData.profit.change * (0.7 + Math.random() * 0.6);
+    const cashFlow = profitData.value * (0.8 + Math.random() * 0.6);
+    const cashFlowChange = profitData.change * (0.7 + Math.random() * 0.6);
     
     const debtToEquity = (Math.random() * 0.8 + 0.2).toFixed(2);
     const currentRatio = (Math.random() * 1.5 + 1).toFixed(2);
@@ -89,6 +96,7 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
   };
   
   const segmentData = generateSegmentData();
+  const profitData = getProfitData();
   
   return (
     <div className="mb-6">
@@ -106,11 +114,11 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
               <div className="mb-4 p-3 bg-neutral-700 rounded-lg">
                 <h3 className="text-sm font-medium text-amber-300 mb-1">Ocena Ogólna</h3>
                 <p className="text-sm text-gray-300">
-                  {report.summaryData.revenue.change > 0 && report.summaryData.profit.change > 0 
+                  {report.summaryData.revenue.change > 0 && profitData.change > 0 
                     ? `Spółka ${report.companyName} wykazuje silny wzrost w kluczowych obszarach działalności, z poprawą zarówno przychodów jak i zysków. Szczególnie pozytywnie należy ocenić dynamikę zysków wyprzedzającą wzrost przychodów, co wskazuje na poprawę efektywności operacyjnej.`
-                    : report.summaryData.revenue.change > 0 && report.summaryData.profit.change <= 0
+                    : report.summaryData.revenue.change > 0 && profitData.change <= 0
                     ? `Spółka ${report.companyName} odnotowuje wzrost przychodów przy jednoczesnym spadku zysków, co może wskazywać na presję kosztową lub inwestycje w rozwój, które obciążają krótkoterminowe wyniki finansowe.`
-                    : report.summaryData.revenue.change <= 0 && report.summaryData.profit.change > 0
+                    : report.summaryData.revenue.change <= 0 && profitData.change > 0
                     ? `Spółka ${report.companyName} wykazuje poprawę zysków mimo spadku przychodów, co sugeruje skuteczną restrukturyzację kosztową i optymalizację operacyjną. Kluczowe będzie utrzymanie tej tendencji w kolejnych kwartałach.`
                     : `Spółka ${report.companyName} zmaga się z wyzwaniami zarówno po stronie przychodów jak i zysków. Konieczna może być rewizja strategii biznesowej i wprowadzenie programu naprawczego w celu odwrócenia negatywnych trendów.`
                   }
@@ -142,18 +150,18 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
                   <div className="text-gray-400 text-xs mb-1">Zysk netto</div>
                   <div className="flex items-baseline gap-2">
                     <span className="text-lg font-bold text-white">
-                      {formatNumber(report.summaryData.profit.value, report.summaryData.profit.unit)}
+                      {formatNumber(profitData.value, profitData.unit)}
                     </span>
-                    <span className={`text-xs font-medium ${report.summaryData.profit.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {report.summaryData.profit.change >= 0 ? '+' : ''}{report.summaryData.profit.change}%
+                    <span className={`text-xs font-medium ${profitData.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      {profitData.change >= 0 ? '+' : ''}{profitData.change}%
                     </span>
                   </div>
                   <div className="text-xs text-gray-400 mt-1">
-                    {report.summaryData.profit.change > 15 
+                    {profitData.change > 15 
                       ? 'Znacząca poprawa' 
-                      : report.summaryData.profit.change > 0 
+                      : profitData.change > 0 
                       ? 'Poprawa rentowności' 
-                      : report.summaryData.profit.change > -15 
+                      : profitData.change > -15 
                       ? 'Umiarkowany spadek' 
                       : 'Silny spadek rentowności'}
                   </div>
@@ -181,17 +189,17 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  {report.summaryData.profit.change >= 0 ? (
+                  {profitData.change >= 0 ? (
                     <TrendingUp className="h-4 w-4 text-green-400 flex-shrink-0 mt-0.5" />
                   ) : (
                     <TrendingDown className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
                   )}
                   <div className="text-gray-300">
                     <span className="font-medium">
-                      {report.summaryData.profit.change >= 0 ? 'Wzrost' : 'Spadek'} zysku netto o {Math.abs(report.summaryData.profit.change)}%
+                      {profitData.change >= 0 ? 'Wzrost' : 'Spadek'} zysku netto o {Math.abs(profitData.change)}%
                     </span>
                     {' '}
-                    {report.summaryData.profit.change >= 0 
+                    {profitData.change >= 0 
                       ? report.summaryData.revenue.change >= 0 
                         ? 'wspierany wzrostem przychodów i poprawą efektywności operacyjnej.' 
                         : 'mimo spadku przychodów, dzięki skutecznej optymalizacji kosztów.'
@@ -204,12 +212,12 @@ export const ReportHighlights = ({ report }: ReportHighlightsProps) => {
                   <BarChart3 className="h-4 w-4 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div className="text-gray-300">
                     <span className="font-medium">
-                      Marża zysku netto: {(report.summaryData.profit.value / report.summaryData.revenue.value * 100).toFixed(1)}%
+                      Marża zysku netto: {(profitData.value / report.summaryData.revenue.value * 100).toFixed(1)}%
                     </span>
                     {' '}
-                    {(report.summaryData.profit.value / report.summaryData.revenue.value) > 0.15 
+                    {(profitData.value / report.summaryData.revenue.value) > 0.15 
                       ? 'znajduje się znacząco powyżej średniej sektorowej, świadcząc o silnej pozycji konkurencyjnej.'
-                      : (report.summaryData.profit.value / report.summaryData.revenue.value) > 0.08
+                      : (profitData.value / report.summaryData.revenue.value) > 0.08
                       ? 'jest zgodna ze średnią sektorową, wskazując na stabilną pozycję rynkową.'
                       : 'jest poniżej średniej sektorowej, co może sugerować wyzwania konkurencyjne.'}
                   </div>

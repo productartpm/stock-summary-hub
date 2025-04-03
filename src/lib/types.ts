@@ -83,7 +83,7 @@ export interface FinancialReport {
   ticker: string;
   companyName: string;
   title: string;
-  summary: string;
+  summary?: string;
   reportType: 'Quarterly' | 'Annual';
   quarterOrYear: string;
   reportDate: string;
@@ -93,11 +93,11 @@ export interface FinancialReport {
   premium: boolean;
   summaryData: {
     revenue: SummaryDataItem;
-    profit: SummaryDataItem;
+    profit?: SummaryDataItem; // Made profit optional
     operatingProfit: SummaryDataItem;
     netIncome: SummaryDataItem;
     eps?: SummaryDataItem;
-    [key: string]: SummaryDataItem;
+    [key: string]: SummaryDataItem | undefined; // Made value optional since some properties like eps are optional
   };
   stockData: StockData;
   outlook?: {
@@ -113,4 +113,8 @@ export interface FinancialReport {
       unit: string;
     };
   };
+  keyHighlights?: string[];
+  reportSummary?: ReportSummary;
+  financialPeriod?: string;
+  logoUrl?: string;
 }

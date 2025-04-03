@@ -1,6 +1,6 @@
 
 import { formatNumber, formatPercentage } from "@/lib/data";
-import type { FinancialReport } from "@/lib/data";
+import type { FinancialReport } from "@/lib/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertCircle, AlertTriangle, ThumbsUp } from "lucide-react";
 
@@ -14,6 +14,7 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
     const translations: Record<string, string> = {
       revenue: "Przychody",
       netIncome: "Zysk Netto",
+      profit: "Zysk",
       operatingProfit: "Zysk Operacyjny",
       eps: "Zysk na Akcję",
       marketCap: "Kapitalizacja",
@@ -89,22 +90,26 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
     <div className="mb-6">
       <h2 className="text-xl font-semibold mb-3 text-neutral-800">Podsumowanie Finansowe</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-        {Object.entries(report.summaryData).map(([key, data]) => (
-          <div key={key} className="bg-neutral-800 rounded-lg p-4 border border-amber-400 text-white shadow-md hover:shadow-lg transition-shadow">
-            <div className="text-sm font-medium mb-1 capitalize text-amber-300">
-              {translateKey(key)}
+        {Object.entries(report.summaryData).map(([key, data]) => {
+          // Skip undefined values (like optional properties that don't exist)
+          if (!data) return null;
+          return (
+            <div key={key} className="bg-neutral-800 rounded-lg p-4 border border-amber-400 text-white shadow-md hover:shadow-lg transition-shadow">
+              <div className="text-sm font-medium mb-1 capitalize text-amber-300">
+                {translateKey(key)}
+              </div>
+              <div className="text-2xl font-bold text-white">
+                {typeof data.value === 'number' 
+                  ? formatNumber(data.value, data.unit) 
+                  : data.value}
+              </div>
+              <div className={`text-sm flex items-center ${data.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {data.change >= 0 ? '↑' : '↓'} {formatPercentage(data.change)}
+                <span className="text-xs text-gray-400 ml-2">vs poprzedni {report.reportType === 'Quarterly' ? 'kwartał' : 'rok'}</span>
+              </div>
             </div>
-            <div className="text-2xl font-bold text-white">
-              {typeof data.value === 'number' 
-                ? formatNumber(data.value, data.unit) 
-                : data.value}
-            </div>
-            <div className={`text-sm flex items-center ${data.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-              {data.change >= 0 ? '↑' : '↓'} {formatPercentage(data.change)}
-              <span className="text-xs text-gray-400 ml-2">vs poprzedni {report.reportType === 'Quarterly' ? 'kwartał' : 'rok'}</span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       
       {report.reportSummary && (
