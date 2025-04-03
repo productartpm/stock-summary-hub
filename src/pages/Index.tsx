@@ -54,13 +54,13 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border/60 py-4 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Stock Summary Hub</h1>
+          <h1 className="text-xl font-semibold">Centrum Raportów Giełdowych</h1>
           <div className="flex items-center space-x-6">
             <nav className="hidden md:flex space-x-4 text-sm">
-              <a href="#" className="text-primary">Reports</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Markets</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Watchlist</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Insights</a>
+              <a href="#" className="text-primary">Raporty</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Rynki</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Obserwowane</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Analizy</a>
             </nav>
             <AuthButtons />
           </div>
@@ -88,7 +88,7 @@ const Index = () => {
                   className="flex items-center text-sm font-medium"
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
-                  Back to Reports
+                  Powrót do Raportów
                 </Button>
               </div>
             )}

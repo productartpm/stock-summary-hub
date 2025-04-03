@@ -10,6 +10,7 @@ export interface FinancialReport {
   publicationDate: string;
   title: string;
   reportCategory: string[];
+  category?: string;
   summaryData: Record<string, SummaryDataItem>;
   keyHighlights: string[];
   financialPeriod?: string;
@@ -48,12 +49,41 @@ export const formatPercentage = (value: number): string => {
 
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString('pl-PL', {
     year: 'numeric',
     month: 'short',
     day: 'numeric'
   });
 };
+
+export const reportCategories = [
+  'Dywidenda',
+  'Działalność finansowa',
+  'Emisja akcji',
+  'Emisja lub wykup obligacji',
+  'Grupa kapitałowa',
+  'Klasyfikacje giełdowe',
+  'Koncesje, kontrole, regulacje',
+  'Pozostałe',
+  'Rozwój firmy',
+  'Skup lub zbycie akcji własnych',
+  'Split',
+  'Spory, procesy, windykacja',
+  'Sprawy kadrowe',
+  'Terminy raportów okresowych',
+  'Transakcje animatora',
+  'Transakcje insidera',
+  'Transakcje insidera lub znaczącego inwestora',
+  'Transakcje pakietowe',
+  'Walne Zgromadzenie',
+  'Wejście znaczącego inwestora lub insidera',
+  'Wyjście znaczącego inwestora lub insidera',
+  'Wyniki',
+  'Zdarzenia losowe',
+  'Zmiana strategii',
+  'Zmiany w kadrze zarządzającej',
+  'Znacząca umowa'
+];
 
 export const financialReports: FinancialReport[] = [
   {
@@ -64,8 +94,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-11-15',
-    title: 'Quarterly Financial Report - Columbus Energy Q3 2024',
+    title: 'Raport Kwartalny - Columbus Energy Q3 2024',
     reportCategory: ['Energy', 'Renewable Energy', 'Solar Power', 'Green Tech', 'ESG'],
+    category: 'Wyniki',
     financialPeriod: '9M 2024',
     summaryData: {
       revenue: {
@@ -100,15 +131,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Revenue decreased by 35.85% to 233.86 million PLN for the 9 months ending September 30, 2024, compared to the same period of 2023.',
-      'The company managed to turn around from an operating loss to an operating profit of 10.38 million PLN.',
-      'EBITDA significantly improved to 20.88 million PLN, compared to a negative EBITDA in the previous year.',
-      'Net loss decreased by 63.37% to -21.96 million PLN, showing progress towards profitability.',
-      'Continued focus on photovoltaic installations, which remains the largest revenue segment (135.38 million PLN).',
-      'Significant growth in the "Other sales" segment (48.45 million PLN, +506.5% YoY) primarily due to services related to energy storage project sold to DTEK.'
+      'Przychody spadły o 35,85% do 233,86 mln PLN w okresie 9 miesięcy zakończonym 30 września 2024 r., w porównaniu z analogicznym okresem 2023 r.',
+      'Spółka zdołała przejść od straty operacyjnej do zysku operacyjnego w wysokości 10,38 mln PLN.',
+      'EBITDA znacząco się poprawiła do 20,88 mln PLN, w porównaniu z ujemną EBITDA w poprzednim roku.',
+      'Strata netto zmniejszyła się o 63,37% do -21,96 mln PLN, pokazując postęp w kierunku rentowności.',
+      'Dalszy nacisk na instalacje fotowoltaiczne, które pozostają największym segmentem przychodów (135,38 mln PLN).',
+      'Znaczący wzrost w segmencie "Pozostała sprzedaż" (48,45 mln PLN, +506,5% r/r) głównie dzięki usługom związanym z projektem magazynowania energii sprzedanym firmie DTEK.'
     ],
     outlook: {
-      statement: 'Columbus Energy expects to continue its strategic repositioning with a focus on establishing the Columbus ONE platform to consolidate the renewable energy market in Poland. The company anticipates returning to revenue growth in 2025, with improving margins as operations become more efficient.',
+      statement: 'Columbus Energy spodziewa się kontynuacji strategicznego repozycjonowania z naciskiem na ustanowienie platformy Columbus ONE w celu konsolidacji rynku energii odnawialnej w Polsce. Firma przewiduje powrót do wzrostu przychodów w 2025 roku, wraz z poprawą marżą dzięki zwiększonej efektywności operacyjnej.',
       guidanceRevenue: {
         min: 320,
         max: 350,
@@ -121,9 +152,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Analysts recognize the significant improvement in operational efficiency, as demonstrated by the return to positive EBITDA and reduced net loss.',
-      'The market response has been cautiously positive, with most analysts maintaining HOLD ratings while acknowledging the company\'s progress in restructuring.',
-      'Concerns remain about the declining revenue trajectory in core business segments, but the strategic shift towards higher-margin services and Columbus ONE development is viewed favorably.'
+      'Analitycy dostrzegają znaczącą poprawę efektywności operacyjnej, co potwierdza powrót do dodatniej EBITDA i zmniejszenie straty netto.',
+      'Reakcja rynku była ostrożnie pozytywna, z większością analityków utrzymujących rekomendacje TRZYMAJ, jednocześnie doceniając postępy spółki w restrukturyzacji.',
+      'Obawy dotyczą nadal spadającej trajektorii przychodów w podstawowych segmentach biznesowych, ale strategiczne przesunięcie w kierunku usług o wyższej marży i rozwoju Columbus ONE jest postrzegane korzystnie.'
     ]
   },
   {
@@ -134,8 +165,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-10-11',
-    title: 'JPMorgan Chase Reports Third Quarter 2024 Financial Results',
+    title: 'JPMorgan Chase - Wyniki Finansowe za III Kwartał 2024',
     reportCategory: ['Banking', 'Financial Services', 'Investment Banking', 'Consumer Banking'],
+    category: 'Wyniki',
     financialPeriod: 'Q3 2024',
     summaryData: {
       revenue: {
@@ -170,15 +202,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Record revenue of $43.32 billion for Q3 2024, a 5.2% increase year-over-year.',
-      'Net income rose to $13.92 billion, up 6.8% compared to Q3 2023.',
-      'Earnings per share increased by 8.5% to $4.87, exceeding analyst expectations of $4.65.',
-      'Credit loss provisions increased to $2.4 billion, reflecting continued economic uncertainty.',
-      'Investment banking fees grew by 12% to $2.1 billion, driven by strong M&A activity.',
-      'Maintained strong capital position with CET1 capital ratio of 15.3%.'
+      'Rekordowe przychody w wysokości 43,32 mld USD za III kwartał 2024 r., wzrost o 5,2% rok do roku.',
+      'Zysk netto wzrósł do 13,92 mld USD, o 6,8% w porównaniu z III kwartałem 2023 r.',
+      'Zysk na akcję wzrósł o 8,5% do 4,87 USD, przekraczając oczekiwania analityków wynoszące 4,65 USD.',
+      'Rezerwy na straty kredytowe wzrosły do 2,4 mld USD, odzwierciedlając utrzymującą się niepewność gospodarczą.',
+      'Opłaty z tytułu bankowości inwestycyjnej wzrosły o 12% do 2,1 mld USD, napędzane silną aktywnością w obszarze fuzji i przejęć.',
+      'Utrzymano silną pozycję kapitałową ze wskaźnikiem kapitału CET1 na poziomie 15,3%.'
     ],
     outlook: {
-      statement: 'JPMorgan Chase maintains a positive outlook for the remainder of 2024 and into 2025, expecting continued growth in investment banking and wealth management, while remaining cautious about consumer credit trends in an uncertain economic environment.',
+      statement: 'JPMorgan Chase utrzymuje pozytywne perspektywy na pozostałą część 2024 roku i na rok 2025, oczekując dalszego wzrostu w bankowości inwestycyjnej i zarządzaniu majątkiem, przy jednoczesnym zachowaniu ostrożności co do trendów w kredytach konsumenckich w niepewnym środowisku gospodarczym.',
       guidanceEps: {
         min: 18.5,
         max: 19.5,
@@ -186,9 +218,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Analysts widely praised JPMorgan\'s ability to generate strong results across all business segments despite economic headwinds.',
-      'Several equity research teams upgraded their price targets following the earnings release, with an average increase of 8%.',
-      'Credit quality metrics remain a closely watched area, though current levels are seen as manageable and appropriately provisioned for.'
+      'Analitycy szeroko chwalili zdolność JPMorgana do generowania silnych wyników we wszystkich segmentach biznesowych pomimo trudności gospodarczych.',
+      'Kilka zespołów badawczych podwyższyło swoje cele cenowe po ogłoszeniu wyników, ze średnim wzrostem o 8%.',
+      'Wskaźniki jakości kredytów pozostają obszarem ściśle monitorowanym, chociaż obecne poziomy są postrzegane jako możliwe do zarządzania i odpowiednio zabezpieczone.'
     ],
     premium: true
   },
@@ -200,8 +232,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-10-29',
-    title: 'PayPal Holdings, Inc. Q3 2024 Results',
+    title: 'PayPal Holdings, Inc. - Wyniki za III Kwartał 2024',
     reportCategory: ['Fintech', 'Payment Processing', 'E-commerce', 'Digital Payments'],
+    category: 'Działalność finansowa',
     financialPeriod: 'Q3 2024',
     summaryData: {
       revenue: {
@@ -236,15 +269,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Revenue grew 9.3% year-over-year to $8.12 billion, beating consensus estimates of $7.95 billion.',
-      'Total Payment Volume (TPV) increased 12.2% to $420.5 billion.',
-      'Added 6.2 million net new active accounts, bringing the total to 438 million active accounts.',
-      'Transaction margin improved to 48.6%, up 70 basis points from the previous year.',
-      'Venmo TPV grew 18% year-over-year, contributing significantly to overall growth.',
-      'Completed $1.5 billion in share repurchases during the quarter.'
+      'Przychody wzrosły o 9,3% rok do roku do 8,12 mld USD, przewyższając konsensus szacunków wynoszący 7,95 mld USD.',
+      'Całkowita Wartość Płatności (TPV) wzrosła o 12,2% do 420,5 mld USD.',
+      'Dodano 6,2 mln nowych aktywnych kont, osiągając łącznie 438 mln aktywnych kont.',
+      'Marża transakcyjna wzrosła do 48,6%, o 70 punktów bazowych w porównaniu z poprzednim rokiem.',
+      'TPV Venmo wzrosło o 18% rok do roku, znacząco przyczyniając się do ogólnego wzrostu.',
+      'W ciągu kwartału przeprowadzono odkup akcji o wartości 1,5 mld USD.'
     ],
     outlook: {
-      statement: 'PayPal raised its full-year guidance, now expecting revenue growth of 9.5-10% for 2024. The company continues to focus on artificial intelligence integration across its platform to enhance fraud detection and user experience, which is expected to drive operating efficiencies in 2025.',
+      statement: 'PayPal podniósł swoją prognozę na cały rok, oczekując teraz wzrostu przychodów o 9,5-10% w 2024 roku. Firma nadal koncentruje się na integracji sztucznej inteligencji na swojej platformie w celu ulepszenia wykrywania oszustw i doświadczeń użytkowników, co ma na celu zwiększenie efektywności operacyjnej w 2025 roku.',
       guidanceRevenue: {
         min: 32.5,
         max: 33.0,
@@ -265,8 +298,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q4 2024',
     publicationDate: '2024-11-07',
-    title: 'The Walt Disney Company Reports Fourth Quarter and Full Year Earnings for Fiscal 2024',
+    title: 'The Walt Disney Company - Wyniki IV Kwartału i Całego Roku 2024',
     reportCategory: ['Entertainment', 'Media', 'Streaming', 'Theme Parks'],
+    category: 'Znacząca umowa',
     financialPeriod: 'Q4 2024',
     summaryData: {
       revenue: {
@@ -301,15 +335,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Revenue rose 3.5% year-over-year to $22.8 billion, slightly below expectations of $23.1 billion.',
-      'Direct-to-Consumer segment reached profitability for the second consecutive quarter with operating income of $380 million.',
-      'Disney+ subscribers grew to 159 million, with total streaming subscribers (including Hulu and ESPN+) reaching 312 million.',
-      'Parks, Experiences and Products segment saw 7.2% revenue growth to $9.1 billion with operating income up 8.3%.',
-      'Studio Entertainment revenue declined 2.1% to $2.4 billion due to fewer theatrical releases compared to the prior year.',
-      'Achieved $7.5 billion in cost reductions, exceeding the original target of $5.5 billion set in February 2023.'
+      'Przychody wzrosły o 3,5% rok do roku do 22,8 mld USD, nieznacznie poniżej oczekiwań wynoszących 23,1 mld USD.',
+      'Segment Direct-to-Consumer osiągnął rentowność drugi kwartał z rzędu z zyskiem operacyjnym wynoszącym 380 mln USD.',
+      'Liczba subskrybentów Disney+ wzrosła do 159 mln, a łączna liczba subskrybentów usług streamingowych (w tym Hulu i ESPN+) osiągnęła 312 mln.',
+      'Segment Parków, Doświadczeń i Produktów odnotował wzrost przychodów o 7,2% do 9,1 mld USD, przy wzroście zysku operacyjnego o 8,3%.',
+      'Przychody Studia Rozrywki spadły o 2,1% do 2,4 mld USD z powodu mniejszej liczby premier kinowych w porównaniu z poprzednim rokiem.',
+      'Osiągnięto 7,5 mld USD oszczędności kosztów, przekraczając pierwotny cel 5,5 mld USD ustalony w lutym 2023 roku.'
     ],
     outlook: {
-      statement: 'Disney expects fiscal 2025 to see continued growth in streaming profitability and stable performance from its Parks business despite economic uncertainties. The company anticipates high-single-digit growth in adjusted EPS, with a focus on expanding its franchises across all business segments.',
+      statement: 'Disney spodziewa się, że rok obrotowy 2025 przyniesie dalszy wzrost rentowności streamingu i stabilne wyniki segmentu Parków pomimo niepewności gospodarczych. Firma przewiduje wzrost skorygowanego zysku na akcję o wysoki jednocyfrowy procent, koncentrując się na rozwijaniu swoich franczyz we wszystkich segmentach biznesowych.',
       guidanceEps: {
         min: 5.2,
         max: 5.5,
@@ -326,8 +360,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q1 2025',
     publicationDate: '2024-11-13',
-    title: 'Cisco Reports First Quarter Earnings for Fiscal Year 2025',
+    title: 'Cisco - Wyniki za Pierwszy Kwartał Roku Obrotowego 2025',
     reportCategory: ['Technology', 'Networking', 'Cybersecurity', 'Infrastructure'],
+    category: 'Rozwój firmy',
     financialPeriod: 'Q1 2025',
     summaryData: {
       revenue: {
@@ -362,15 +397,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Revenue increased 2.8% year-over-year to $13.9 billion, slightly above expectations of $13.8 billion.',
-      'Product revenue grew by 1.9% while service revenue increased by 4.8%.',
-      'Security revenue grew 15% year-over-year, reflecting strong performance in the cybersecurity segment.',
-      'Annualized Recurring Revenue (ARR) reached $27.3 billion, up 14% year-over-year.',
-      'Operating cash flow of $4.3 billion, up 6% year-over-year.',
-      'Returned $2.8 billion to shareholders through share repurchases and dividends.'
+      'Przychody wzrosły o 2,8% rok do roku do 13,9 mld USD, nieznacznie powyżej oczekiwań wynoszących 13,8 mld USD.',
+      'Przychody z produktów wzrosły o 1,9%, a przychody z usług o 4,8%.',
+      'Przychody z segmentu bezpieczeństwa wzrosły o 15% rok do roku, odzwierciedlając silne wyniki w segmencie cyberbezpieczeństwa.',
+      'Roczny Powtarzalny Przychód (ARR) osiągnął 27,3 mld USD, wzrost o 14% rok do roku.',
+      'Przepływy pieniężne z działalności operacyjnej wyniosły 4,3 mld USD, wzrost o 6% rok do roku.',
+      'Zwrócono akcjonariuszom 2,8 mld USD poprzez wykup akcji i dywidendy.'
     ],
     outlook: {
-      statement: 'Cisco projects Q2 FY2025 revenue growth between 1% and 3%, with continued strength in security and software. The company remains focused on its AI-driven networking capabilities and growth in subscription-based offerings, which are expected to contribute to margin expansion over time.',
+      statement: 'Cisco prognozuje wzrost przychodów w II kwartale roku obrotowego 2025 między 1% a 3%, z dalszą siłą w segmencie bezpieczeństwa i oprogramowania. Firma pozostaje skoncentrowana na swoich możliwościach sieciowych opartych na sztucznej inteligencji i wzroście ofert opartych na subskrypcji, które mają przyczynić się do rozszerzenia marży w czasie.',
       guidanceRevenue: {
         min: 54.5,
         max: 56.0,
@@ -392,8 +427,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q2 2024',
     publicationDate: '2024-05-02',
-    title: 'Apple Reports Second Quarter Results',
+    title: 'Apple - Wyniki za Drugi Kwartał',
     reportCategory: ['Technology', 'Consumer Electronics', 'Hardware', 'Services'],
+    category: 'Wyniki',
     financialPeriod: 'Q2 2024',
     summaryData: {
       revenue: {
@@ -428,15 +464,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'iPhone revenue increased 5.5% to $46.28 billion, exceeding expectations.',
-      'Services revenue hit a record high of $23.87 billion, up 14.3% year-over-year.',
-      'Gross margin improved to 46.6%, up from 45.3% in the same quarter last year.',
-      'Board approved $110 billion in additional share repurchases and a 4% increase in quarterly dividend.',
-      'Wearables, Home, and Accessories segment declined 7.6% to $7.91 billion.',
-      'Cash and marketable securities totaled $167.2 billion at the end of the quarter.'
+      'Przychody z iPhone\'a wzrosły o 5,5% do 46,28 mld USD, przekraczając oczekiwania.',
+      'Przychody z usług osiągnęły rekordowy poziom 23,87 mld USD, wzrost o 14,3% rok do roku.',
+      'Marża brutto wzrosła do 46,6%, z 45,3% w tym samym kwartale ubiegłego roku.',
+      'Zarząd zatwierdził dodatkowy wykup akcji o wartości 110 mld USD oraz 4% wzrost kwartalnej dywidendy.',
+      'Segment akcesoriów, domu i wearables odnotował spadek o 7,6% do 7,91 mld USD.',
+      'Na koniec kwartału gotówka i zbywalne papiery wartościowe wyniosły łącznie 167,2 mld USD.'
     ],
     outlook: {
-      statement: 'Apple expects continued growth in iPhone and Services segments in the third quarter of fiscal 2024, with revenue growth rates similar to the second quarter. However, the company anticipates that supply constraints for certain components may impact Mac and iPad sales in the near term.',
+      statement: 'Apple oczekuje dalszego wzrostu segmentów iPhone i Usług w trzecim kwartale roku obrotowego 2024, przy stopach wzrostu przychodów podobnych do drugiego kwartału. Jednak firma przewiduje, że ograniczenia w dostawach niektórych komponentów mogą wpłynąć na sprzedaż Mac i iPad w najbliższym czasie.',
       guidanceRevenue: {
         min: 90.0,
         max: 93.0,
@@ -449,9 +485,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Analysts were particularly impressed by the performance of the Services segment, seeing it as a key driver for future growth and margin expansion.',
-      'Several investment banks raised their price targets following the better-than-expected results, with an average increase of approximately 7%.',
-      'Some concerns were raised about the weakness in the Wearables segment, which may indicate slower adoption of newer products.'
+      'Analitycy byli szczególnie pod wrażeniem wyników segmentu Usług, widząc w nim kluczowy czynnik przyszłego wzrostu i rozszerzania marży.',
+      'Kilka banków inwestycyjnych podniosło swoje cele cenowe po lepszych niż oczekiwano wynikach, ze średnim wzrostem o około 7%.',
+      'Pojawiły się pewne obawy dotyczące słabości w segmencie Wearables, co może wskazywać na wolniejszą adopcję nowszych produktów.'
     ],
     premium: true
   },
@@ -463,8 +499,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Annual',
     quarterOrYear: 'FY 2023',
     publicationDate: '2024-01-24',
-    title: 'Tesla Annual Report 2023',
+    title: 'Tesla - Raport Roczny 2023',
     reportCategory: ['Automotive', 'Electric Vehicles', 'Energy Generation', 'Storage', 'Clean Energy'],
+    category: 'Zmiana strategii',
     financialPeriod: 'FY 2023',
     summaryData: {
       revenue: {
@@ -499,15 +536,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Record vehicle deliveries of 1.8 million units in 2023, representing a 38% increase year-over-year.',
-      'Energy storage deployments more than doubled to 14.7 GWh, driving a 54% increase in Energy Generation and Storage revenue.',
-      'Gross margin decreased to 18.2% from 23.8% in 2022, primarily due to vehicle price reductions.',
-      'Automotive revenue grew by 15% to $82.4 billion, while automotive regulatory credits reached $1.8 billion.',
-      'Cumulative Supercharger stations increased to 5,117 globally, with 48,082 connectors.',
-      'Cash and cash equivalents totaled $29.1 billion at year-end.'
+      'Rekordowa liczba dostarczonych pojazdów: 1,8 miliona sztuk w 2023 roku, co stanowi wzrost o 38% rok do roku.',
+      'Wdrożenia magazynów energii więcej niż podwoiły się do 14,7 GWh, napędzając wzrost przychodów z Wytwarzania i Magazynowania Energii o 54%.',
+      'Marża brutto spadła do 18,2% z 23,8% w 2022 roku, głównie z powodu obniżek cen pojazdów.',
+      'Przychody z segmentu motoryzacyjnego wzrosły o 15% do 82,4 mld USD, podczas gdy kredyty regulacyjne w motoryzacji osiągnęły 1,8 mld USD.',
+      'Skumulowana liczba stacji Supercharger wzrosła do 5 117 na całym świecie, z 48 082 złączami.',
+      'Środki pieniężne i ich ekwiwalenty wyniosły 29,1 mld USD na koniec roku.'
     ],
     outlook: {
-      statement: 'Tesla expects vehicle volume growth in 2024 to be notably lower than the growth rate achieved in 2023, as the company works on the launch of next-generation vehicles at Gigafactory Texas. Energy storage deployments are projected to grow approximately 75% in 2024, supported by the ramp of the 40 GWh Megapack factory in Lathrop.',
+      statement: 'Tesla oczekuje, że wzrost wolumenu pojazdów w 2024 roku będzie znacznie niższy niż stopa wzrostu osiągnięta w 2023 roku, ponieważ firma pracuje nad uruchomieniem pojazdów nowej generacji w Gigafactory Texas. Przewiduje się, że wdrożenia magazynów energii wzrosną o około 75% w 2024 roku, wspierane przez zwiększanie produkcji w fabryce Megapack o mocy 40 GWh w Lathrop.',
       guidanceEps: {
         min: 3.80,
         max: 4.50,
@@ -515,9 +552,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Wall Street expressed mixed reactions to Tesla\'s forward guidance, with concerns about reduced growth rates for vehicle deliveries affecting long-term valuation models.',
-      'Many analysts highlighted the Energy business as a bright spot, with expectations that it could become a more significant contributor to overall profitability in the coming years.',
-      'The lack of specific timeline for new models and the Robotaxi program disappointed some analysts who were looking for more concrete plans.'
+      'Wall Street wyraziło mieszane reakcje na prognozę Tesli, z obawami dotyczącymi zmniejszonych stóp wzrostu dostaw pojazdów wpływających na długoterminowe modele wyceny.',
+      'Wielu analityków wyróżniło biznes energetyczny jako jasny punkt, z oczekiwaniami, że w nadchodzących latach może on stać się bardziej znaczącym czynnikiem ogólnej rentowności.',
+      'Brak konkretnego harmonogramu dla nowych modeli i programu Robotaxi rozczarował niektórych analityków, którzy szukali bardziej konkretnych planów.'
     ]
   },
   {
@@ -528,8 +565,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q1 2025',
     publicationDate: '2024-05-22',
-    title: 'NVIDIA Announces Financial Results for First Quarter Fiscal 2025',
+    title: 'NVIDIA - Wyniki Finansowe za Pierwszy Kwartał Roku Obrotowego 2025',
     reportCategory: ['Technology', 'Semiconductors', 'AI Computing', 'Graphics Processing', 'Data Center'],
+    category: 'Wyniki',
     financialPeriod: 'Q1 FY2025',
     summaryData: {
       revenue: {
@@ -564,15 +602,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Record Data Center revenue of $22.6 billion, up 427% from a year ago, driven by accelerating demand for NVIDIA Hopper architecture products.',
-      'Achieved record gross margin of 78.4%, up 12.3 percentage points year-over-year.',
-      'Gaming revenue of $2.6 billion, up 18% from a year ago.',
-      'Professional Visualization revenue of $418 million, up 75% from a year ago.',
-      'Automotive revenue of $306 million, up 4% from a year ago.',
-      'Returned $7.7 billion to shareholders through share repurchases and cash dividends.'
+      'Rekordowe przychody Centrum Danych w wysokości 22,6 mld USD, wzrost o 427% w porównaniu z rokiem poprzednim, napędzane rosnącym popytem na produkty architektury NVIDIA Hopper.',
+      'Osiągnięto rekordową marżę brutto 78,4%, wzrost o 12,3 punktu procentowego rok do roku.',
+      'Przychody z segmentu gier wyniosły 2,6 mld USD, wzrost o 18% w porównaniu z rokiem poprzednim.',
+      'Przychody z Profesjonalnej Wizualizacji wyniosły 418 mln USD, wzrost o 75% w porównaniu z rokiem poprzednim.',
+      'Przychody z segmentu motoryzacyjnego wyniosły 306 mld USD, wzrost o 4% w porównaniu z rokiem poprzednim.',
+      'Zwrócono akcjonariuszom 7,7 mld USD poprzez wykup akcji i dywidendy w gotówce.'
     ],
     outlook: {
-      statement: 'For the second quarter of fiscal 2025, NVIDIA expects unprecedented demand to continue for its AI computing platforms. The company anticipates Data Center revenue to grow significantly sequentially, while Gaming revenue is expected to be relatively flat quarter-over-quarter.',
+      statement: 'Na drugi kwartał roku obrotowego 2025 NVIDIA oczekuje, że bezprecedensowy popyt na jej platformy obliczeniowe AI będzie się utrzymywał. Firma przewiduje, że przychody Centrum Danych znacznie wzrosną sekwencyjnie, podczas gdy przychody z Gier powinny pozostać relatywnie płaskie kwartał do kwartału.',
       guidanceRevenue: {
         min: 28.0,
         max: 30.0,
@@ -580,9 +618,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Analysts described the results as "mind-blowing" and "spectacular," with many raising their price targets substantially following the earnings release.',
-      'The strength in Data Center revenue and the outlook for continued sequential growth surpassed even the most optimistic expectations.',
-      'Some analysts questioned the sustainability of the current growth rates and high gross margins in the long term, but most agreed that NVIDIA\'s near-term momentum remains exceptionally strong.'
+      'Analitycy określili wyniki jako "zapierające dech w piersiach" i "spektakularne", przy czym wielu znacząco podniosło swoje cele cenowe po ogłoszeniu wyników.',
+      'Siła przychodów Centrum Danych i perspektywa dalszego sekwencyjnego wzrostu przewyższyły nawet najbardziej optymistyczne oczekiwania.',
+      'Niektórzy analitycy kwestionowali długoterminową stabilność obecnych stóp wzrostu i wysokich marż brutto, ale większość zgodziła się, że krótkoterminowy impet NVIDIA pozostaje wyjątkowo silny.'
     ],
     premium: true
   },
@@ -594,8 +632,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Annual',
     quarterOrYear: 'FY 2023',
     publicationDate: '2024-02-01',
-    title: 'Amazon.com Announces Full Year 2023 Financial Results',
+    title: 'Amazon.com - Wyniki Finansowe za Cały Rok 2023',
     reportCategory: ['E-commerce', 'Cloud Computing', 'Digital Content', 'Logistics', 'Retail'],
+    category: 'Dywidenda',
     financialPeriod: 'FY 2023',
     summaryData: {
       revenue: {
@@ -630,15 +669,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Net sales increased 12% to $574.8 billion, compared with $514.0 billion in 2022.',
-      'Operating income increased to $36.9 billion, compared with $12.2 billion in 2022.',
-      'AWS operating income increased to $25.4 billion, compared with $22.8 billion in 2022.',
-      'North America segment returned to profitability with $14.9 billion in operating income, compared with a loss of $2.8 billion in 2022.',
-      'International segment reduced operating loss to $3.5 billion, compared with $7.7 billion in 2022.',
-      'Operating cash flow increased 82% to $98.8 billion for the trailing twelve months.'
+      'Sprzedaż netto wzrosła o 12% do 574,8 mld USD, w porównaniu z 514,0 mld USD w 2022 roku.',
+      'Zysk operacyjny wzrósł do 36,9 mld USD, w porównaniu z 12,2 mld USD w 2022 roku.',
+      'Zysk operacyjny AWS wzrósł do 25,4 mld USD, w porównaniu z 22,8 mld USD w 2022 roku.',
+      'Segment Ameryki Północnej powrócił do rentowności z zyskiem operacyjnym 14,9 mld USD, w porównaniu ze stratą 2,8 mld USD w 2022 roku.',
+      'Segment Międzynarodowy zmniejszył stratę operacyjną do 3,5 mld USD, w porównaniu z 7,7 mld USD w 2022 roku.',
+      'Przepływy pieniężne z działalności operacyjnej wzrosły o 82% do 98,8 mld USD za dwanaście miesięcy.'
     ],
     outlook: {
-      statement: 'For the first quarter of 2024, Amazon expects net sales to be between $138.0 billion and $143.5 billion, representing growth of 8-13% compared to first quarter 2023. The company anticipates continued investment in AWS, including significant advancements in AI capabilities, while maintaining discipline on capital expenditures.',
+      statement: 'Na pierwszy kwartał 2024 roku Amazon oczekuje, że sprzedaż netto wyniesie od 138,0 do 143,5 mld USD, co oznacza wzrost o 8-13% w porównaniu z pierwszym kwartałem 2023 roku. Firma przewiduje dalsze inwestycje w AWS, w tym znaczące postępy w możliwościach AI, przy jednoczesnym zachowaniu dyscypliny w zakresie nakładów inwestycyjnych.',
       guidanceRevenue: {
         min: 138.0,
         max: 143.5,
@@ -646,9 +685,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Wall Street reacted positively to Amazon\'s significant improvement in profitability across all business segments, particularly in North America and AWS.',
-      'Analysts highlighted the company\'s effective cost-cutting measures, which helped transform a net loss in 2022 to substantial net income in 2023.',
-      'The expected continued investment in AI capabilities was seen as strategically important for maintaining AWS\'s competitive position in the cloud market.'
+      'Wall Street zareagowało pozytywnie na znaczącą poprawę rentowności Amazona we wszystkich segmentach biznesowych, szczególnie w Ameryce Północnej i AWS.',
+      'Analitycy podkreślili skuteczne działania firmy w zakresie redukcji kosztów, które pomogły przekształcić stratę netto w 2022 roku w znaczący zysk netto w 2023 roku.',
+      'Oczekiwane dalsze inwestycje w możliwości AI zostały uznane za strategicznie ważne dla utrzymania konkurencyjnej pozycji AWS na rynku chmury.'
     ]
   },
   {
@@ -659,8 +698,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Quarterly',
     quarterOrYear: 'Q3 2024',
     publicationDate: '2024-10-29',
-    title: 'Pfizer Reports Third Quarter 2024 Results',
+    title: 'Pfizer - Wyniki za Trzeci Kwartał 2024',
     reportCategory: ['Healthcare', 'Pharmaceuticals', 'Biotechnology', 'Vaccines', 'Drug Manufacturing'],
+    category: 'Sprawy kadrowe',
     financialPeriod: 'Q3 2024',
     summaryData: {
       revenue: {
@@ -695,15 +735,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Non-COVID product revenue grew 9.8% operationally to $16.53 billion, driven by strong performance from key brands.',
-      'Oncology portfolio revenue increased 15.3% to $3.87 billion, including 42% growth from recently launched products.',
-      'Prevnar family of vaccines revenue increased 12.7% to $2.32 billion globally.',
-      'R&D expenses increased 5.6% to $2.82 billion, reflecting continued investment in the pipeline.',
-      'Completed three acquisitions in targeted therapeutic areas, strengthening the company\'s long-term growth prospects.',
-      'COVID-19 products (Comirnaty and Paxlovid) generated $1.31 billion in Q3, down from expectations due to lower vaccination rates.'
+      'Przychody z produktów non-COVID wzrosły o 9,8% operacyjnie do 16,53 mld USD, napędzane silnymi wynikami kluczowych marek.',
+      'Przychody z portfolio onkologicznego wzrosły o 15,3% do 3,87 mld USD, w tym 42% wzrost z niedawno wprowadzonych produktów.',
+      'Przychody z rodziny szczepionek Prevnar wzrosły globalnie o 12,7% do 2,32 mld USD.',
+      'Wydatki na badania i rozwój wzrosły o 5,6% do 2,82 mld USD, odzwierciedlając dalsze inwestycje w pipeline.',
+      'Zakończono trzy przejęcia w ukierunkowanych obszarach terapeutycznych, wzmacniając długoterminowe perspektywy wzrostu firmy.',
+      'Produkty COVID-19 (Comirnaty i Paxlovid) wygenerowały 1,31 mld USD w III kwartale, poniżej oczekiwań ze względu na niższe wskaźniki szczepień.'
     ],
     outlook: {
-      statement: 'Pfizer narrowed its full-year 2024 revenue guidance to $69.0-$71.0 billion, reflecting strong performance from the non-COVID portfolio offset by lower COVID-19 product revenues. The company expects continued momentum from new product launches and remains on track to deliver on its cost-reduction initiatives of approximately $4 billion by the end of 2024.',
+      statement: 'Pfizer zawęził prognozę przychodów na cały rok 2024 do 69,0-71,0 mld USD, odzwierciedlając silne wyniki portfolio non-COVID, które zrównoważyły niższe przychody z produktów COVID-19. Firma oczekuje dalszego impulsu z nowych wprowadzeń produktów i pozostaje na dobrej drodze do realizacji inicjatyw redukcji kosztów o około 4 mld USD do końca 2024 roku.',
       guidanceRevenue: {
         min: 69.0,
         max: 71.0,
@@ -716,9 +756,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Analysts viewed the quarter positively, with particular focus on the strength of the non-COVID portfolio offsetting the expected decline in COVID-19 product revenues.',
-      'Several equity research teams maintained their "buy" ratings, citing the company\'s robust pipeline and successful integration of recent acquisitions.',
-      'Some concerns persisted about patent expirations for key drugs in the coming years, though these were partially offset by optimism about the company\'s R&D productivity.'
+      'Analitycy ocenili kwartał pozytywnie, zwracając szczególną uwagę na siłę portfolio non-COVID, która zrównoważyła oczekiwany spadek przychodów z produktów COVID-19.',
+      'Kilka zespołów badawczych utrzymało swoje rekomendacje "kupuj", powołując się na solidny pipeline firmy i udaną integrację ostatnich przejęć.',
+      'Nadal utrzymują się pewne obawy dotyczące wygaśnięcia patentów na kluczowe leki w nadchodzących latach, choć zostały one częściowo zrównoważone optymizmem co do produktywności firmy w zakresie badań i rozwoju.'
     ]
   },
   {
@@ -729,8 +769,9 @@ export const financialReports: FinancialReport[] = [
     reportType: 'Annual',
     quarterOrYear: 'FY 2024',
     publicationDate: '2024-07-30',
-    title: 'Microsoft Annual Report Fiscal Year 2024',
+    title: 'Microsoft - Raport Roczny za Rok Obrotowy 2024',
     reportCategory: ['Technology', 'Software', 'Cloud Computing', 'AI', 'Enterprise Solutions'],
+    category: 'Koncesje, kontrole, regulacje',
     financialPeriod: 'FY 2024',
     summaryData: {
       revenue: {
@@ -765,15 +806,15 @@ export const financialReports: FinancialReport[] = [
       }
     },
     keyHighlights: [
-      'Revenue increased 14.9% to a record $245.1 billion, driven by strong cloud and AI services growth.',
-      'Intelligent Cloud revenue, including Azure, grew 22% to $114.8 billion.',
-      'Microsoft 365 consumer subscribers increased to 82.5 million, up 12% year-over-year.',
-      'AI services revenue, though starting from a smaller base, grew by 183% to $12.7 billion.',
-      'Operating margin expanded to 44.7%, improving by 2.5 percentage points from fiscal year 2023.',
-      'Returned $67.3 billion to shareholders through dividends and share repurchases.'
+      'Przychody wzrosły o 14,9% do rekordowych 245,1 mld USD, napędzane silnym wzrostem usług chmurowych i AI.',
+      'Przychody Intelligent Cloud, w tym Azure, wzrosły o 22% do 114,8 mld USD.',
+      'Liczba konsumenckich subskrybentów Microsoft 365 wzrosła do 82,5 mln, o 12% rok do roku.',
+      'Przychody z usług AI, choć zaczynając od mniejszej bazy, wzrosły o 183% do 12,7 mld USD.',
+      'Marża operacyjna wzrosła do 44,7%, poprawiając się o 2,5 punktu procentowego w porównaniu z rokiem obrotowym 2023.',
+      'Zwrócono 67,3 mld USD akcjonariuszom poprzez dywidendy i wykup akcji.'
     ],
     outlook: {
-      statement: 'Looking ahead to fiscal year 2025, Microsoft expects continued momentum in its cloud and AI businesses. The company anticipates double-digit revenue and operating income growth, with particular strength in Azure and AI services. Capital expenditures are expected to increase significantly as the company continues to build out AI infrastructure to meet growing demand.',
+      statement: 'Patrząc na rok obrotowy 2025, Microsoft oczekuje dalszego impetu w biznesie chmurowym i AI. Firma przewiduje dwucyfrowy wzrost przychodów i zysku operacyjnego, ze szczególną siłą w Azure i usługach AI. Oczekuje się, że nakłady inwestycyjne znacząco wzrosną, ponieważ firma nadal buduje infrastrukturę AI, aby sprostać rosnącemu popytowi.',
       guidanceRevenue: {
         min: 271.0,
         max: 277.0,
@@ -786,9 +827,9 @@ export const financialReports: FinancialReport[] = [
       }
     },
     analystReactions: [
-      'Wall Street analysts widely praised Microsoft\'s performance, with many highlighting the company\'s leadership position in enterprise AI solutions.',
-      'The strong growth in Azure, particularly the AI components, reinforced confidence in Microsoft\'s long-term growth trajectory.',
-      'Some analysts expressed concerns about the planned increase in capital expenditures, but most acknowledged the necessity of these investments to maintain Microsoft\'s competitive advantage in cloud and AI.'
+      'Analitycy Wall Street szeroko chwalili wyniki Microsoftu, przy czym wielu podkreślało wiodącą pozycję firmy w rozwiązaniach AI dla przedsiębiorstw.',
+      'Silny wzrost w Azure, szczególnie komponentów AI, wzmocnił pewność co do długoterminowej trajektorii wzrostu Microsoftu.',
+      'Niektórzy analitycy wyrazili obawy dotyczące planowanego wzrostu nakładów inwestycyjnych, ale większość uznała niezbędność tych inwestycji dla utrzymania przewagi konkurencyjnej Microsoftu w chmurze i AI.'
     ],
     premium: true
   }
