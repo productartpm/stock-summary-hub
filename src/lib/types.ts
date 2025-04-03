@@ -40,4 +40,7 @@ export interface StockData {
 export interface ReportSummary {
   text: string;
   sentiment: 'positive' | 'neutral' | 'negative';
+  marketContext?: string;
+  keyFactors?: string[];
 }
+

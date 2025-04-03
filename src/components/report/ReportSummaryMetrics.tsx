@@ -48,6 +48,42 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
         return null;
     }
   };
+
+  const getSentimentLabel = () => {
+    if (!report.reportSummary) return "";
+    
+    switch (report.reportSummary.sentiment) {
+      case 'positive':
+        return "Pozytywna ocena wyników";
+      case 'negative':
+        return "Negatywna ocena wyników";
+      case 'neutral':
+        return "Neutralna ocena wyników";
+      default:
+        return "";
+    }
+  };
+
+  // Generate a more comprehensive market context description
+  const getMarketContext = () => {
+    if (!report.reportSummary) return null;
+    
+    const revenueChange = report.summaryData.revenue.change;
+    const incomeChange = report.summaryData.netIncome.change;
+    
+    let marketTrend = "";
+    if (report.category === "Technology") {
+      marketTrend = "Sektor technologiczny wykazuje oznaki stabilizacji po okresie dynamicznego wzrostu, z większym naciskiem inwestorów na rentowność niż na same przychody.";
+    } else if (report.category === "Financial Services") {
+      marketTrend = "Sektor finansowy zmaga się z wyzwaniami związanymi ze zmianami stóp procentowych i regulacyjnymi, co wpływa na marże operacyjne wielu instytucji.";
+    } else if (report.category === "Energy") {
+      marketTrend = "Sektor energetyczny przechodzi transformację w kierunku odnawialnych źródeł energii, co wiąże się z istotnymi inwestycjami i zmianami w strukturze przychodów.";
+    } else {
+      marketTrend = "Obecne warunki rynkowe charakteryzują się zwiększoną zmiennością i ostrożnością inwestorów, szczególnie w kontekście inflacji i potencjalnego spowolnienia gospodarczego.";
+    }
+    
+    return marketTrend;
+  };
   
   return (
     <div className="mb-6">
@@ -78,8 +114,34 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
               {getSentimentIcon()}
             </div>
             <div>
-              <h3 className="font-medium text-lg mb-1 text-neutral-800">Podsumowanie Raportu</h3>
-              <p className="text-neutral-700">{report.reportSummary.text}</p>
+              <h3 className="font-medium text-lg mb-1 text-neutral-800 flex items-center">
+                {getSentimentLabel()}
+              </h3>
+              <p className="text-neutral-700 mb-3">{report.reportSummary.text}</p>
+              
+              <div className="mt-4 border-t pt-3 border-neutral-200">
+                <h4 className="font-medium text-sm mb-2 text-neutral-700">Kontekst rynkowy:</h4>
+                <p className="text-neutral-600 text-sm">{getMarketContext()}</p>
+              </div>
+              
+              <div className="mt-4 border-t pt-3 border-neutral-200">
+                <h4 className="font-medium text-sm mb-2 text-neutral-700">Kluczowe czynniki wpływające na wyniki:</h4>
+                <ul className="text-neutral-600 text-sm list-disc pl-5 space-y-1">
+                  {report.summaryData.revenue.change >= 0 ? (
+                    <li>Wzrost przychodów o {formatPercentage(report.summaryData.revenue.change)} dzięki {report.category === "Technology" ? "zwiększonej bazie użytkowników i nowym produktom" : "poprawie warunków rynkowych i strategiom cenowym"}</li>
+                  ) : (
+                    <li>Spadek przychodów o {formatPercentage(Math.abs(report.summaryData.revenue.change))} spowodowany {report.category === "Technology" ? "zwiększoną konkurencją i nasyceniem rynku" : "trudnymi warunkami makroekonomicznymi"}</li>
+                  )}
+                  
+                  {report.summaryData.netIncome.change >= 0 ? (
+                    <li>Poprawa zysku netto o {formatPercentage(report.summaryData.netIncome.change)} dzięki {report.summaryData.operatingProfit.change >= 0 ? "efektywności operacyjnej i kontroli kosztów" : "jednorazowym pozycjom zysków nadzwyczajnych"}</li>
+                  ) : (
+                    <li>Spadek zysku netto o {formatPercentage(Math.abs(report.summaryData.netIncome.change))} wynikający z {report.summaryData.operatingProfit.change < 0 ? "rosnących kosztów operacyjnych i presji na marże" : "wyższych kosztów finansowania i podatków"}</li>
+                  )}
+                  
+                  <li>Obecne warunki makroekonomiczne charakteryzują się {report.category === "Financial Services" ? "zmiennością stóp procentowych i regulacjami sektora finansowego" : "presją inflacyjną i niepewnością geopolityczną"}</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
