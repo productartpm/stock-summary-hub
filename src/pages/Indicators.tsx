@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -240,8 +241,9 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">7</span>
                 MACD - kupno
                 {!user && (
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] rounded">
-                    <span className="absolute inset-0 flex items-center justify-center text-foreground/80">MACD - kupno</span>
+                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
+                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
+                    <span className="text-foreground/80">MACD - kupno</span>
                   </div>
                 )}
               </TabsTrigger>
@@ -253,8 +255,9 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">8</span>
                 MACD - sprzedaż
                 {!user && (
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] rounded">
-                    <span className="absolute inset-0 flex items-center justify-center text-foreground/80">MACD - sprzedaż</span>
+                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
+                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
+                    <span className="text-foreground/80">MACD - sprzedaż</span>
                   </div>
                 )}
               </TabsTrigger>
@@ -266,8 +269,9 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">9</span>
                 Złoty krzyż
                 {!user && (
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] rounded">
-                    <span className="absolute inset-0 flex items-center justify-center text-foreground/80">Złoty krzyż</span>
+                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
+                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
+                    <span className="text-foreground/80">Złoty krzyż</span>
                   </div>
                 )}
               </TabsTrigger>
@@ -279,8 +283,9 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">10</span>
                 Krzyż śmierci
                 {!user && (
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] rounded">
-                    <span className="absolute inset-0 flex items-center justify-center text-foreground/80">Krzyż śmierci</span>
+                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
+                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
+                    <span className="text-foreground/80">Krzyż śmierci</span>
                   </div>
                 )}
               </TabsTrigger>
@@ -292,8 +297,9 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">11</span>
                 Wolumen na wzroście
                 {!user && (
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] rounded">
-                    <span className="absolute inset-0 flex items-center justify-center text-foreground/80">Wolumen na wzroście</span>
+                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
+                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
+                    <span className="text-foreground/80">Wolumen na wzroście</span>
                   </div>
                 )}
               </TabsTrigger>
@@ -305,8 +311,9 @@ const IndicatorsPage = () => {
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">12</span>
                 Wolumen na spadku
                 {!user && (
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] rounded">
-                    <span className="absolute inset-0 flex items-center justify-center text-foreground/80">Wolumen na spadku</span>
+                  <div className="absolute inset-0 bg-background/30 backdrop-blur-[1px] rounded flex items-center justify-center">
+                    <Lock className="h-4 w-4 mr-1 text-foreground/80" />
+                    <span className="text-foreground/80">Wolumen na spadku</span>
                   </div>
                 )}
               </TabsTrigger>
