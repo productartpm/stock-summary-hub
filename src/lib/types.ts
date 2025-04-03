@@ -52,6 +52,14 @@ export interface StockData {
   };
   atr?: number;
   obv?: number;
+  williamsR?: number;
+  sma50?: number;
+  sma200?: number;
+  consecutiveUpDays?: number;
+  consecutiveDownDays?: number;
+  volumeChangePercent?: number;
+  supportLevels?: number[];
+  resistanceLevels?: number[];
 }
 
 export interface ReportSummary {
@@ -59,4 +67,13 @@ export interface ReportSummary {
   sentiment: 'positive' | 'neutral' | 'negative';
   marketContext?: string;
   keyFactors?: string[];
+}
+
+export interface CalendarEvent {
+  id: string;
+  company: string;
+  ticker: string;
+  date: Date;
+  type: 'quarterly' | 'annual';
+  description: string;
 }

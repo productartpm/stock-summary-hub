@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FinancialReportsList from '@/components/FinancialReportsList';
 import ReportDetail from '@/components/ReportDetail';
 import { financialReports } from '@/lib/data';
@@ -57,10 +58,9 @@ const Index = () => {
           <h1 className="text-xl font-semibold">Centrum Raportów Giełdowych</h1>
           <div className="flex items-center space-x-6">
             <nav className="hidden md:flex space-x-4 text-sm">
-              <a href="#" className="text-primary">Raporty</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Rynki</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Obserwowane</a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Analizy</a>
+              <Link to="/" className="text-primary">ESPI</Link>
+              <Link to="/calendar" className="text-muted-foreground hover:text-foreground transition-colors">Kalendarium raportów</Link>
+              <Link to="/indicators" className="text-muted-foreground hover:text-foreground transition-colors">Wskaźniki</Link>
             </nav>
             <AuthButtons />
           </div>
