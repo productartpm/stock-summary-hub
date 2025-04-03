@@ -1,10 +1,11 @@
-
 import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, Activity, ArrowUp, ArrowDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Activity, ArrowUp, ArrowDown, Calendar } from 'lucide-react';
+import { format } from 'date-fns';
+import { pl } from 'date-fns/locale';
 
 // Types for indicators
 interface StockWithIndicator {
@@ -16,6 +17,10 @@ interface StockWithIndicator {
   volume: number;
   indicator?: number;
 }
+
+// Current date for displaying when the indicators were generated
+const currentDate = new Date();
+const formattedDate = format(currentDate, 'd MMMM yyyy', { locale: pl });
 
 // Sample data for indicators page
 const topGainers: StockWithIndicator[] = [
@@ -123,7 +128,7 @@ const volumeIncreaseDown: StockWithIndicator[] = [
 ];
 
 const IndicatorsPage = () => {
-  const [activeTab, setActiveTab] = useState('top-gainers');
+  const [activeTab, setActiveTab] = useState('tab1');
   
   const renderStockList = (stocks: StockWithIndicator[], showIndicator = false, indicatorLabel = 'Indicator') => {
     return (
@@ -181,8 +186,9 @@ const IndicatorsPage = () => {
       <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
         <div className="mb-6">
           <h1 className="text-2xl font-bold mb-2">Wskaźniki techniczne i trendy rynkowe</h1>
-          <p className="text-muted-foreground">
-            Analizuj akcje na podstawie kluczowych wskaźników technicznych i trendów cenowych.
+          <p className="text-muted-foreground flex items-center">
+            <Calendar className="h-4 w-4 mr-2" />
+            Dane na dzień: {formattedDate}
           </p>
         </div>
         
@@ -191,33 +197,65 @@ const IndicatorsPage = () => {
           onValueChange={setActiveTab} 
           className="space-y-4"
         >
-          <div className="overflow-x-auto pb-2">
-            <TabsList className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 w-fit">
-              <TabsTrigger value="top-gainers" className="flex gap-1 items-center whitespace-nowrap">
-                <TrendingUp className="h-4 w-4" /> Top 10 wzrosty
+          <div className="overflow-auto">
+            <TabsList className="w-full h-auto flex flex-wrap gap-2 p-2 justify-start">
+              <TabsTrigger value="tab1" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">1</span>
+                <TrendingUp className="h-4 w-4 mr-1" /> Top 10 wzrosty
               </TabsTrigger>
-              <TabsTrigger value="top-losers" className="flex gap-1 items-center whitespace-nowrap">
-                <TrendingDown className="h-4 w-4" /> Top 10 spadki
+              <TabsTrigger value="tab2" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">2</span>
+                <TrendingDown className="h-4 w-4 mr-1" /> Top 10 spadki
               </TabsTrigger>
-              <TabsTrigger value="rsi-above-70" className="whitespace-nowrap">RSI &gt; 70</TabsTrigger>
-              <TabsTrigger value="rsi-below-30" className="whitespace-nowrap">RSI &lt; 30</TabsTrigger>
-              <TabsTrigger value="consecutive-up" className="whitespace-nowrap">5 sesji wzrostowych</TabsTrigger>
-              <TabsTrigger value="consecutive-down" className="whitespace-nowrap">5 sesji spadkowych</TabsTrigger>
-              <TabsTrigger value="macd-buy" className="whitespace-nowrap">MACD - kupno</TabsTrigger>
-              <TabsTrigger value="macd-sell" className="whitespace-nowrap">MACD - sprzedaż</TabsTrigger>
-              <TabsTrigger value="golden-cross" className="whitespace-nowrap">Złoty krzyż</TabsTrigger>
-              <TabsTrigger value="death-cross" className="whitespace-nowrap">Krzyż śmierci</TabsTrigger>
-              <TabsTrigger value="volume-up" className="whitespace-nowrap">Wolumen na wzroście</TabsTrigger>
-              <TabsTrigger value="volume-down" className="whitespace-nowrap">Wolumen na spadku</TabsTrigger>
+              <TabsTrigger value="tab3" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">3</span>
+                RSI &gt; 70
+              </TabsTrigger>
+              <TabsTrigger value="tab4" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">4</span>
+                RSI &lt; 30
+              </TabsTrigger>
+              <TabsTrigger value="tab5" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">5</span>
+                5 sesji wzrostowych
+              </TabsTrigger>
+              <TabsTrigger value="tab6" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">6</span>
+                5 sesji spadkowych
+              </TabsTrigger>
+              <TabsTrigger value="tab7" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">7</span>
+                MACD - kupno
+              </TabsTrigger>
+              <TabsTrigger value="tab8" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">8</span>
+                MACD - sprzedaż
+              </TabsTrigger>
+              <TabsTrigger value="tab9" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">9</span>
+                Złoty krzyż
+              </TabsTrigger>
+              <TabsTrigger value="tab10" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">10</span>
+                Krzyż śmierci
+              </TabsTrigger>
+              <TabsTrigger value="tab11" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">11</span>
+                Wolumen na wzroście
+              </TabsTrigger>
+              <TabsTrigger value="tab12" className="px-4 py-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground mr-2">12</span>
+                Wolumen na spadku
+              </TabsTrigger>
             </TabsList>
           </div>
           
           <Card>
-            <TabsContent value="top-gainers" className="space-y-4">
+            <TabsContent value="tab1" className="space-y-4">
               <CardHeader>
                 <CardTitle>Top 10 spółek - największe wzrosty dnia</CardTitle>
                 <CardDescription>
-                  Spółki z najwyższym procentowym wzrostem podczas ostatniej sesji
+                  Spółki z najwyższym procentowym wzrostem podczas ostatniej sesji ({formattedDate})
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -225,11 +263,11 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="top-losers" className="space-y-4">
+            <TabsContent value="tab2" className="space-y-4">
               <CardHeader>
                 <CardTitle>Top 10 spółek - największe spadki dnia</CardTitle>
                 <CardDescription>
-                  Spółki z najwyższym procentowym spadkiem podczas ostatniej sesji
+                  Spółki z najwyższym procentowym spadkiem podczas ostatniej sesji ({formattedDate})
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -237,11 +275,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="rsi-above-70" className="space-y-4">
+            <TabsContent value="tab3" className="space-y-4">
               <CardHeader>
                 <CardTitle>Spółki z RSI powyżej 70 - potencjalna wyprzedaż</CardTitle>
                 <CardDescription>
-                  RSI (Relative Strength Index) powyżej 70 może wskazywać, że spółka jest wykupiona i może nastąpić korekta
+                  RSI (Relative Strength Index) powyżej 70 może wskazywać, że spółka jest wykupiona i może nastąpić korekta. 
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -249,11 +288,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="rsi-below-30" className="space-y-4">
+            <TabsContent value="tab4" className="space-y-4">
               <CardHeader>
-                <CardTitle>Spółki z RSI poniżej 30 - potencjalny niedowartościowane</CardTitle>
+                <CardTitle>Spółki z RSI poniżej 30 - potencjalnie niedowartościowane</CardTitle>
                 <CardDescription>
-                  RSI (Relative Strength Index) poniżej 30 może wskazywać, że spółka jest wyprzedana i może nastąpić odbicie
+                  RSI (Relative Strength Index) poniżej 30 może wskazywać, że spółka jest wyprzedana i może nastąpić odbicie.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -261,11 +301,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="consecutive-up" className="space-y-4">
+            <TabsContent value="tab5" className="space-y-4">
               <CardHeader>
                 <CardTitle>Spółki z 5 lub więcej sesji wzrostowych z rzędu</CardTitle>
                 <CardDescription>
-                  Spółki, które odnotowały wzrosty cen przez co najmniej 5 kolejnych sesji giełdowych
+                  Spółki, które odnotowały wzrosty cen przez co najmniej 5 kolejnych sesji giełdowych.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -273,11 +314,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="consecutive-down" className="space-y-4">
+            <TabsContent value="tab6" className="space-y-4">
               <CardHeader>
                 <CardTitle>Spółki z 5 lub więcej sesji spadkowych z rzędu</CardTitle>
                 <CardDescription>
-                  Spółki, które odnotowały spadki cen przez co najmniej 5 kolejnych sesji giełdowych
+                  Spółki, które odnotowały spadki cen przez co najmniej 5 kolejnych sesji giełdowych.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -285,11 +327,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="macd-buy" className="space-y-4">
+            <TabsContent value="tab7" className="space-y-4">
               <CardHeader>
                 <CardTitle>MACD - sygnał kupna</CardTitle>
                 <CardDescription>
-                  Spółki, dla których linia MACD przecina linię sygnalną od dołu, generując sygnał kupna
+                  Spółki, dla których linia MACD przecina linię sygnalną od dołu, generując sygnał kupna.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -297,11 +340,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="macd-sell" className="space-y-4">
+            <TabsContent value="tab8" className="space-y-4">
               <CardHeader>
                 <CardTitle>MACD - sygnał sprzedaży</CardTitle>
                 <CardDescription>
-                  Spółki, dla których linia MACD przecina linię sygnalną od góry, generując sygnał sprzedaży
+                  Spółki, dla których linia MACD przecina linię sygnalną od góry, generując sygnał sprzedaży.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -309,11 +353,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="golden-cross" className="space-y-4">
+            <TabsContent value="tab9" className="space-y-4">
               <CardHeader>
                 <CardTitle>Złoty krzyż (średnie 50 i 200 sesji)</CardTitle>
                 <CardDescription>
-                  Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od dołu, sygnalizując potencjalny trend wzrostowy
+                  Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od dołu, sygnalizując potencjalny trend wzrostowy.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -321,11 +366,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="death-cross" className="space-y-4">
+            <TabsContent value="tab10" className="space-y-4">
               <CardHeader>
                 <CardTitle>Krzyż śmierci (średnie 50 i 200 sesji)</CardTitle>
                 <CardDescription>
-                  Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od góry, sygnalizując potencjalny trend spadkowy
+                  Spółki, dla których średnia 50-sesyjna przecięła średnią 200-sesyjną od góry, sygnalizując potencjalny trend spadkowy.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -333,11 +379,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="volume-up" className="space-y-4">
+            <TabsContent value="tab11" className="space-y-4">
               <CardHeader>
                 <CardTitle>Zwiększony wolumen na wzroście</CardTitle>
                 <CardDescription>
-                  Spółki, które odnotowały znaczący wzrost ceny przy wolumenie wyższym niż średnia 3-miesięczna
+                  Spółki, które odnotowały znaczący wzrost ceny przy wolumenie wyższym niż średnia 3-miesięczna.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -345,11 +392,12 @@ const IndicatorsPage = () => {
               </CardContent>
             </TabsContent>
             
-            <TabsContent value="volume-down" className="space-y-4">
+            <TabsContent value="tab12" className="space-y-4">
               <CardHeader>
                 <CardTitle>Zwiększony wolumen na spadku</CardTitle>
                 <CardDescription>
-                  Spółki, które odnotowały znaczący spadek ceny przy wolumenie wyższym niż średnia 3-miesięczna
+                  Spółki, które odnotowały znaczący spadek ceny przy wolumenie wyższym niż średnia 3-miesięczna.
+                  Dane na dzień {formattedDate}.
                 </CardDescription>
               </CardHeader>
               <CardContent>

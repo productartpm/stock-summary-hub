@@ -105,7 +105,7 @@ const calendarEvents: CalendarEvent[] = [
 
 const CalendarPage = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [view, setView] = useState<'calendar' | 'list'>('calendar');
+  const [view, setView] = useState<'calendar' | 'list'>('list'); // Changed default to 'list'
   
   // Filter events for the selected day
   const selectedDateEvents = date 
@@ -150,14 +150,51 @@ const CalendarPage = () => {
           </p>
         </div>
         
-        <Tabs defaultValue="calendar" onValueChange={(v) => setView(v as 'calendar' | 'list')}>
+        <Tabs defaultValue="list" onValueChange={(v) => setView(v as 'calendar' | 'list')}>
           <TabsList className="mb-6">
+            <TabsTrigger value="list">Lista chronologiczna</TabsTrigger>
             <TabsTrigger value="calendar" className="flex items-center">
               <CalendarIcon className="mr-2 h-4 w-4" />
               Kalendarz
             </TabsTrigger>
-            <TabsTrigger value="list">Lista chronologiczna</TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="list">
+            <Card>
+              <CardHeader>
+                <CardTitle>Nadchodzące publikacje raportów</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {upcomingEvents.length > 0 ? (
+                  <ul className="divide-y">
+                    {upcomingEvents.map((event) => (
+                      <li key={event.id} className="py-4 first:pt-0 last:pb-0">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <div className="flex items-baseline">
+                              <span className="font-semibold">{event.company}</span>
+                              <span className="text-sm ml-2 text-muted-foreground">({event.ticker})</span>
+                            </div>
+                            <p className="text-sm text-muted-foreground mt-1">{event.description}</p>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-medium">{format(event.date, 'd MMMM yyyy', { locale: pl })}</div>
+                            <Badge variant={event.type === 'quarterly' ? 'secondary' : 'default'} className="mt-1">
+                              {event.type === 'quarterly' ? 'Kwartalny' : 'Roczny'}
+                            </Badge>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="text-center text-muted-foreground py-6">
+                    Brak zaplanowanych nadchodzących raportów
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
           
           <TabsContent value="calendar" className="space-y-4">
             <div className="grid md:grid-cols-[1fr_300px] gap-6">
@@ -225,43 +262,6 @@ const CalendarPage = () => {
                 </CardContent>
               </Card>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="list">
-            <Card>
-              <CardHeader>
-                <CardTitle>Nadchodzące publikacje raportów</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {upcomingEvents.length > 0 ? (
-                  <ul className="divide-y">
-                    {upcomingEvents.map((event) => (
-                      <li key={event.id} className="py-4 first:pt-0 last:pb-0">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <div className="flex items-baseline">
-                              <span className="font-semibold">{event.company}</span>
-                              <span className="text-sm ml-2 text-muted-foreground">({event.ticker})</span>
-                            </div>
-                            <p className="text-sm text-muted-foreground mt-1">{event.description}</p>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-medium">{format(event.date, 'd MMMM yyyy', { locale: pl })}</div>
-                            <Badge variant={event.type === 'quarterly' ? 'secondary' : 'default'} className="mt-1">
-                              {event.type === 'quarterly' ? 'Kwartalny' : 'Roczny'}
-                            </Badge>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div className="text-center text-muted-foreground py-6">
-                    Brak zaplanowanych nadchodzących raportów
-                  </div>
-                )}
-              </CardContent>
-            </Card>
           </TabsContent>
         </Tabs>
       </main>
