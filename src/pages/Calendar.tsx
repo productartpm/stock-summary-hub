@@ -17,7 +17,7 @@ import {
 
 const CalendarPage = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [activeView, setActiveView] = useState<string>("calendar");
+  const [activeView, setActiveView] = useState<string>("upcoming");
   
   // Create a map of dates with events
   const eventDates = useMemo(() => {
@@ -41,17 +41,6 @@ const CalendarPage = () => {
       return reportDateStr === dateStr;
     });
   };
-
-  // Group reports by company
-  const reportsByCompany = useMemo(() => {
-    return financialReports.reduce<Record<string, typeof financialReports>>((acc, report) => {
-      if (!acc[report.companyName]) {
-        acc[report.companyName] = [];
-      }
-      acc[report.companyName].push(report);
-      return acc;
-    }, {});
-  }, []);
 
   // Get upcoming reports (next 3 months)
   const upcomingReports = useMemo(() => {
@@ -91,17 +80,13 @@ const CalendarPage = () => {
         
         <Tabs value={activeView} onValueChange={setActiveView} className="w-full mb-6">
           <TabsList>
-            <TabsTrigger value="calendar" className="flex items-center">
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              Widok kalendarza
-            </TabsTrigger>
-            <TabsTrigger value="companies" className="flex items-center">
-              <Badge variant="outline" className="mr-2">{Object.keys(reportsByCompany).length}</Badge>
-              Spółki
-            </TabsTrigger>
             <TabsTrigger value="upcoming" className="flex items-center">
               <Badge variant="outline" className="mr-2">{upcomingReports.length}</Badge>
               Nadchodzące raporty
+            </TabsTrigger>
+            <TabsTrigger value="calendar" className="flex items-center">
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              Widok kalendarza
             </TabsTrigger>
           </TabsList>
         
@@ -173,48 +158,6 @@ const CalendarPage = () => {
                   )}
                 </CardContent>
               </Card>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="companies" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Object.entries(reportsByCompany).map(([company, reports]) => (
-                <Card key={company}>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-xl">{company}</CardTitle>
-                    <CardDescription>
-                      <Badge variant="outline" className="mr-2">{reports.length}</Badge>
-                      raporty
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {reports.slice(0, 5).map((report) => (
-                        <li key={report.id} className="text-sm flex justify-between items-center py-1 border-b last:border-b-0">
-                          <div>
-                            <div className="font-medium">{report.reportType}</div>
-                            <div className="text-muted-foreground">
-                              {format(new Date(report.publicationDate), 'dd MMM yyyy', { locale: pl })}
-                            </div>
-                          </div>
-                          <Badge variant={
-                            isToday(new Date(report.publicationDate)) ? "default" :
-                            isFuture(new Date(report.publicationDate)) ? "secondary" : "outline"
-                          }>
-                            {isToday(new Date(report.publicationDate)) ? "Dziś" :
-                             isFuture(new Date(report.publicationDate)) ? "Nadchodzące" : "Zakończone"}
-                          </Badge>
-                        </li>
-                      ))}
-                    </ul>
-                    {reports.length > 5 && (
-                      <div className="mt-3 text-sm text-muted-foreground text-center">
-                        + {reports.length - 5} więcej raportów
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
             </div>
           </TabsContent>
           
