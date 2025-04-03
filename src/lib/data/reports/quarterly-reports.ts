@@ -1,3 +1,4 @@
+
 import type { FinancialReport } from '@/lib/types';
 
 export const quarterlyReports: FinancialReport[] = [
@@ -77,6 +78,11 @@ export const quarterlyReports: FinancialReport[] = [
         unit: 'PLN'
       }
     },
+    analystReactions: [
+      'Analitycy dostrzegają znaczącą poprawę efektywności operacyjnej, co potwierdza powrót do dodatniej EBITDA i zmniejszenie straty netto.',
+      'Reakcja rynku była ostrożnie pozytywna, z większością analityków utrzymujących rekomendacje TRZYMAJ, jednocześnie doceniając postępy spółki w restrukturyzacji.',
+      'Obawy dotyczą nadal spadającej trajektorii przychodów w podstawowych segmentach biznesowych, ale strategiczne przesunięcie w kierunku usług o wyższej marży i rozwoju Columbus ONE jest postrzegane korzystnie.'
+    ],
     reportSummary: {
       text: 'Columbus Energy wykazuje pozytywne oznaki transformacji operacyjnej, z powrotem do dodatniej EBITDA i znaczącym zmniejszeniem straty netto pomimo spadku przychodów. Restrukturyzacja i przesunięcie w stronę usług o wyższej marży zaczyna przynosić rezultaty, ale spółka nadal jest na drodze do pełnej rentowności.',
       sentiment: 'neutral'
@@ -154,6 +160,11 @@ export const quarterlyReports: FinancialReport[] = [
         unit: 'USD'
       }
     },
+    analystReactions: [
+      'Analitycy szeroko chwalili zdolność JPMorgana do generowania silnych wyników we wszystkich segmentach biznesowych pomimo trudności gospodarczych.',
+      'Kilka zespołów badawczych podwyższyło swoje cele cenowe po ogłoszeniu wyników, ze średnim wzrostem o około 8%.',
+      'Wskaźniki jakości kredytów pozostają obszarem ściśle monitorowanym, chociaż obecne poziomy są postrzegane jako możliwe do zarządzania i odpowiednio zabezpieczone.'
+    ],
     reportSummary: {
       text: 'JPMorgan Chase osiągnął rekordowe wyniki w trzecim kwartale 2024 roku, z solidnym wzrostem przychodów i zysków we wszystkich segmentach biznesowych. Bank wykazuje silną odporność na niepewność gospodarczą dzięki zdywersyfikowanemu modelowi biznesowemu i skutecznemu zarządzaniu ryzykiem.',
       sentiment: 'positive'
