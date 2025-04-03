@@ -25,6 +25,9 @@ interface ReportDetailProps {
   user: User | null;
 }
 
+// Lista raportów, które nie wymagają premium (oprócz tych, które już mają premium: false)
+const nonPremiumReportIds = ['paypal-q3-2024', 'jpmorgan-q3-2024', 'columbus-energy-q3-2024'];
+
 const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState('financial-data');
@@ -33,8 +36,11 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
     return <EmptyReportState />;
   }
 
-  // Show login prompt for premium reports when user is not logged in
-  if (report.premium && !user) {
+  // Sprawdź czy raport ma być dostępny bez premium (albo jest już not premium, albo jest na liście nonPremiumReportIds)
+  const isNonPremium = !report.premium || nonPremiumReportIds.includes(report.id);
+
+  // Pokaż zachętę do logowania dla raportów premium, gdy użytkownik nie jest zalogowany
+  if (report.premium && !isNonPremium && !user) {
     return <LoginPrompt report={report} />;
   }
 
@@ -114,7 +120,7 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   return (
     <div className="p-6 md:p-8 overflow-y-auto h-full bg-neutral-100">
       <div className="max-w-4xl mx-auto">
-        {report.premium ? (
+        {report.premium && !isNonPremium ? (
           <PremiumContent 
             content={{
               title: "Premium Analizy Finansowe",

@@ -2,6 +2,7 @@
 import { formatNumber, formatPercentage } from "@/lib/data";
 import type { FinancialReport } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertCircle, AlertTriangle, ThumbsUp } from "lucide-react";
 
 interface ReportSummaryMetricsProps {
   report: FinancialReport;
@@ -22,10 +23,30 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
       currentRatio: "Wskaźnik Płynności",
       quickRatio: "Wskaźnik Szybki",
       returnOnEquity: "ROE",
-      priceSales: "Cena/Przychody"
+      priceSales: "Cena/Przychody",
+      ebitda: "EBITDA",
+      cashFlow: "Przepływy Pieniężne",
+      roa: "ROA",
+      tpv: "Całkowita Wartość Płatności",
+      activeAccounts: "Aktywne Konta",
     };
     
     return translations[key] || key.replace(/([A-Z])/g, ' $1').trim();
+  };
+
+  const getSentimentIcon = () => {
+    if (!report.reportSummary) return null;
+    
+    switch (report.reportSummary.sentiment) {
+      case 'positive':
+        return <ThumbsUp className="h-5 w-5 text-green-500" />;
+      case 'negative':
+        return <AlertCircle className="h-5 w-5 text-red-500" />;
+      case 'neutral':
+        return <AlertTriangle className="h-5 w-5 text-amber-500" />;
+      default:
+        return null;
+    }
   };
   
   return (
@@ -49,6 +70,20 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
           </div>
         ))}
       </div>
+      
+      {report.reportSummary && (
+        <div className="bg-neutral-100 p-4 rounded-lg border border-neutral-300 mb-6">
+          <div className="flex items-start gap-3">
+            <div className="mt-1">
+              {getSentimentIcon()}
+            </div>
+            <div>
+              <h3 className="font-medium text-lg mb-1 text-neutral-800">Podsumowanie Raportu</h3>
+              <p className="text-neutral-700">{report.reportSummary.text}</p>
+            </div>
+          </div>
+        </div>
+      )}
       
       {report.financialPeriod && (
         <div className="text-sm text-neutral-600 mb-2 bg-neutral-200 p-2 rounded-md inline-block">

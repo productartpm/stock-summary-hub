@@ -1,4 +1,4 @@
-import type { SummaryDataItem, StockData } from './types';
+import type { SummaryDataItem, StockData, ReportSummary } from './types';
 
 export interface FinancialReport {
   id: string;
@@ -31,6 +31,7 @@ export interface FinancialReport {
   analystReactions?: string[];
   premium?: boolean;
   stockData: StockData;
+  reportSummary?: ReportSummary;
 }
 
 export const formatNumber = (value: number, unit?: string): string => {
@@ -168,7 +169,11 @@ export const financialReports: FinancialReport[] = [
       'Analitycy dostrzegają znaczącą poprawę efektywności operacyjnej, co potwierdza powrót do dodatniej EBITDA i zmniejszenie straty netto.',
       'Reakcja rynku była ostrożnie pozytywna, z większością analityków utrzymujących rekomendacje TRZYMAJ, jednocześnie doceniając postępy spółki w restrukturyzacji.',
       'Obawy dotyczą nadal spadającej trajektorii przychodów w podstawowych segmentach biznesowych, ale strategiczne przesunięcie w kierunku usług o wyższej marży i rozwoju Columbus ONE jest postrzegane korzystnie.'
-    ]
+    ],
+    reportSummary: {
+      text: 'Columbus Energy wykazuje pozytywne oznaki transformacji operacyjnej, z powrotem do dodatniej EBITDA i znaczącym zmniejszeniem straty netto pomimo spadku przychodów. Restrukturyzacja i przesunięcie w stronę usług o wyższej marży zaczyna przynosić rezultaty, ale spółka nadal jest na drodze do pełnej rentowności.',
+      sentiment: 'neutral'
+    }
   },
   {
     id: 'jpmorgan-q3-2024',
@@ -246,7 +251,10 @@ export const financialReports: FinancialReport[] = [
       'Kilka zespołów badawczych podwyższyło swoje cele cenowe po ogłoszeniu wyników, ze średnim wzrostem o 8%.',
       'Wskaźniki jakości kredytów pozostają obszarem ściśle monitorowanym, chociaż obecne poziomy są postrzegane jako możliwe do zarządzania i odpowiednio zabezpieczone.'
     ],
-    premium: true
+    reportSummary: {
+      text: 'JPMorgan Chase osiągnął rekordowe wyniki w trzecim kwartale 2024 roku, z solidnym wzrostem przychodów i zysków we wszystkich segmentach biznesowych. Bank wykazuje silną odporność na niepewność gospodarczą dzięki zdywersyfikowanemu modelowi biznesowemu i skutecznemu zarządzaniu ryzykiem.',
+      sentiment: 'positive'
+    }
   },
   {
     id: 'paypal-q3-2024',
@@ -323,6 +331,10 @@ export const financialReports: FinancialReport[] = [
         max: 4.3,
         unit: 'USD'
       }
+    },
+    reportSummary: {
+      text: 'PayPal kontynuuje silny wzrost, z wynikami przekraczającymi oczekiwania analityków w trzecim kwartale 2024 roku. Firma skutecznie zwiększa bazę użytkowników i poprawia marże, jednocześnie inwestując w technologie AI dla dalszego rozwoju. Podniesienie prognozy na cały rok odzwierciedla rosnące zaufanie zarządu do modelu biznesowego i strategii firmy.',
+      sentiment: 'positive'
     }
   },
   {
@@ -545,11 +557,6 @@ export const financialReports: FinancialReport[] = [
         min: 90.0,
         max: 93.0,
         unit: 'B USD'
-      },
-      guidanceEps: {
-        min: 1.48,
-        max: 1.52,
-        unit: 'USD'
       }
     },
     analystReactions: [

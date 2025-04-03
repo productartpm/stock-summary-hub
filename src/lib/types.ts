@@ -36,3 +36,8 @@ export interface StockData {
   averageDailyVolume: number;
   volatility: number;
 }
+
+export interface ReportSummary {
+  text: string;
+  sentiment: 'positive' | 'neutral' | 'negative';
+}
