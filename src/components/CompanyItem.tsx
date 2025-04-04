@@ -37,25 +37,25 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     <div 
       onClick={onClick}
       className={cn(
-        "p-3 sm:p-4 mb-3 rounded-xl transition-all duration-300 cursor-pointer",
+        "p-2 sm:p-3 mb-2 sm:mb-3 rounded-lg transition-all duration-300 cursor-pointer",
         "hover:bg-secondary/80 border border-border/40 hover:border-border",
         "transform hover:-translate-y-1 hover:shadow-lg",
         isSelected ? "bg-secondary border-primary/20" : "bg-card hover:bg-secondary/80"
       )}
     >
       {/* Date and time first */}
-      <div className="text-xs text-muted-foreground mb-2">
+      <div className="text-xs text-muted-foreground mb-1 sm:mb-2">
         {formatDate(report.publicationDate)}
       </div>
 
       {/* Report Title */}
-      <div className="flex items-center mb-3">
-        <FileText className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
-        <h4 className="font-semibold text-sm line-clamp-1">{report.title}</h4>
+      <div className="flex items-center mb-2 sm:mb-3">
+        <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-primary mr-1 sm:mr-2 flex-shrink-0" />
+        <h4 className="font-semibold text-xs sm:text-sm line-clamp-1">{report.title}</h4>
       </div>
 
-      <div className="flex items-center space-x-2 sm:space-x-4">
-        <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-secondary/50 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
+      <div className="flex items-center space-x-2">
+        <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-secondary/50 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-secondary/80 animate-pulse rounded-lg"></div>
           )}
@@ -63,7 +63,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-7 h-7 sm:w-8 sm:h-8 object-contain transition-opacity duration-300",
+              "w-5 h-5 sm:w-7 sm:h-7 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
@@ -72,15 +72,15 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start">
             <div className="min-w-0">
-              <h3 className="font-medium truncate pr-2">{report.companyName}</h3>
-              <div className="flex items-center text-xs text-muted-foreground space-x-2 flex-wrap">
+              <h3 className="font-medium text-sm sm:text-base truncate pr-2">{report.companyName}</h3>
+              <div className="flex items-center text-xs text-muted-foreground space-x-1 sm:space-x-2 flex-wrap">
                 <span className="whitespace-nowrap">{report.ticker}</span>
                 <span className="h-1 w-1 rounded-full bg-muted-foreground/40 hidden sm:block"></span>
-                <span className="whitespace-nowrap">{report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'} {report.quarterOrYear}</span>
+                <span className="text-[10px] sm:text-xs whitespace-nowrap">{report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'} {report.quarterOrYear}</span>
               </div>
             </div>
             <div className={cn(
-              "text-xs px-2 py-1 rounded-full flex-shrink-0 ml-1",
+              "text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full flex-shrink-0 ml-1",
               isSelected ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"
             )}>
               {report.financialPeriod}
@@ -88,21 +88,21 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
           </div>
           
           {/* Report categories */}
-          <div className="mt-2 flex flex-wrap gap-1">
+          <div className="mt-1 sm:mt-2 flex flex-wrap gap-1">
             {report.category && (
               <Badge 
                 key="main-category"
                 variant={isSelected ? "default" : "secondary"}
-                className="text-[10px] py-0 h-5 flex items-center gap-1"
+                className="text-[10px] py-0 h-4 sm:h-5 flex items-center gap-1"
               >
-                <Tag className="h-3 w-3" />
+                <Tag className="h-2 w-2 sm:h-3 sm:w-3" />
                 {report.category}
               </Badge>
             )}
           </div>
           
           {/* One sentence summary */}
-          <div className="mt-2 text-sm line-clamp-2">
+          <div className="mt-1 sm:mt-2 text-xs sm:text-sm line-clamp-2">
             {generateSummary(report)}
           </div>
         </div>

@@ -24,12 +24,13 @@ interface ReportDetailProps {
   report: FinancialReport | null;
   onShare: () => void;
   user: User | null;
+  onBackToList?: () => void;
 }
 
 // Lista raportów, które nie wymagają premium (oprócz tych, które już mają premium: false)
 const nonPremiumReportIds = ['paypal-q3-2024', 'jpmorgan-q3-2024', 'columbus-energy-q3-2024'];
 
-const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
+const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps) => {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState('financial-data');
 
@@ -49,7 +50,7 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
     return (
       <Tabs defaultValue="financial-data" value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="mb-4 bg-neutral-800 p-1 rounded-md">
-          <TabsList className="grid grid-cols-4 w-full bg-transparent">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full bg-transparent">
             <TabsTrigger value="financial-data" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
               1. Dane Finansowe
             </TabsTrigger>
@@ -64,7 +65,7 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
             </TabsTrigger>
           </TabsList>
           
-          <TabsList className="grid grid-cols-3 w-full mt-1 bg-transparent">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-3 w-full mt-1 bg-transparent">
             <TabsTrigger value="predictions" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
               5. Predykcje Finansowe
             </TabsTrigger>
@@ -111,7 +112,7 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   const renderContent = () => {
     return (
       <>
-        <ReportHeader report={report} onShare={onShare} />
+        <ReportHeader report={report} onShare={onShare} onBackToList={onBackToList} />
         <ReportSummaryMetrics report={report} />
         {renderTabbedContent()}
       </>
@@ -119,7 +120,7 @@ const ReportDetail = ({ report, onShare, user }: ReportDetailProps) => {
   };
 
   return (
-    <div className="p-6 md:p-8 overflow-y-auto h-full bg-neutral-100">
+    <div className="p-4 md:p-8 overflow-y-auto h-full bg-neutral-100">
       <div className="max-w-4xl mx-auto">
         {report.premium && !isNonPremium ? (
           <PremiumContent 

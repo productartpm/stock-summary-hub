@@ -6,6 +6,8 @@ import ReportDetail from "@/components/ReportDetail";
 import { type FinancialReport } from "@/lib/data";
 import { useAuth } from "@/hooks/useAuth";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 
 const Index = () => {
   const [selectedReport, setSelectedReport] = useState<FinancialReport | null>(null);
@@ -53,7 +55,7 @@ const Index = () => {
           )}
           
           {/* Show report detail if a report is selected, or on desktop view */}
-          {((selectedReport && !showListOnMobile) || !isMobile) && (
+          {((selectedReport && !showListOnMobile) || (!isMobile && selectedReport)) && (
             <div className="w-full md:w-2/3 lg:w-3/5 overflow-hidden bg-muted/20">
               <ReportDetail 
                 report={selectedReport} 
@@ -61,6 +63,16 @@ const Index = () => {
                 user={user}
                 onBackToList={isMobile ? handleBackToList : undefined}
               />
+            </div>
+          )}
+
+          {/* Show empty state if no report is selected on desktop */}
+          {!selectedReport && !isMobile && (
+            <div className="w-full md:w-2/3 lg:w-3/5 overflow-hidden bg-muted/20 flex items-center justify-center">
+              <div className="text-center p-8">
+                <h2 className="text-xl font-semibold mb-2">Wybierz raport z listy</h2>
+                <p className="text-muted-foreground">Zapoznaj się ze szczegółowymi analizami raportów finansowych</p>
+              </div>
             </div>
           )}
         </div>

@@ -54,11 +54,12 @@ const FinancialReportsList = ({
       );
     }
     
-    // Filter by search query (ticker)
+    // Filter by search query (ticker or company name)
     if (searchQuery.trim() !== '') {
       const query = searchQuery.toLowerCase();
       results = results.filter(report => 
-        report.ticker.toLowerCase().includes(query)
+        report.ticker.toLowerCase().includes(query) ||
+        report.companyName.toLowerCase().includes(query)
       );
     }
     
@@ -73,7 +74,7 @@ const FinancialReportsList = ({
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
               className="pl-10"
-              placeholder="Szukaj po symbolu..."
+              placeholder="Szukaj po symbolu lub nazwie..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -88,9 +89,9 @@ const FinancialReportsList = ({
             className="w-auto"
           >
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="all" className="px-2 sm:px-3">Wszystkie</TabsTrigger>
-              <TabsTrigger value="quarterly" className="px-2 sm:px-3">Kwartalne</TabsTrigger>
-              <TabsTrigger value="annual" className="px-2 sm:px-3">Roczne</TabsTrigger>
+              <TabsTrigger value="all" className="text-xs sm:text-sm px-2 sm:px-3">Wszystkie</TabsTrigger>
+              <TabsTrigger value="quarterly" className="text-xs sm:text-sm px-2 sm:px-3">Kwartalne</TabsTrigger>
+              <TabsTrigger value="annual" className="text-xs sm:text-sm px-2 sm:px-3">Roczne</TabsTrigger>
             </TabsList>
           </Tabs>
 
@@ -164,7 +165,7 @@ const FinancialReportsList = ({
             <p>Nie znaleziono raportów. Spróbuj dostosować filtry.</p>
           </div>
         ) : (
-          <ul className="divide-y divide-border p-3 sm:p-0">
+          <ul className="divide-y divide-border p-2 sm:p-3">
             {filteredReports.map((report) => (
               <li key={report.id} className="hover:bg-muted/50">
                 <CompanyItem 
