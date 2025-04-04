@@ -1,22 +1,19 @@
-
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { CreditCard, Search, ChevronRight, Lock, Filter } from 'lucide-react';
+import { Search, Filter } from 'lucide-react';
 import { financialReports, type FinancialReport, reportCategories } from '@/lib/data';
 import CompanyItem from '@/components/CompanyItem';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Select, 
-  SelectContent, 
-  SelectGroup, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useIsMobile } from '@/hooks/use-mobile';
+
+const polishCompanies = [
+  'PKO BP', 'Bank Pekao', 'KGHM', 'JSW', 'Orlen', 'PZU', 'Cyfrowy Polsat', 
+  'Santander Bank Polska', 'Orange Polska', 'PGE', 'Alior Bank', 'Dino', 
+  'LPP', 'Allegro', 'CD Projekt', 'mBank', 'PGNiG', 'Tauron', 'Lotos'
+];
 
 interface FinancialReportsListProps {
   onSelectReport: (report: FinancialReport) => void;
@@ -29,6 +26,10 @@ const FinancialReportsList = ({
   selectedReportId,
   reports = financialReports
 }: FinancialReportsListProps) => {
+  const polishReports = reports.filter(report => 
+    polishCompanies.some(company => report.companyName.includes(company))
+  );
+  
   const [filterType, setFilterType] = useState<string>('all');
   const [filterCategory, setFilterCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,25 +37,21 @@ const FinancialReportsList = ({
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
   const isMobile = useIsMobile();
 
-  // Apply filters when dependencies change
   useEffect(() => {
-    let results = [...reports];
+    let results = [...polishReports];
     
-    // Filter by report type
     if (filterType !== 'all') {
       results = results.filter(report => 
         report.reportType.toLowerCase() === filterType.toLowerCase()
       );
     }
     
-    // Filter by category
     if (filterCategory !== 'all') {
       results = results.filter(report => 
         report.category === filterCategory
       );
     }
     
-    // Filter by search query (ticker or company name)
     if (searchQuery.trim() !== '') {
       const query = searchQuery.toLowerCase();
       results = results.filter(report => 
@@ -64,7 +61,7 @@ const FinancialReportsList = ({
     }
     
     setFilteredReports(results);
-  }, [filterType, filterCategory, searchQuery, reports]);
+  }, [filterType, filterCategory, searchQuery, polishReports]);
 
   return (
     <div className="h-full flex flex-col">
