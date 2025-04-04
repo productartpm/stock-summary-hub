@@ -40,5 +40,44 @@ export const telecomReports: FinancialReport[] = [
       'Inwestycje w rozbudowę sieci 5G wyniosły 0,4 mld PLN w I kwartale'
     ],
     premium: false
+  },
+  {
+    id: 'cyfrowy-polsat-q4-2024',
+    companyName: 'Cyfrowy Polsat',
+    ticker: 'CPS.WA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Polsat_2021.svg/1200px-Polsat_2021.svg.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q4 2024',
+    publicationDate: '2025-03-21',
+    reportDate: '2025-03-21',
+    title: 'Cyfrowy Polsat - Skonsolidowane wyniki za IV kwartał 2024',
+    reportCategory: ['Telecommunications', 'Media', 'Entertainment', 'Pay TV'],
+    category: 'Wyniki',
+    financialPeriod: 'Q4 2024',
+    summaryData: {
+      revenue: { value: 3.45, change: 2.1, unit: 'B PLN' },
+      operatingProfit: { value: 0.56, change: -3.4, unit: 'B PLN' },
+      netIncome: { value: 0.31, change: -8.2, unit: 'B PLN' },
+      eps: { value: 0.49, change: -8.2, unit: 'PLN' },
+      ebitda: { value: 0.98, change: -1.5, unit: 'B PLN' }
+    },
+    stockData: {
+      currentPrice: 14 + Math.random() * 4,
+      priceChange: (Math.random() * 0.8) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: -3 + (Math.random() * 12),
+      low52Week: 12 + Math.random() * 2,
+      high52Week: 21 + Math.random() * 3,
+      sharesOutstanding: 640 + Math.random() * 15,
+      averageDailyVolume: 350000 + Math.random() * 200000,
+      volatility: 1.2 + Math.random() * 0.4
+    },
+    keyHighlights: [
+      'Łączna liczba klientów usług multiplay przekroczyła 2,5 mln',
+      'Spadek wskaźnika odejść klientów (churn) do poziomu 7,2% rocznie',
+      'Średni przychód na użytkownika (ARPU) wzrósł o 3,1% do 70,8 PLN',
+      'Zakończenie wdrażania sieci 5G na częstotliwości 2600 MHz',
+      'Wzrost zadłużenia netto związany z inwestycjami w infrastrukturę i akwizycjami'
+    ],
+    premium: true
   }
 ];

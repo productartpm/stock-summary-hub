@@ -5,6 +5,7 @@ import type { FinancialReport } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Tag, FileText } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface CompanyItemProps {
   report: FinancialReport;
@@ -14,6 +15,7 @@ interface CompanyItemProps {
 
 const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const isMobile = useIsMobile();
   
   // Generate a one-sentence summary based on the report data
   const generateSummary = (report: FinancialReport): string => {
@@ -35,7 +37,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     <div 
       onClick={onClick}
       className={cn(
-        "p-4 mb-3 rounded-xl transition-all duration-300 cursor-pointer",
+        "p-3 sm:p-4 mb-3 rounded-xl transition-all duration-300 cursor-pointer",
         "hover:bg-secondary/80 border border-border/40 hover:border-border",
         "transform hover:-translate-y-1 hover:shadow-lg",
         isSelected ? "bg-secondary border-primary/20" : "bg-card hover:bg-secondary/80"
@@ -48,12 +50,12 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
 
       {/* Report Title */}
       <div className="flex items-center mb-3">
-        <FileText className="h-4 w-4 text-primary mr-2" />
-        <h4 className="font-semibold text-sm">{report.title}</h4>
+        <FileText className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
+        <h4 className="font-semibold text-sm line-clamp-1">{report.title}</h4>
       </div>
 
-      <div className="flex items-center space-x-4">
-        <div className="relative w-12 h-12 bg-secondary/50 rounded-lg overflow-hidden flex items-center justify-center">
+      <div className="flex items-center space-x-2 sm:space-x-4">
+        <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-secondary/50 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-secondary/80 animate-pulse rounded-lg"></div>
           )}
@@ -61,7 +63,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-8 h-8 object-contain transition-opacity duration-300",
+              "w-7 h-7 sm:w-8 sm:h-8 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
@@ -69,16 +71,16 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start">
-            <div>
+            <div className="min-w-0">
               <h3 className="font-medium truncate pr-2">{report.companyName}</h3>
-              <div className="flex items-center text-xs text-muted-foreground space-x-2">
-                <span>{report.ticker}</span>
-                <span className="h-1 w-1 rounded-full bg-muted-foreground/40"></span>
-                <span>{report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'} {report.quarterOrYear}</span>
+              <div className="flex items-center text-xs text-muted-foreground space-x-2 flex-wrap">
+                <span className="whitespace-nowrap">{report.ticker}</span>
+                <span className="h-1 w-1 rounded-full bg-muted-foreground/40 hidden sm:block"></span>
+                <span className="whitespace-nowrap">{report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'} {report.quarterOrYear}</span>
               </div>
             </div>
             <div className={cn(
-              "text-xs px-2 py-1 rounded-full",
+              "text-xs px-2 py-1 rounded-full flex-shrink-0 ml-1",
               isSelected ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"
             )}>
               {report.financialPeriod}

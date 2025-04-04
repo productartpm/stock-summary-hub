@@ -40,5 +40,44 @@ export const miningReports: FinancialReport[] = [
       'Inwestycje w projekty związane z transformacją energetyczną wyniosły 0,6 mld PLN'
     ],
     premium: false
+  },
+  {
+    id: 'jsw-q1-2025',
+    companyName: 'Jastrzębska Spółka Węglowa',
+    ticker: 'JSW.WA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/JSW_SA_logo.svg/1280px-JSW_SA_logo.svg.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q1 2025',
+    publicationDate: '2025-05-23',
+    reportDate: '2025-05-23',
+    title: 'JSW - Wyniki finansowe za I kwartał 2025',
+    reportCategory: ['Mining', 'Coal', 'Coke', 'Steel'],
+    category: 'Wyniki',
+    financialPeriod: 'Q1 2025',
+    summaryData: {
+      revenue: { value: 2.85, change: -8.2, unit: 'B PLN' },
+      operatingProfit: { value: 0.32, change: -42.1, unit: 'B PLN' },
+      netIncome: { value: 0.24, change: -51.3, unit: 'B PLN' },
+      eps: { value: 2.04, change: -51.3, unit: 'PLN' },
+      ebitda: { value: 0.68, change: -35.6, unit: 'B PLN' }
+    },
+    stockData: {
+      currentPrice: 32 + Math.random() * 15,
+      priceChange: (Math.random() * 4) * (Math.random() > 0.6 ? 1 : -1),
+      yearToDateChange: -18 + (Math.random() * 25),
+      low52Week: 28 + Math.random() * 8,
+      high52Week: 75 + Math.random() * 15,
+      sharesOutstanding: 117 + Math.random() * 3,
+      averageDailyVolume: 450000 + Math.random() * 200000,
+      volatility: 2.1 + Math.random() * 0.6
+    },
+    keyHighlights: [
+      'Spadek średnich cen węgla koksowego o 18% rok do roku',
+      'Wzrost produkcji węgla o 4,2% do 3,6 mln ton',
+      'Redukcja nakładów inwestycyjnych o 12% w porównaniu do analogicznego okresu poprzedniego roku',
+      'Spadek zadłużenia netto o 15,3%',
+      'Wdrożenie programu optymalizacji kosztów operacyjnych w odpowiedzi na niższe ceny surowców'
+    ],
+    premium: true
   }
 ];

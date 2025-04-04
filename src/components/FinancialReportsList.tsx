@@ -16,6 +16,7 @@ import {
   SelectValue 
 } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FinancialReportsListProps {
   onSelectReport: (report: FinancialReport) => void;
@@ -33,6 +34,7 @@ const FinancialReportsList = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredReports, setFilteredReports] = useState<FinancialReport[]>([]);
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+  const isMobile = useIsMobile();
 
   // Apply filters when dependencies change
   useEffect(() => {
@@ -65,7 +67,7 @@ const FinancialReportsList = ({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="p-4 border-b border-border/60">
+      <div className="p-3 sm:p-4 border-b border-border/60">
         <div className="mb-4">
           <div className="relative">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -78,17 +80,17 @@ const FinancialReportsList = ({
           </div>
         </div>
 
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3">
           <Tabs 
             defaultValue="all" 
             value={filterType} 
             onValueChange={setFilterType}
             className="w-auto"
           >
-            <TabsList>
-              <TabsTrigger value="all" className="px-3">Wszystkie</TabsTrigger>
-              <TabsTrigger value="quarterly" className="px-3">Kwartalne</TabsTrigger>
-              <TabsTrigger value="annual" className="px-3">Roczne</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="all" className="px-2 sm:px-3">Wszystkie</TabsTrigger>
+              <TabsTrigger value="quarterly" className="px-2 sm:px-3">Kwartalne</TabsTrigger>
+              <TabsTrigger value="annual" className="px-2 sm:px-3">Roczne</TabsTrigger>
             </TabsList>
           </Tabs>
 
@@ -96,8 +98,8 @@ const FinancialReportsList = ({
             <PopoverTrigger asChild>
               <Button 
                 variant="outline" 
-                size="sm" 
-                className="flex items-center"
+                size={isMobile ? "sm" : "default"}
+                className="flex items-center ml-auto mt-2 sm:mt-0"
                 onClick={() => setShowCategoryFilter(!showCategoryFilter)}
               >
                 <Filter className="h-4 w-4 mr-2" />
@@ -152,7 +154,7 @@ const FinancialReportsList = ({
 
       <div className="flex-1 overflow-y-auto">
         {searchQuery && (
-          <div className="px-4 py-2 bg-muted text-sm">
+          <div className="px-3 py-2 sm:px-4 bg-muted text-sm">
             Wyniki dla: <strong>{searchQuery}</strong>
           </div>
         )}
@@ -162,7 +164,7 @@ const FinancialReportsList = ({
             <p>Nie znaleziono raportów. Spróbuj dostosować filtry.</p>
           </div>
         ) : (
-          <ul className="divide-y divide-border">
+          <ul className="divide-y divide-border p-3 sm:p-0">
             {filteredReports.map((report) => (
               <li key={report.id} className="hover:bg-muted/50">
                 <CompanyItem 
