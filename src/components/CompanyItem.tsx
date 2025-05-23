@@ -19,21 +19,11 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   const generateSummary = (report: FinancialReport): string => {
     const revenueChange = report.summaryData.revenue.change;
     const incomeChange = report.summaryData.netIncome.change;
-    const changeDirection = revenueChange >= 0 ? 'zwiększyło' : 'odnotowało spadek';
-    const changeText = revenueChange >= 0 ? `+${revenueChange.toFixed(2)}%` : `${revenueChange.toFixed(2)}%`;
     
-    let trendDescription = '';
-    if (revenueChange >= 5) {
-      trendDescription = 'Znaczący wzrost świadczy o skutecznej strategii rozwoju.';
-    } else if (revenueChange >= 0) {
-      trendDescription = 'Umiarkowany wzrost wskazuje na stabilną pozycję rynkową.';
-    } else if (revenueChange >= -5) {
-      trendDescription = 'Spadek może wskazywać na przejściowe trudności.';
-    } else {
-      trendDescription = 'Znaczący spadek wymaga szczególnej uwagi.';
-    }
+    const revenueText = `Przychody: ${revenueChange >= 0 ? '+' : ''}${revenueChange.toFixed(2)}%`;
+    const incomeText = `Zysk netto: ${incomeChange >= 0 ? '+' : ''}${incomeChange.toFixed(2)}%`;
     
-    return `${report.companyName} ${changeDirection} przychodów o ${changeText}. ${trendDescription} Zysk netto ${incomeChange >= 0 ? 'wzrósł' : 'spadł'} o ${incomeChange >= 0 ? '+' : ''}${incomeChange.toFixed(2)}%.`;
+    return `${revenueText}, ${incomeText}`;
   };
 
   const generateDescriptionLines = (report: FinancialReport): string[] => {
@@ -103,7 +93,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
 
       <div className="flex gap-3">
         {/* Logo - większy */}
-        <div className="relative w-14 h-14 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
+        <div className="relative w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-slate-200 dark:bg-slate-600 animate-pulse rounded-lg"></div>
           )}
@@ -111,7 +101,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-8 h-8 object-contain transition-opacity duration-300",
+              "w-10 h-10 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
