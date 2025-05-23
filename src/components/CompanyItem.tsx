@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { formatDate } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
@@ -32,7 +31,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     }
   };
 
-  const getPerformanceIndicator = () => {
+  const getPerformanceIndicator = (report: FinancialReport) => {
     const revenueChange = report.summaryData.revenue.change;
     if (revenueChange > 5) {
       return <TrendingUp className="h-4 w-4 text-emerald-500" />;
@@ -46,7 +45,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     <div 
       onClick={onClick}
       className={cn(
-        "p-4 rounded-xl transition-all duration-300 cursor-pointer border",
+        "p-5 rounded-xl transition-all duration-300 cursor-pointer border",
         "hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50",
         isSelected 
           ? "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 shadow-md" 
@@ -54,14 +53,14 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
       )}
     >
       {/* Header section with date and report type */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+      <div className="flex items-center justify-between mb-4">
+        <div className="text-sm text-slate-500 dark:text-slate-400 font-medium">
           {formatDate(report.publicationDate)}
         </div>
         <div className="flex items-center gap-2">
-          {getPerformanceIndicator()}
+          {getPerformanceIndicator(report)}
           <div className={cn(
-            "text-xs px-2 py-1 rounded-full font-medium",
+            "text-sm px-3 py-1 rounded-full font-medium",
             isSelected 
               ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300" 
               : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300"
@@ -72,9 +71,9 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
       </div>
 
       {/* Main content section */}
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-4">
         {/* Company logo */}
-        <div className="relative w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
+        <div className="relative w-14 h-14 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-slate-200 dark:bg-slate-600 animate-pulse rounded-lg"></div>
           )}
@@ -82,7 +81,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-8 h-8 object-contain transition-opacity duration-300",
+              "w-10 h-10 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
@@ -91,49 +90,49 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
 
         {/* Company info */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="font-semibold text-slate-900 dark:text-slate-100 truncate">
+          <div className="flex items-center gap-3 mb-2">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 truncate">
               {report.companyName}
             </h3>
-            <span className="text-sm text-slate-500 dark:text-slate-400 font-mono">
+            <span className="text-base text-slate-500 dark:text-slate-400 font-mono font-medium">
               {report.ticker}
             </span>
           </div>
           
-          <div className="flex items-center gap-2 mb-2">
-            <FileText className="h-3 w-3 text-slate-400" />
-            <span className="text-sm text-slate-600 dark:text-slate-300 line-clamp-1">
+          <div className="flex items-center gap-2 mb-3">
+            <FileText className="h-4 w-4 text-slate-400" />
+            <span className="text-base font-medium text-slate-700 dark:text-slate-200 line-clamp-2 leading-relaxed">
               {report.title}
             </span>
           </div>
 
           {/* Financial period and category */}
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">
               {report.financialPeriod} • {report.quarterOrYear}
             </span>
             {report.category && (
               <Badge 
                 variant={isSelected ? "default" : "secondary"}
-                className="text-xs h-5 flex items-center gap-1"
+                className="text-sm h-6 flex items-center gap-1 px-3"
               >
-                <Tag className="h-2 w-2" />
+                <Tag className="h-3 w-3" />
                 {report.category}
               </Badge>
             )}
           </div>
           
           {/* Summary */}
-          <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mb-4">
             {generateSummary(report)}
           </p>
 
           {/* Performance metrics */}
-          <div className="flex items-center gap-4 mt-3 pt-2 border-t border-slate-100 dark:border-slate-700">
-            <div className="text-xs">
-              <span className="text-slate-500 dark:text-slate-400">Przychody: </span>
+          <div className="flex items-center gap-6 pt-3 border-t border-slate-100 dark:border-slate-700">
+            <div className="text-sm">
+              <span className="text-slate-500 dark:text-slate-400 font-medium">Przychody: </span>
               <span className={cn(
-                "font-medium",
+                "font-bold text-base",
                 report.summaryData.revenue.change > 0 
                   ? "text-emerald-600 dark:text-emerald-400" 
                   : "text-red-600 dark:text-red-400"
@@ -141,10 +140,10 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
                 {report.summaryData.revenue.change > 0 ? '+' : ''}{report.summaryData.revenue.change}%
               </span>
             </div>
-            <div className="text-xs">
-              <span className="text-slate-500 dark:text-slate-400">Zysk netto: </span>
+            <div className="text-sm">
+              <span className="text-slate-500 dark:text-slate-400 font-medium">Zysk netto: </span>
               <span className={cn(
-                "font-medium",
+                "font-bold text-base",
                 report.summaryData.netIncome.change > 0 
                   ? "text-emerald-600 dark:text-emerald-400" 
                   : "text-red-600 dark:text-red-400"
@@ -157,6 +156,31 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
       </div>
     </div>
   );
+};
+
+const generateSummary = (report: FinancialReport): string => {
+  const revenueChange = report.summaryData.revenue.change;
+  const incomeChange = report.summaryData.netIncome.change;
+  
+  if (revenueChange > 0 && incomeChange > 0) {
+    return `Silny wzrost z przychodami wyższymi o ${report.summaryData.revenue.change}% i zyskiem netto wyższym o ${report.summaryData.netIncome.change}%.`;
+  } else if (revenueChange < 0 && incomeChange < 0) {
+    return `Wyzwania z przychodami niższymi o ${Math.abs(report.summaryData.revenue.change)}% i zyskiem netto niższym o ${Math.abs(report.summaryData.netIncome.change)}%.`;
+  } else if (revenueChange > 0) {
+    return `Wzrost przychodów o ${report.summaryData.revenue.change}% pomimo ${incomeChange >= 0 ? 'zmian' : 'spadku'} w zysku netto.`;
+  } else {
+    return `${revenueChange >= 0 ? 'Stabilne' : 'Malejące'} przychody z ${incomeChange >= 0 ? 'poprawioną' : 'zmniejszoną'} rentownością.`;
+  }
+};
+
+const getPerformanceIndicator = (report: FinancialReport) => {
+  const revenueChange = report.summaryData.revenue.change;
+  if (revenueChange > 5) {
+    return <TrendingUp className="h-4 w-4 text-emerald-500" />;
+  } else if (revenueChange < -5) {
+    return <TrendingDown className="h-4 w-4 text-red-500" />;
+  }
+  return null;
 };
 
 export default CompanyItem;
