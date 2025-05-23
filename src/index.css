@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 60 33% 98%;
-    --foreground: 0 0% 12%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 12%;
+    --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 12%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 12%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 60 20% 96%;
-    --secondary-foreground: 0 0% 12%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
 
-    --muted: 60 20% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 45 100% 80%;
-    --accent-foreground: 0 0% 12%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
 
-    --destructive: 0 80% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 45 100% 60%;
-    --input: 45 100% 80%;
-    --ring: 45 100% 50%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 12%;
-    --foreground: 45 100% 96%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 16%;
-    --card-foreground: 45 100% 96%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 16%;
-    --popover-foreground: 45 100% 96%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 12%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
 
-    --secondary: 0 0% 20%;
-    --secondary-foreground: 45 100% 96%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 0 0% 20%;
-    --muted-foreground: 45 80% 80%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 45 100% 40%;
-    --accent-foreground: 0 0% 12%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 60% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 45 100% 40%;
-    --input: 0 0% 20%;
-    --ring: 45 100% 50%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
   }
 }
 
@@ -78,57 +78,65 @@
 
   /* Customizing scrollbars */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-neutral-300;
+    @apply bg-muted;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-500 rounded-full transition-colors;
+    @apply bg-muted-foreground/30 rounded-full transition-colors;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-neutral-700;
+    @apply bg-muted-foreground/50;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/80 dark:bg-black/80 backdrop-blur-md border border-amber-400/40 dark:border-amber-400/20;
+    @apply bg-white/90 dark:bg-black/90 backdrop-blur-md border border-border/50;
   }
   
   .finance-card {
-    @apply bg-neutral-800 text-white border border-amber-400 rounded-lg shadow-md hover:shadow-amber-400/10 transition-all;
+    @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-200;
   }
   
   .finance-title {
-    @apply text-amber-300 font-semibold;
+    @apply text-primary font-semibold;
   }
   
   .finance-value-positive {
-    @apply text-green-400 font-medium;
+    @apply text-green-600 dark:text-green-400 font-medium;
   }
   
   .finance-value-negative {
-    @apply text-red-400 font-medium;
+    @apply text-red-600 dark:text-red-400 font-medium;
   }
   
   .finance-value-neutral {
-    @apply text-amber-300 font-medium;
+    @apply text-muted-foreground font-medium;
   }
   
   .finance-tab {
-    @apply bg-neutral-800 text-amber-300 data-[state=active]:bg-amber-400 data-[state=active]:text-black;
+    @apply bg-muted text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground;
   }
   
   .finance-timeline-item {
-    @apply relative pl-8 pb-5 before:absolute before:left-2.5 before:top-2 before:h-full before:w-0.5 before:bg-amber-400/30;
+    @apply relative pl-8 pb-6 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-border;
   }
   
   .finance-marker {
-    @apply absolute left-0 top-1 h-5 w-5 rounded-full bg-amber-400 text-black flex items-center justify-center;
+    @apply absolute left-0 top-1 h-6 w-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium;
+  }
+  
+  .list-item-hover {
+    @apply hover:bg-muted/50 transition-colors duration-150 cursor-pointer;
+  }
+  
+  .active-item {
+    @apply bg-primary/10 border-l-4 border-l-primary;
   }
 }
