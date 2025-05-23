@@ -10,6 +10,7 @@ import { ReportRisks } from './report/ReportRisks';
 import { ReportTechnicalAnalysis } from './report/ReportTechnicalAnalysis';
 import { ReportFinancialData } from './report/ReportFinancialData';
 import { ReportHeader } from './report/ReportHeader';
+import { ReportHighlights } from './report/ReportHighlights';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useState } from 'react';
 
@@ -45,19 +46,20 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
         <div className="mb-4 bg-neutral-100 p-1 rounded-md">
           <TabsList className="grid grid-cols-3 w-full bg-transparent">
             <TabsTrigger value="financial-data" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              1. Dane Finansowe
+              Dane Finansowe & Komentarze
             </TabsTrigger>
             <TabsTrigger value="risks" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              2. Ryzyka
+              Ryzyka
             </TabsTrigger>
             <TabsTrigger value="technical" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              3. Analiza Techniczna
+              Analiza Techniczna
             </TabsTrigger>
           </TabsList>
         </div>
 
         <TabsContent value="financial-data" className="space-y-4">
           <ReportFinancialData report={report} />
+          <ReportHighlights report={report} />
         </TabsContent>
 
         <TabsContent value="risks" className="space-y-4">
