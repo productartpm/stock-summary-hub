@@ -32,6 +32,17 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     }
   };
 
+  const generateDescriptionLines = (report: FinancialReport): string[] => {
+    const revenueChange = report.summaryData.revenue.change;
+    const incomeChange = report.summaryData.netIncome.change;
+    
+    return [
+      `Przychody: ${revenueChange > 0 ? '+' : ''}${revenueChange.toFixed(1)}% względem poprzedniego okresu`,
+      `Zysk netto: ${incomeChange > 0 ? '+' : ''}${incomeChange.toFixed(1)}% w porównaniu rok do roku`,
+      `Sektor: ${report.category || 'Różne'} • Okres: ${report.financialPeriod} ${report.quarterOrYear}`
+    ];
+  };
+
   const formatDateTime = (dateString: string): { date: string, time: string } => {
     const date = new Date(dateString);
     return {
@@ -53,6 +64,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   };
 
   const { date, time } = formatDateTime(report.publicationDate);
+  const descriptionLines = generateDescriptionLines(report);
 
   return (
     <div 
@@ -138,10 +150,14 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             )}
           </div>
           
-          {/* Skrócony opis */}
-          <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
-            {generateSummary(report)}
-          </p>
+          {/* 3 linijki opisu */}
+          <div className="space-y-1">
+            {descriptionLines.map((line, index) => (
+              <p key={index} className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </div>
