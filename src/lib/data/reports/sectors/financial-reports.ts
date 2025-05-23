@@ -18,9 +18,9 @@ export const financialReports: FinancialReport[] = [
     summaryData: {
       revenue: { value: 3.8, change: 12.1, unit: 'B PLN' },
       netInterestIncome: { value: 2.85, change: 10.2, unit: 'B PLN' },
-      netIncome: { value: 1.32, change: 15.8, unit: 'B PLN' },
-      eps: { value: 12.92, change: 15.8, unit: 'PLN' },
-      roe: { value: 12.4, change: 1.5, unit: '%' },
+      netIncome: { value: -1.32, change: -15.8, unit: 'B PLN' },
+      eps: { value: -12.92, change: -15.8, unit: 'PLN' },
+      roe: { value: -12.4, change: -1.5, unit: '%' },
       operatingProfit: { value: 1.9, change: 14.2, unit: 'B PLN' }
     },
     stockData: {
