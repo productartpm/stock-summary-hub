@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -62,7 +61,6 @@ const FinancialReportsList = ({
       );
     }
     
-    // Enhanced sorting options
     results.sort((a, b) => {
       switch (sortBy) {
         case 'date':
@@ -331,29 +329,24 @@ const FinancialReportsList = ({
             )}
           </div>
         ) : (
-          <div className="divide-y divide-slate-200 dark:divide-slate-700">
-            {filteredReports.map((report, index) => (
+          <div className="p-3 space-y-2">
+            {filteredReports.map((report) => (
               <div
                 key={report.id}
-                className={`relative transition-colors duration-150 ${
+                className={`relative transition-all duration-200 hover:transform hover:scale-[1.01] ${
                   selectedReportId === report.id 
-                    ? 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-l-blue-500' 
-                    : 'hover:bg-white dark:hover:bg-slate-800 cursor-pointer'
+                    ? 'ring-2 ring-blue-500 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-900' 
+                    : ''
                 }`}
               >
-                <div className="absolute left-4 top-4 flex items-center gap-2 z-10">
-                  <div className="bg-slate-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
-                    {index + 1}
-                  </div>
+                <div className="absolute top-3 right-3 z-10">
                   {getReportIcon(report)}
                 </div>
-                <div className="pl-16">
-                  <CompanyItem 
-                    report={report} 
-                    isSelected={selectedReportId === report.id}
-                    onClick={() => onSelectReport(report)}
-                  />
-                </div>
+                <CompanyItem 
+                  report={report} 
+                  isSelected={selectedReportId === report.id}
+                  onClick={() => onSelectReport(report)}
+                />
               </div>
             ))}
           </div>

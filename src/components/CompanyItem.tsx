@@ -4,7 +4,7 @@ import { formatDate } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { Tag, FileText } from 'lucide-react';
+import { Tag, FileText, TrendingUp, TrendingDown } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface CompanyItemProps {
@@ -17,93 +17,141 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
   
-  // Generate a one-sentence summary based on the report data
   const generateSummary = (report: FinancialReport): string => {
     const revenueChange = report.summaryData.revenue.change;
     const incomeChange = report.summaryData.netIncome.change;
     
     if (revenueChange > 0 && incomeChange > 0) {
-      return `${report.companyName} zaraportowała silny wzrost z przychodami wyższymi o ${report.summaryData.revenue.change}% i zyskiem netto wyższym o ${report.summaryData.netIncome.change}%.`;
+      return `Silny wzrost z przychodami wyższymi o ${report.summaryData.revenue.change}% i zyskiem netto wyższym o ${report.summaryData.netIncome.change}%.`;
     } else if (revenueChange < 0 && incomeChange < 0) {
-      return `${report.companyName} zaraportowała wyzwania z przychodami niższymi o ${Math.abs(report.summaryData.revenue.change)}% i zyskiem netto niższym o ${Math.abs(report.summaryData.netIncome.change)}%.`;
+      return `Wyzwania z przychodami niższymi o ${Math.abs(report.summaryData.revenue.change)}% i zyskiem netto niższym o ${Math.abs(report.summaryData.netIncome.change)}%.`;
     } else if (revenueChange > 0) {
-      return `${report.companyName} zaraportowała wzrost przychodów o ${report.summaryData.revenue.change}% pomimo ${incomeChange >= 0 ? 'zmian' : 'spadku'} w zysku netto.`;
+      return `Wzrost przychodów o ${report.summaryData.revenue.change}% pomimo ${incomeChange >= 0 ? 'zmian' : 'spadku'} w zysku netto.`;
     } else {
-      return `${report.companyName} zaraportowała ${revenueChange >= 0 ? 'stabilne' : 'malejące'} przychody z ${incomeChange >= 0 ? 'poprawioną' : 'zmniejszoną'} rentownością.`;
+      return `${revenueChange >= 0 ? 'Stabilne' : 'Malejące'} przychody z ${incomeChange >= 0 ? 'poprawioną' : 'zmniejszoną'} rentownością.`;
     }
+  };
+
+  const getPerformanceIndicator = () => {
+    const revenueChange = report.summaryData.revenue.change;
+    if (revenueChange > 5) {
+      return <TrendingUp className="h-4 w-4 text-emerald-500" />;
+    } else if (revenueChange < -5) {
+      return <TrendingDown className="h-4 w-4 text-red-500" />;
+    }
+    return null;
   };
 
   return (
     <div 
       onClick={onClick}
       className={cn(
-        "p-2 sm:p-3 mb-2 sm:mb-3 rounded-lg transition-all duration-300 cursor-pointer",
-        "hover:bg-secondary/80 border border-border/40 hover:border-border",
-        "transform hover:-translate-y-1 hover:shadow-lg",
-        isSelected ? "bg-secondary border-primary/20" : "bg-card hover:bg-secondary/80"
+        "p-4 rounded-xl transition-all duration-300 cursor-pointer border",
+        "hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50",
+        isSelected 
+          ? "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 shadow-md" 
+          : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750"
       )}
     >
-      {/* Date and time first */}
-      <div className="text-xs text-muted-foreground mb-1 sm:mb-2">
-        {formatDate(report.publicationDate)}
+      {/* Header section with date and report type */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+          {formatDate(report.publicationDate)}
+        </div>
+        <div className="flex items-center gap-2">
+          {getPerformanceIndicator()}
+          <div className={cn(
+            "text-xs px-2 py-1 rounded-full font-medium",
+            isSelected 
+              ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300" 
+              : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300"
+          )}>
+            {report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'}
+          </div>
+        </div>
       </div>
 
-      {/* Report Title */}
-      <div className="flex items-center mb-2 sm:mb-3">
-        <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-primary mr-1 sm:mr-2 flex-shrink-0" />
-        <h4 className="font-semibold text-xs sm:text-sm line-clamp-1">{report.title}</h4>
-      </div>
-
-      <div className="flex items-center space-x-2">
-        <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-secondary/50 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
+      {/* Main content section */}
+      <div className="flex items-start gap-3">
+        {/* Company logo */}
+        <div className="relative w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
-            <div className="absolute inset-0 bg-secondary/80 animate-pulse rounded-lg"></div>
+            <div className="absolute inset-0 bg-slate-200 dark:bg-slate-600 animate-pulse rounded-lg"></div>
           )}
           <img
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-5 h-5 sm:w-7 sm:h-7 object-contain transition-opacity duration-300",
+              "w-8 h-8 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
           />
         </div>
+
+        {/* Company info */}
         <div className="flex-1 min-w-0">
-          <div className="flex justify-between items-start">
-            <div className="min-w-0">
-              <h3 className="font-medium text-sm sm:text-base truncate pr-2">{report.companyName}</h3>
-              <div className="flex items-center text-xs text-muted-foreground space-x-1 sm:space-x-2 flex-wrap">
-                <span className="whitespace-nowrap">{report.ticker}</span>
-                <span className="h-1 w-1 rounded-full bg-muted-foreground/40 hidden sm:block"></span>
-                <span className="text-[10px] sm:text-xs whitespace-nowrap">{report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'} {report.quarterOrYear}</span>
-              </div>
-            </div>
-            <div className={cn(
-              "text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full flex-shrink-0 ml-1",
-              isSelected ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"
-            )}>
-              {report.financialPeriod}
-            </div>
+          <div className="flex items-center gap-2 mb-1">
+            <h3 className="font-semibold text-slate-900 dark:text-slate-100 truncate">
+              {report.companyName}
+            </h3>
+            <span className="text-sm text-slate-500 dark:text-slate-400 font-mono">
+              {report.ticker}
+            </span>
           </div>
           
-          {/* Report categories */}
-          <div className="mt-1 sm:mt-2 flex flex-wrap gap-1">
+          <div className="flex items-center gap-2 mb-2">
+            <FileText className="h-3 w-3 text-slate-400" />
+            <span className="text-sm text-slate-600 dark:text-slate-300 line-clamp-1">
+              {report.title}
+            </span>
+          </div>
+
+          {/* Financial period and category */}
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
+              {report.financialPeriod} • {report.quarterOrYear}
+            </span>
             {report.category && (
               <Badge 
-                key="main-category"
                 variant={isSelected ? "default" : "secondary"}
-                className="text-[10px] py-0 h-4 sm:h-5 flex items-center gap-1"
+                className="text-xs h-5 flex items-center gap-1"
               >
-                <Tag className="h-2 w-2 sm:h-3 sm:w-3" />
+                <Tag className="h-2 w-2" />
                 {report.category}
               </Badge>
             )}
           </div>
           
-          {/* One sentence summary */}
-          <div className="mt-1 sm:mt-2 text-xs sm:text-sm line-clamp-2">
+          {/* Summary */}
+          <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
             {generateSummary(report)}
+          </p>
+
+          {/* Performance metrics */}
+          <div className="flex items-center gap-4 mt-3 pt-2 border-t border-slate-100 dark:border-slate-700">
+            <div className="text-xs">
+              <span className="text-slate-500 dark:text-slate-400">Przychody: </span>
+              <span className={cn(
+                "font-medium",
+                report.summaryData.revenue.change > 0 
+                  ? "text-emerald-600 dark:text-emerald-400" 
+                  : "text-red-600 dark:text-red-400"
+              )}>
+                {report.summaryData.revenue.change > 0 ? '+' : ''}{report.summaryData.revenue.change}%
+              </span>
+            </div>
+            <div className="text-xs">
+              <span className="text-slate-500 dark:text-slate-400">Zysk netto: </span>
+              <span className={cn(
+                "font-medium",
+                report.summaryData.netIncome.change > 0 
+                  ? "text-emerald-600 dark:text-emerald-400" 
+                  : "text-red-600 dark:text-red-400"
+              )}>
+                {report.summaryData.netIncome.change > 0 ? '+' : ''}{report.summaryData.netIncome.change}%
+              </span>
+            </div>
           </div>
         </div>
       </div>
