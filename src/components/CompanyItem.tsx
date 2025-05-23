@@ -47,6 +47,11 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     };
   };
 
+  const cleanReportTitle = (title: string, companyName: string): string => {
+    // Usuń nazwę firmy z tytułu jeśli się tam znajduje
+    return title.replace(new RegExp(companyName, 'gi'), '').replace(/^[\s\-]+|[\s\-]+$/g, '').trim();
+  };
+
   const { date, time } = formatDateTime(report.publicationDate);
 
   return (
@@ -106,11 +111,11 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             </span>
           </div>
           
-          {/* Nazwa raportu */}
+          {/* Nazwa raportu - bez nazwy firmy */}
           <div className="flex items-start gap-3">
             <FileText className="h-5 w-5 text-slate-400 mt-1 flex-shrink-0" />
             <h4 className="text-lg font-semibold text-slate-800 dark:text-slate-200 line-clamp-2 leading-relaxed">
-              {report.title}
+              {cleanReportTitle(report.title, report.companyName)}
             </h4>
           </div>
 
