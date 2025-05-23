@@ -24,16 +24,16 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     
     let trendDescription = '';
     if (revenueChange >= 5) {
-      trendDescription = 'Ten znaczący wzrost przychodów świadczy o skuteczności strategii rozwoju spółki oraz umocnieniu jej pozycji na rynku.';
+      trendDescription = 'Znaczący wzrost świadczy o skutecznej strategii rozwoju.';
     } else if (revenueChange >= 0) {
-      trendDescription = 'Ten umiarkowany wzrost przychodów wskazuje na stabilną pozycję rynkową pomimo wyzwań makroekonomicznych.';
+      trendDescription = 'Umiarkowany wzrost wskazuje na stabilną pozycję rynkową.';
     } else if (revenueChange >= -5) {
-      trendDescription = 'Ten spadek przychodów wymaga uwagi i może wskazywać na przejściowe trudności w sektorze.';
+      trendDescription = 'Spadek może wskazywać na przejściowe trudności.';
     } else {
-      trendDescription = 'Ten znaczący spadek przychodów wymaga szczególnej uwagi i może wskazywać na strukturalne wyzwania.';
+      trendDescription = 'Znaczący spadek wymaga szczególnej uwagi.';
     }
     
-    return `W analizowanym okresie ${report.companyName} ${changeDirection} przychodów o ${changeText} w porównaniu do analogicznego okresu w roku ubiegłym. ${trendDescription} Zysk netto ${incomeChange >= 0 ? 'wzrósł' : 'spadł'} o ${incomeChange >= 0 ? '+' : ''}${incomeChange.toFixed(2)}%, co odzwierciedla ${incomeChange >= 0 ? 'poprawę' : 'pogorszenie'} efektywności operacyjnej w ${report.quarterOrYear}.`;
+    return `${report.companyName} ${changeDirection} przychodów o ${changeText}. ${trendDescription} Zysk netto ${incomeChange >= 0 ? 'wzrósł' : 'spadł'} o ${incomeChange >= 0 ? '+' : ''}${incomeChange.toFixed(2)}%.`;
   };
 
   const generateDescriptionLines = (report: FinancialReport): string[] => {
