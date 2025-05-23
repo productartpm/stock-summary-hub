@@ -161,7 +161,7 @@ export const financialReports: FinancialReport[] = [
         k: 35 + Math.random() * 15,
         d: 32 + Math.random() * 10
       },
-      williams: -65 + (Math.random() * 20) - 10,
+      williamsR: -65 + (Math.random() * 20) - 10,
       supportLevels: [3.8, 3.6, 3.4],
       resistanceLevels: [4.6, 5.0, 5.5]
     },

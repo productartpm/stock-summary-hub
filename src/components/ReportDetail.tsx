@@ -12,7 +12,6 @@ import { ReportFinancialData } from './report/ReportFinancialData';
 import { ReportHeader } from './report/ReportHeader';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useState } from 'react';
-import { Header } from '@/components/Header';
 
 interface ReportDetailProps {
   report: FinancialReport | null;
@@ -43,15 +42,15 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
   const renderTabbedContent = () => {
     return (
       <Tabs defaultValue="financial-data" value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <div className="mb-4 bg-neutral-800 p-1 rounded-md">
+        <div className="mb-4 bg-neutral-100 p-1 rounded-md">
           <TabsList className="grid grid-cols-3 w-full bg-transparent">
-            <TabsTrigger value="financial-data" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+            <TabsTrigger value="financial-data" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               1. Dane Finansowe
             </TabsTrigger>
-            <TabsTrigger value="risks" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+            <TabsTrigger value="risks" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               2. Ryzyka
             </TabsTrigger>
-            <TabsTrigger value="technical" className="data-[state=active]:bg-amber-400 data-[state=active]:text-black">
+            <TabsTrigger value="technical" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               3. Analiza Techniczna
             </TabsTrigger>
           </TabsList>
@@ -83,7 +82,7 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
   };
 
   return (
-    <div className="p-4 md:p-8 overflow-y-auto h-full bg-neutral-100">
+    <div className="p-4 md:p-8 overflow-y-auto h-full bg-background">
       <div className="max-w-4xl mx-auto">
         {report.premium && !isNonPremium ? (
           <PremiumContent 
