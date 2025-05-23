@@ -1,4 +1,3 @@
-
 import type { FinancialReport } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, TrendingDown, DollarSign, Users, Shield, Globe } from "lucide-react";
@@ -8,12 +7,14 @@ interface ReportRisksProps {
 }
 
 export const ReportRisks = ({ report }: ReportRisksProps) => {
-  // Determine risk levels based on financial data
+  // Determine risk levels based on financial data with safe property access
   const financialRisk = report.summaryData.netIncome.change < 0 ? 'high' : 
                       report.summaryData.netIncome.change < 5 ? 'medium' : 'low';
   
-  const operationalRisk = report.summaryData.operatingProfit.change < 0 ? 'high' : 
-                        report.summaryData.operatingProfit.change < 5 ? 'medium' : 'low';
+  // Safe access to operatingProfit with fallback
+  const operatingProfitChange = report.summaryData.operatingProfit?.change ?? 0;
+  const operationalRisk = operatingProfitChange < 0 ? 'high' : 
+                        operatingProfitChange < 5 ? 'medium' : 'low';
   
   const marketRisk = report.reportCategory.includes('ESG') || 
                    report.reportCategory.includes('Regulatory') ? 'high' : 'medium';
