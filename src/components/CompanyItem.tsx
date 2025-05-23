@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { formatDate } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
@@ -33,14 +32,17 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   };
 
   const generateDescriptionLines = (report: FinancialReport): string[] => {
-    const revenueChange = report.summaryData.revenue.change;
-    const incomeChange = report.summaryData.netIncome.change;
+    const summary = generateSummary(report);
+    
+    // Podziel podsumowanie na 3 logiczne części
+    const words = summary.split(' ');
+    const thirdLength = Math.ceil(words.length / 3);
     
     return [
-      `Przychody: ${revenueChange > 0 ? '+' : ''}${revenueChange.toFixed(1)}% względem poprzedniego okresu`,
-      `Zysk netto: ${incomeChange > 0 ? '+' : ''}${incomeChange.toFixed(1)}% w porównaniu rok do roku`,
-      `Sektor: ${report.category || 'Różne'} • Okres: ${report.financialPeriod} ${report.quarterOrYear}`
-    ];
+      words.slice(0, thirdLength).join(' '),
+      words.slice(thirdLength, thirdLength * 2).join(' '),
+      words.slice(thirdLength * 2).join(' ')
+    ].filter(line => line.trim()); // Usuń puste linie
   };
 
   const formatDateTime = (dateString: string): { date: string, time: string } => {
