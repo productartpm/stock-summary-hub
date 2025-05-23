@@ -23,6 +23,15 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
     return null;
   };
 
+  // Calculate previous values based on change percentage
+  const calculatePreviousValue = (currentValue: number, changePercent: number) => {
+    if (changePercent === 0) return currentValue;
+    return currentValue / (1 + changePercent / 100);
+  };
+
+  const previousRevenue = calculatePreviousValue(revenue.value, revenue.change);
+  const previousNetIncome = calculatePreviousValue(netIncome.value, netIncome.change);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       {/* Przychody */}
@@ -45,11 +54,26 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
             </div>
           </div>
           
-          <div className="space-y-2">
-            <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">
-              {formatNumber(revenue.value, revenue.unit)}
+          <div className="space-y-3">
+            <div>
+              <div className="text-xs text-blue-600 dark:text-blue-300 font-medium mb-1">
+                {report.financialPeriod || report.quarterOrYear}
+              </div>
+              <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">
+                {formatNumber(revenue.value, revenue.unit)}
+              </div>
             </div>
-            <p className="text-sm text-blue-700 dark:text-blue-300">
+            
+            <div className="pt-2 border-t border-blue-200 dark:border-blue-700">
+              <div className="text-xs text-blue-600 dark:text-blue-300 font-medium mb-1">
+                Poprzedni okres
+              </div>
+              <div className="text-xl font-semibold text-blue-700 dark:text-blue-200">
+                {formatNumber(previousRevenue, revenue.unit)}
+              </div>
+            </div>
+            
+            <p className="text-sm text-blue-700 dark:text-blue-300 pt-1">
               {revenue.change >= 0 ? 'Wzrost' : 'Spadek'} o {Math.abs(revenue.change).toFixed(2)}% 
               {revenue.change >= 0 ? ' rok do roku' : ' względem roku poprzedniego'}
             </p>
@@ -77,11 +101,26 @@ export const ReportSummaryMetrics = ({ report }: ReportSummaryMetricsProps) => {
             </div>
           </div>
           
-          <div className="space-y-2">
-            <div className="text-3xl font-bold text-emerald-900 dark:text-emerald-100">
-              {formatNumber(netIncome.value, netIncome.unit)}
+          <div className="space-y-3">
+            <div>
+              <div className="text-xs text-emerald-600 dark:text-emerald-300 font-medium mb-1">
+                {report.financialPeriod || report.quarterOrYear}
+              </div>
+              <div className="text-3xl font-bold text-emerald-900 dark:text-emerald-100">
+                {formatNumber(netIncome.value, netIncome.unit)}
+              </div>
             </div>
-            <p className="text-sm text-emerald-700 dark:text-emerald-300">
+            
+            <div className="pt-2 border-t border-emerald-200 dark:border-emerald-700">
+              <div className="text-xs text-emerald-600 dark:text-emerald-300 font-medium mb-1">
+                Poprzedni okres
+              </div>
+              <div className="text-xl font-semibold text-emerald-700 dark:text-emerald-200">
+                {formatNumber(previousNetIncome, netIncome.unit)}
+              </div>
+            </div>
+            
+            <p className="text-sm text-emerald-700 dark:text-emerald-300 pt-1">
               {netIncome.change >= 0 ? 'Wzrost' : 'Spadek'} o {Math.abs(netIncome.change).toFixed(2)}% 
               {netIncome.change >= 0 ? ' rok do roku' : ' względem roku poprzedniego'}
             </p>
