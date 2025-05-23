@@ -22,7 +22,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     const incomeChange = report.summaryData.netIncome.change;
     
     if (revenueChange > 0 && incomeChange > 0) {
-      return `Pozytywne wyniki finansowe spółki z rosnącymi wskaźnikami operacyjnymi.`;
+      return `Pozytywne wyniki finansowe z rosnącymi wskaźnikami operacyjnymi.`;
     } else if (revenueChange < 0 && incomeChange < 0) {
       return `Wyzwania operacyjne z potrzebą optymalizacji procesów biznesowych.`;
     } else if (revenueChange > 0) {
