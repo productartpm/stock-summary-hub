@@ -58,22 +58,22 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     <div 
       onClick={onClick}
       className={cn(
-        "p-6 rounded-xl transition-all duration-300 cursor-pointer border",
-        "hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50",
+        "p-4 rounded-lg transition-all duration-300 cursor-pointer border",
+        "hover:shadow-md hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50",
         isSelected 
           ? "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 shadow-md" 
           : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750"
       )}
     >
       {/* Data i czas na samej górze */}
-      <div className="flex items-center justify-between mb-4 text-sm text-slate-600 dark:text-slate-400">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
+      <div className="flex items-center justify-between mb-3 text-xs text-slate-600 dark:text-slate-400">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <Calendar className="h-3 w-3" />
             <span className="font-medium">{date}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
+          <div className="flex items-center gap-1.5">
+            <Clock className="h-3 w-3" />
             <span className="font-medium">{time}</span>
           </div>
         </div>
@@ -82,9 +82,9 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
         </div>
       </div>
 
-      <div className="flex gap-5">
+      <div className="flex gap-3">
         {/* Logo */}
-        <div className="relative w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
+        <div className="relative w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-slate-200 dark:bg-slate-600 animate-pulse rounded-lg"></div>
           )}
@@ -92,7 +92,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-12 h-12 object-contain transition-opacity duration-300",
+              "w-8 h-8 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
@@ -100,46 +100,46 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
         </div>
 
         {/* Główna zawartość */}
-        <div className="flex-1 min-w-0 space-y-3">
+        <div className="flex-1 min-w-0 space-y-2">
           {/* Nazwa firmy i ticker */}
-          <div className="flex items-center gap-3">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+          <div className="flex items-center gap-2">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
               {report.companyName}
             </h3>
-            <span className="text-lg text-slate-500 dark:text-slate-400 font-mono font-medium">
+            <span className="text-sm text-slate-500 dark:text-slate-400 font-mono font-medium">
               {report.ticker}
             </span>
           </div>
           
           {/* Nazwa raportu - bez nazwy firmy */}
-          <div className="flex items-start gap-3">
-            <FileText className="h-5 w-5 text-slate-400 mt-1 flex-shrink-0" />
-            <h4 className="text-lg font-semibold text-slate-800 dark:text-slate-200 line-clamp-2 leading-relaxed">
+          <div className="flex items-start gap-2">
+            <FileText className="h-4 w-4 text-slate-400 mt-0.5 flex-shrink-0" />
+            <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200 line-clamp-2 leading-relaxed">
               {cleanReportTitle(report.title, report.companyName)}
             </h4>
           </div>
 
           {/* Typ raportu i kategoria */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Badge 
               variant={isSelected ? "default" : "secondary"}
-              className="text-sm h-7 flex items-center gap-2 px-3 font-medium"
+              className="text-xs h-6 flex items-center gap-1.5 px-2 font-medium"
             >
               {report.reportType === 'Quarterly' ? 'Raport Kwartalny' : 'Raport Roczny'}
             </Badge>
             {report.category && (
               <Badge 
                 variant="outline"
-                className="text-sm h-7 flex items-center gap-2 px-3"
+                className="text-xs h-6 flex items-center gap-1.5 px-2"
               >
-                <Tag className="h-3 w-3" />
+                <Tag className="h-2.5 w-2.5" />
                 {report.category}
               </Badge>
             )}
           </div>
           
           {/* Skrócony opis */}
-          <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-2">
+          <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
             {generateSummary(report)}
           </p>
         </div>
