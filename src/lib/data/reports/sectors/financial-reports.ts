@@ -121,5 +121,57 @@ export const financialReports: FinancialReport[] = [
       'Współczynnik kapitałowy Tier 1 na poziomie 17,8%, znacznie powyżej wymogów regulacyjnych'
     ],
     premium: true
+  },
+  {
+    id: 'columbus-energy-q3-2024',
+    companyName: 'Columbus Energy',
+    ticker: 'CLC.WA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Logo_Columbus_Energy_2021.png',
+    reportType: 'Quarterly',
+    quarterOrYear: 'Q3 2024',
+    publicationDate: '2024-11-15',
+    reportDate: '2024-09-30',
+    title: 'Columbus Energy - Raport skonsolidowany za III kwartał 2024',
+    reportCategory: ['Energy', 'Renewable Energy', 'Photovoltaics', 'Heat Pumps'],
+    category: 'Energy',
+    financialPeriod: 'Q3 2024 (9 miesięcy)',
+    summaryData: {
+      revenue: { value: 233.86, change: -35.85, unit: 'M PLN' },
+      netIncome: { value: -21.96, change: 63.37, unit: 'M PLN' }, // strata zmniejszyła się r/r
+      eps: { value: -0.33, change: 63.37, unit: 'PLN' },
+      operatingProfit: { value: 10.38, change: 134.5, unit: 'M PLN' }, // zmiana z -30.098 na +10.382
+      ebitda: { value: 20.88, change: 206.1, unit: 'M PLN' } // zmiana z -19.668 na +20.878
+    },
+    stockData: {
+      currentPrice: 4.2 + Math.random() * 0.8,
+      priceChange: (Math.random() * 5) * (Math.random() > 0.5 ? 1 : -1),
+      yearToDateChange: -12 + (Math.random() * 8),
+      low52Week: 3.5 + Math.random() * 0.5,
+      high52Week: 7.8 + Math.random() * 1.2,
+      sharesOutstanding: 66.5 + Math.random() * 0.5,
+      averageDailyVolume: 250000 + Math.random() * 100000,
+      volatility: 1.8 + Math.random() * 0.4,
+      rsi: 41 + Math.random() * 10,
+      macd: {
+        value: -0.12 + (Math.random() * 0.24) - 0.12,
+        signal: -0.08 + (Math.random() * 0.16) - 0.08,
+        histogram: -0.04 + (Math.random() * 0.08) - 0.04
+      },
+      stochastic: {
+        k: 35 + Math.random() * 15,
+        d: 32 + Math.random() * 10
+      },
+      williams: -65 + (Math.random() * 20) - 10,
+      supportLevels: [3.8, 3.6, 3.4],
+      resistanceLevels: [4.6, 5.0, 5.5]
+    },
+    keyHighlights: [
+      'Redukcja straty netto o 63,4% w porównaniu do analogicznego okresu 2023',
+      'Osiągnięcie dodatniego wyniku EBITDA na poziomie 20,88 mln PLN',
+      'Wzrost rentowności operacyjnej do 4,44% z -8,26% w analogicznym okresie 2023',
+      'Rozwój projektu Columbus ONE dla konsolidacji rynku OZE',
+      'Wdrażanie innowacyjnej usługi Columbus Intelligence do synchronizacji urządzeń energetycznych'
+    ],
+    premium: false
   }
 ];
