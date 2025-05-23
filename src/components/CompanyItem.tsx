@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 import { formatDate } from '@/lib/data';
 import type { FinancialReport } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { Tag, FileText, Calendar, Clock } from 'lucide-react';
+import { FileText, Calendar, Clock } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface CompanyItemProps {
@@ -139,7 +138,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             </h4>
           </div>
 
-          {/* Typ raportu i kategoria */}
+          {/* Typ raportu bez kategorii */}
           <div className="flex items-center gap-2">
             <Badge 
               variant={isSelected ? "default" : "secondary"}
@@ -147,15 +146,6 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             >
               {report.reportType === 'Quarterly' ? 'Raport Kwartalny' : 'Raport Roczny'}
             </Badge>
-            {report.category && (
-              <Badge 
-                variant="outline"
-                className="text-xs h-5 flex items-center gap-1 px-2"
-              >
-                <Tag className="h-2 w-2" />
-                {report.category}
-              </Badge>
-            )}
           </div>
           
           {/* 3 linijki opisu */}
