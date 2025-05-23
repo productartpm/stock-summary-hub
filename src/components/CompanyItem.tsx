@@ -22,22 +22,22 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     const incomeChange = report.summaryData.netIncome.change;
     
     if (revenueChange > 0 && incomeChange > 0) {
-      return `Silny wzrost z przychodami wyższymi o ${report.summaryData.revenue.change}% i zyskiem netto wyższym o ${report.summaryData.netIncome.change}%.`;
+      return `Pozytywne wyniki finansowe spółki z rosnącymi wskaźnikami operacyjnymi.`;
     } else if (revenueChange < 0 && incomeChange < 0) {
-      return `Wyzwania z przychodami niższymi o ${Math.abs(report.summaryData.revenue.change)}% i zyskiem netto niższym o ${Math.abs(report.summaryData.netIncome.change)}%.`;
+      return `Wyzwania operacyjne z potrzebą optymalizacji procesów biznesowych.`;
     } else if (revenueChange > 0) {
-      return `Wzrost przychodów o ${report.summaryData.revenue.change}% pomimo ${incomeChange >= 0 ? 'zmian' : 'spadku'} w zysku netto.`;
+      return `Rozwój działalności z fokusem na poprawę efektywności operacyjnej.`;
     } else {
-      return `${revenueChange >= 0 ? 'Stabilne' : 'Malejące'} przychody z ${incomeChange >= 0 ? 'poprawioną' : 'zmniejszoną'} rentownością.`;
+      return `Stabilizacja wyników z koncentracją na długoterminowym wzroście.`;
     }
   };
 
   const getPerformanceIndicator = (report: FinancialReport) => {
     const revenueChange = report.summaryData.revenue.change;
     if (revenueChange > 5) {
-      return <TrendingUp className="h-4 w-4 text-emerald-500" />;
+      return <TrendingUp className="h-5 w-5 text-emerald-500" />;
     } else if (revenueChange < -5) {
-      return <TrendingDown className="h-4 w-4 text-red-500" />;
+      return <TrendingDown className="h-5 w-5 text-red-500" />;
     }
     return null;
   };
@@ -63,17 +63,16 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
     <div 
       onClick={onClick}
       className={cn(
-        "p-5 rounded-xl transition-all duration-300 cursor-pointer border",
+        "p-6 rounded-xl transition-all duration-300 cursor-pointer border",
         "hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50",
         isSelected 
           ? "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 shadow-md" 
           : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750"
       )}
     >
-      {/* Main content layout */}
-      <div className="flex gap-4">
+      <div className="flex gap-5">
         {/* Logo */}
-        <div className="relative w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0">
+        <div className="relative w-20 h-20 bg-slate-100 dark:bg-slate-700 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-slate-200 dark:bg-slate-600 animate-pulse rounded-xl"></div>
           )}
@@ -81,7 +80,7 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
             src={report.logoUrl}
             alt={`${report.companyName} logo`}
             className={cn(
-              "w-12 h-12 object-contain transition-opacity duration-300",
+              "w-14 h-14 object-contain transition-opacity duration-300",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setImageLoaded(true)}
@@ -89,14 +88,14 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 space-y-4">
           {/* Company name and performance indicator */}
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-3">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                 {report.companyName}
               </h3>
-              <span className="text-lg text-slate-500 dark:text-slate-400 font-mono font-medium">
+              <span className="text-xl text-slate-500 dark:text-slate-400 font-mono font-medium">
                 {report.ticker}
               </span>
             </div>
@@ -104,77 +103,51 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
           </div>
           
           {/* Report title */}
-          <div className="flex items-start gap-2 mb-3">
-            <FileText className="h-5 w-5 text-slate-400 mt-0.5 flex-shrink-0" />
-            <h4 className="text-lg font-semibold text-slate-800 dark:text-slate-200 line-clamp-2 leading-relaxed">
+          <div className="flex items-start gap-3">
+            <FileText className="h-6 w-6 text-slate-400 mt-1 flex-shrink-0" />
+            <h4 className="text-xl font-semibold text-slate-800 dark:text-slate-200 line-clamp-2 leading-relaxed">
               {report.title}
             </h4>
           </div>
 
           {/* Report type and category */}
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-4">
             <Badge 
               variant={isSelected ? "default" : "secondary"}
-              className="text-sm h-7 flex items-center gap-1 px-3 font-medium"
+              className="text-base h-8 flex items-center gap-2 px-4 font-medium"
             >
-              {report.reportType === 'Quarterly' ? 'Kwartalny' : 'Roczny'}
+              {report.reportType === 'Quarterly' ? 'Raport Kwartalny' : 'Raport Roczny'}
             </Badge>
             {report.category && (
               <Badge 
                 variant="outline"
-                className="text-sm h-7 flex items-center gap-1 px-3"
+                className="text-base h-8 flex items-center gap-2 px-4"
               >
-                <Tag className="h-3 w-3" />
+                <Tag className="h-4 w-4" />
                 {report.category}
               </Badge>
             )}
           </div>
 
           {/* Date and time */}
-          <div className="flex items-center gap-4 mb-4 text-slate-600 dark:text-slate-400">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              <span className="text-sm font-medium">{date}</span>
+          <div className="flex items-center gap-6 text-slate-600 dark:text-slate-400">
+            <div className="flex items-center gap-3">
+              <Calendar className="h-5 w-5" />
+              <span className="text-base font-medium">{date}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span className="text-sm font-medium">{time}</span>
+            <div className="flex items-center gap-3">
+              <Clock className="h-5 w-5" />
+              <span className="text-base font-medium">{time}</span>
+            </div>
+            <div className="text-base text-slate-500 dark:text-slate-400">
+              <span className="font-medium">{report.financialPeriod} • {report.quarterOrYear}</span>
             </div>
           </div>
           
           {/* Summary description */}
-          <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mb-4">
+          <p className="text-base text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
             {generateSummary(report)}
           </p>
-
-          {/* Financial metrics */}
-          <div className="flex items-center gap-6 pt-3 border-t border-slate-100 dark:border-slate-700">
-            <div className="text-sm">
-              <span className="text-slate-500 dark:text-slate-400 font-medium">Przychody: </span>
-              <span className={cn(
-                "font-bold text-base",
-                report.summaryData.revenue.change > 0 
-                  ? "text-emerald-600 dark:text-emerald-400" 
-                  : "text-red-600 dark:text-red-400"
-              )}>
-                {report.summaryData.revenue.change > 0 ? '+' : ''}{report.summaryData.revenue.change}%
-              </span>
-            </div>
-            <div className="text-sm">
-              <span className="text-slate-500 dark:text-slate-400 font-medium">Zysk netto: </span>
-              <span className={cn(
-                "font-bold text-base",
-                report.summaryData.netIncome.change > 0 
-                  ? "text-emerald-600 dark:text-emerald-400" 
-                  : "text-red-600 dark:text-red-400"
-              )}>
-                {report.summaryData.netIncome.change > 0 ? '+' : ''}{report.summaryData.netIncome.change}%
-              </span>
-            </div>
-            <div className="text-sm text-slate-500 dark:text-slate-400">
-              <span className="font-medium">{report.financialPeriod} • {report.quarterOrYear}</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
