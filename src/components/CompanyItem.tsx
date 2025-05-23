@@ -19,16 +19,21 @@ const CompanyItem = ({ report, isSelected, onClick }: CompanyItemProps) => {
   const generateSummary = (report: FinancialReport): string => {
     const revenueChange = report.summaryData.revenue.change;
     const incomeChange = report.summaryData.netIncome.change;
+    const changeDirection = revenueChange >= 0 ? 'zwiększyło' : 'odnotowało spadek';
+    const changeText = revenueChange >= 0 ? `+${revenueChange.toFixed(2)}%` : `${revenueChange.toFixed(2)}%`;
     
-    if (revenueChange > 0 && incomeChange > 0) {
-      return `Pozytywne wyniki finansowe z rosnącymi wskaźnikami operacyjnymi.`;
-    } else if (revenueChange < 0 && incomeChange < 0) {
-      return `Wyzwania operacyjne z potrzebą optymalizacji procesów biznesowych.`;
-    } else if (revenueChange > 0) {
-      return `Rozwój działalności z fokusem na poprawę efektywności operacyjnej.`;
+    let trendDescription = '';
+    if (revenueChange >= 5) {
+      trendDescription = 'Ten znaczący wzrost przychodów świadczy o skuteczności strategii rozwoju spółki oraz umocnieniu jej pozycji na rynku.';
+    } else if (revenueChange >= 0) {
+      trendDescription = 'Ten umiarkowany wzrost przychodów wskazuje na stabilną pozycję rynkową pomimo wyzwań makroekonomicznych.';
+    } else if (revenueChange >= -5) {
+      trendDescription = 'Ten spadek przychodów wymaga uwagi i może wskazywać na przejściowe trudności w sektorze.';
     } else {
-      return `Stabilizacja wyników z koncentracją na długoterminowym wzroście.`;
+      trendDescription = 'Ten znaczący spadek przychodów wymaga szczególnej uwagi i może wskazywać na strukturalne wyzwania.';
     }
+    
+    return `W analizowanym okresie ${report.companyName} ${changeDirection} przychodów o ${changeText} w porównaniu do analogicznego okresu w roku ubiegłym. ${trendDescription} Zysk netto ${incomeChange >= 0 ? 'wzrósł' : 'spadł'} o ${incomeChange >= 0 ? '+' : ''}${incomeChange.toFixed(2)}%, co odzwierciedla ${incomeChange >= 0 ? 'poprawę' : 'pogorszenie'} efektywności operacyjnej w ${report.quarterOrYear}.`;
   };
 
   const generateDescriptionLines = (report: FinancialReport): string[] => {
