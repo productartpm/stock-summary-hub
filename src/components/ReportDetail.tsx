@@ -1,4 +1,3 @@
-
 import { PremiumContent } from '@/components/PremiumContent';
 import { type FinancialReport } from '@/lib/types';
 import { User } from '@/hooks/useAuth';
@@ -13,7 +12,6 @@ import { ReportFinancialAnalysis } from './report/ReportFinancialAnalysis';
 import { ReportTrends } from './report/ReportTrends';
 import { ReportFuturePlans } from './report/ReportFuturePlans';
 import { ReportRisks } from './report/ReportRisks';
-import { ReportFinancialPredictions } from './report/ReportFinancialPredictions';
 import { ReportTechnicalAnalysis } from './report/ReportTechnicalAnalysis';
 
 interface ReportDetailProps {
@@ -46,7 +44,7 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
     return (
       <Tabs defaultValue="financial-analysis" value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="mb-6 bg-neutral-50 p-2 rounded-lg border">
-          <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full bg-transparent gap-1">
+          <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-full bg-transparent gap-1">
             <TabsTrigger value="financial-analysis" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs px-2 py-2">
               Dane Finansowe
             </TabsTrigger>
@@ -58,9 +56,6 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
             </TabsTrigger>
             <TabsTrigger value="risks" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs px-2 py-2">
               Ryzyka
-            </TabsTrigger>
-            <TabsTrigger value="predictions" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs px-2 py-2">
-              Predykcje Finansowe
             </TabsTrigger>
             <TabsTrigger value="technical" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs px-2 py-2">
               Analiza Techniczna
@@ -82,10 +77,6 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
 
         <TabsContent value="risks" className="space-y-4">
           <ReportRisks report={report} />
-        </TabsContent>
-
-        <TabsContent value="predictions" className="space-y-4">
-          <ReportFinancialPredictions report={report} />
         </TabsContent>
 
         <TabsContent value="technical" className="space-y-4">
