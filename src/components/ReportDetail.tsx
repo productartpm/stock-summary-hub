@@ -1,3 +1,4 @@
+
 import { PremiumContent } from '@/components/PremiumContent';
 import { type FinancialReport } from '@/lib/types';
 import { User } from '@/hooks/useAuth';
@@ -13,6 +14,8 @@ import { ReportTrends } from './report/ReportTrends';
 import { ReportFuturePlans } from './report/ReportFuturePlans';
 import { ReportRisks } from './report/ReportRisks';
 import { ReportTechnicalAnalysis } from './report/ReportTechnicalAnalysis';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { AlertTriangle } from 'lucide-react';
 
 interface ReportDetailProps {
   report: FinancialReport | null;
@@ -107,6 +110,25 @@ const ReportDetail = ({ report, onShare, user, onBackToList }: ReportDetailProps
               'Spadek wyników wymaga intensyfikacji działań operacyjnych i strategicznych w kolejnych okresach.'}
           </p>
         </div>
+
+        {/* Zastrzeżenie prawne - bardzo ważne */}
+        <Alert className="mb-6 border-2 border-amber-400 bg-amber-50">
+          <AlertTriangle className="h-5 w-5 text-amber-600" />
+          <AlertDescription>
+            <div className="space-y-2">
+              <p className="font-semibold text-amber-900 text-sm">
+                ⚠️ WAŻNE ZASTRZEŻENIE PRAWNE
+              </p>
+              <p className="text-sm text-amber-800 leading-relaxed">
+                <strong>To nie jest rekomendacja finansowa ani doradztwo inwestycyjne.</strong> Przedstawione analizy i komentarze mają charakter wyłącznie informacyjny i edukacyjny. Podsumowanie może zawierać błędy lub nieścisłości.
+              </p>
+              <p className="text-sm text-amber-800 leading-relaxed">
+                <strong>Zachęcamy do samodzielnego potwierdzania wszystkich danych z oficjalnych raportów spółki</strong> oraz konsultacji z wykwalifikowanym doradcą finansowym przed podjęciem jakichkolwiek decyzji inwestycyjnych. 
+                Inwestowanie wiąże się z ryzykiem utraty kapitału.
+              </p>
+            </div>
+          </AlertDescription>
+        </Alert>
 
         {renderTabbedContent()}
       </>
