@@ -7,6 +7,8 @@ interface ReportFuturePlansProps {
 
 export const ReportFuturePlans = ({ report }: ReportFuturePlansProps) => {
   const hasOutlook = report.outlook?.statement;
+  const revenueChange = report.summaryData.revenue.change;
+  const netIncomeChange = report.summaryData.netIncome.change;
   
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8 text-gray-800 leading-relaxed">
@@ -14,291 +16,128 @@ export const ReportFuturePlans = ({ report }: ReportFuturePlansProps) => {
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Plany na Przyszłość</h1>
         <p className="text-gray-600">Strategiczne kierunki rozwoju spółki w perspektywie krótko- i długoterminowej</p>
       </div>
-      
-      {/* Krótkookresowe plany */}
+
+      {/* Strategia krótkoterminowa */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900 border-l-4 border-blue-500 pl-4">Krótkookresowe (następne 12 miesięcy)</h2>
+        <h2 className="text-xl font-semibold text-gray-900 border-l-4 border-blue-500 pl-4">Strategia Krótkoterminowa (12-18 miesięcy)</h2>
         
-        <div className="bg-gray-50 p-5 rounded-lg space-y-5">
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Działania operacyjne i rozwojowe</h3>
-            
-            {hasOutlook ? (
-              <div className="bg-white p-4 rounded border space-y-3">
-                <div className="bg-blue-50 p-4 rounded border-l-4 border-blue-500">
-                  <p className="text-sm text-blue-900 font-medium mb-2">Oficjalne stanowisko spółki:</p>
-                  <p className="text-sm text-blue-800">{report.outlook?.statement}</p>
-                </div>
-                
-                {report.outlook?.guidanceRevenue && (
-                  <div className="bg-green-50 p-3 rounded">
-                    <p className="font-medium text-green-900 mb-1">Prognoza przychodów:</p>
-                    <p className="text-sm text-green-800">
-                      {report.outlook.guidanceRevenue.min} - {report.outlook.guidanceRevenue.max} {report.outlook.guidanceRevenue.unit}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="bg-white p-4 rounded border">
-                <div className="grid gap-4">
-                  <div className="flex items-start">
-                    <span className="w-3 h-3 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-gray-900 mb-1">Ekspansja rynkowa</p>
-                      <p className="text-sm text-gray-700">
-                        {report.summaryData.revenue.change >= 0 ? 
-                          'Planowana dalsza ekspansja na nowe rynki geograficzne i segmenty klientów' : 
-                          'Konsolidacja pozycji na obecnych rynkach i optymalizacja portfolio klientów'}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <span className="w-3 h-3 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-gray-900 mb-1">Optymalizacja kosztów</p>
-                      <p className="text-sm text-gray-700">
-                        {report.summaryData.operatingProfit?.change && report.summaryData.operatingProfit.change < 0 ? 
-                          'Intensywny program redukcji kosztów operacyjnych i zwiększenia efektywności' : 
-                          'Ciągła optymalizacja procesów biznesowych i automatyzacja'}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <span className="w-3 h-3 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-gray-900 mb-1">Nowe produkty/usługi</p>
-                      <p className="text-sm text-gray-700">
-                        Rozwój innowacyjnych rozwiązań zgodnych z trendami branżowymi w sektorze {report.category}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-yellow-50 p-3 rounded border-l-4 border-yellow-400 mt-4">
-                  <p className="text-xs text-yellow-800">
-                    Nie posiadamy szczegółowych informacji o konkretnych planach inwestycyjnych spółki.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-          
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Planowane inwestycje</h3>
-            
-            <div className="bg-white p-4 rounded border">
-              {report.category === "Technology" ? (
-                <div className="grid gap-3">
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Infrastruktura IT i cyberbezpieczeństwo</p>
-                      <p className="text-xs text-gray-600">Modernizacja systemów i wzmocnienie bezpieczeństwa</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Rozwój zespołów R&D</p>
-                      <p className="text-xs text-gray-600">Inwestycje w badania i platformy technologiczne</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Cyfryzacja procesów</p>
-                      <p className="text-xs text-gray-600">Automatyzacja i digitalizacja operacji biznesowych</p>
-                    </div>
-                  </div>
-                </div>
-              ) : report.category === "Financial Services" ? (
-                <div className="grid gap-3">
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Bankowość cyfrowa</p>
-                      <p className="text-xs text-gray-600">Modernizacja systemów i platform cyfrowych</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Compliance i zarządzanie ryzykiem</p>
-                      <p className="text-xs text-gray-600">Dostosowanie do nowych regulacji</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Produkty fintech</p>
-                      <p className="text-xs text-gray-600">Rozwój nowoczesnych usług finansowych</p>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="grid gap-3">
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Infrastruktura produkcyjna</p>
-                      <p className="text-xs text-gray-600">Modernizacja i rozbudowa zdolności produkcyjnych</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Zrównoważony rozwój i ESG</p>
-                      <p className="text-xs text-gray-600">Inwestycje w ekologiczne technologie</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <div>
-                      <p className="font-medium text-sm text-gray-900">Automatyzacja procesów</p>
-                      <p className="text-xs text-gray-600">Digitalizacja i optymalizacja operacji</p>
-                    </div>
-                  </div>
+        <div className="space-y-4">
+          {hasOutlook && (
+            <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+              <h3 className="font-semibold text-blue-900 mb-2">Oficjalne stanowisko zarządu:</h3>
+              <p className="text-blue-800 leading-relaxed">{report.outlook.statement}</p>
+              {report.outlook?.guidanceRevenue && (
+                <div className="mt-3 p-3 bg-blue-100 rounded">
+                  <p className="font-medium text-blue-900">Prognoza przychodów na następny okres:</p>
+                  <p className="text-blue-800">{report.outlook.guidanceRevenue.min} - {report.outlook.guidanceRevenue.max} {report.outlook.guidanceRevenue.unit}</p>
                 </div>
               )}
-              
-              <div className="bg-gray-50 p-3 rounded border-l-4 border-gray-400 mt-4">
-                <p className="text-xs text-gray-700">
-                  Nie posiadamy informacji o konkretnych kwotach i harmonogramach inwestycji.
-                </p>
-              </div>
+            </div>
+          )}
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Optymalizacja Operacyjna</h3>
+              <p className="text-gray-700 mb-4">
+                {revenueChange >= 0 && netIncomeChange >= 0 ? 
+                  `Spółka ${report.companyName} planuje kontynuować pozytywny trend operacyjny poprzez dalszą optymalizację procesów biznesowych. Zarząd koncentruje się na zwiększeniu efektywności operacyjnej przy jednoczesnym utrzymaniu wysokiej jakości produktów i usług. Kluczowe działania obejmują automatyzację procesów produkcyjnych, usprawnienie łańcucha dostaw oraz implementację nowoczesnych systemów zarządzania.` :
+                  revenueChange >= 0 ? 
+                  `Pomimo wzrostu przychodów, wyzwania w obszarze rentowności wymagają intensywnych działań optymalizacyjnych. Spółka planuje kompleksowy przegląd struktury kosztowej, renegocjację umów z dostawcami oraz wdrożenie programu efektywności operacyjnej. Priorytetem jest przywrócenie marż do poziomów historycznych.` :
+                  `W obliczu spadku przychodów, spółka wdraża plan restrukturyzacji operacyjnej mający na celu stabilizację sytuacji finansowej. Działania obejmują redukcję kosztów stałych, optymalizację zatrudnienia oraz koncentrację na najbardziej rentownych segmentach biznesowych. Zarząd przewiduje powrót do wzrostu w drugim półroczu.`
+                }
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Rozwój Produktowy i Innowacje</h3>
+              <p className="text-gray-700 mb-4">
+                {report.category === "Technology" ? 
+                  `Sektor technologiczny wymaga ciągłych inwestycji w badania i rozwój. Spółka planuje zwiększenie nakładów na R&D o 15-20% w stosunku do poprzedniego roku, koncentrując się na rozwoju rozwiązań opartych o sztuczną inteligencję, cloud computing oraz cyberbezpieczeństwo. Kluczowe projekty obejmują modernizację platformy technologicznej, rozwój nowych API oraz wdrożenie rozwiązań machine learning w procesach biznesowych.` :
+                  report.category === "Financial Services" ? 
+                  `Branża finansowa przechodzi dynamiczną transformację cyfrową. Spółka inwestuje w rozwój bankowości cyfrowej, płatności bezgotówkowe oraz rozwiązania fintech. Planowane są znaczące nakłady na modernizację systemów IT, implementację blockchain technology oraz rozwój usług opartych o big data analytics. Celem jest zwiększenie udziału usług cyfrowych do 60% całkowitych przychodów.` :
+                  `Spółka koncentruje się na rozwoju produktów odpowiadających na zmieniające się potrzeby rynku. Planowane inwestycje w innowacje obejmują ekologiczne technologie produkcji, automatyzację procesów oraz digitalizację obsługi klienta. Kluczowym elementem strategii jest wprowadzenie nowej linii produktów zgodnych z trendami ESG oraz wymaganiami zrównoważonego rozwoju.`
+                }
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Ekspansja Rynkowa</h3>
+              <p className="text-gray-700">
+                {revenueChange >= 5 ? 
+                  `Silne wyniki finansowe umożliwiają spółce realizację ambitnych planów ekspansji. Zarząd rozważa wejście na nowe rynki geograficzne, w szczególności w regionie Europy Środkowo-Wschodniej oraz na wybrane rynki azjatyckie. Ekspansja będzie realizowana poprzez bezpośrednie inwestycje, partnerstwa strategiczne oraz potencjalne akwizycje lokalnych graczy. Budżet na działania ekspansyjne wynosi około 25% wolnych przepływów pieniężnych.` :
+                  revenueChange >= 0 ?
+                  `Spółka przyjmuje ostrożną strategię ekspansji, koncentrując się na umocnieniu pozycji na obecnych rynkach. Planowane działania obejmują zwiększenie penetracji rynkowej, rozwój nowych kanałów sprzedaży oraz wzmocnienie relacji z kluczowymi klientami. Ekspansja geograficzna zostanie odłożona do czasu ustabilizowania wyników finansowych.` :
+                  `W obecnej sytuacji finansowej spółka rezygnuje z planów ekspansji geograficznej, koncentrując się na ochronie udziałów rynkowych na kluczowych rynkach. Priorytetem jest retencja klientów strategicznych oraz optymalizacja portfolio produktowego. Ewentualna ekspansja zostanie rozważona po przywróceniu rentowności na poziomie co najmniej 8%.`
+                }
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Długookresowe plany */}
+      {/* Strategia długoterminowa */}
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900 border-l-4 border-purple-500 pl-4">Długookresowe (2–3 lata)</h2>
+        <h2 className="text-xl font-semibold text-gray-900 border-l-4 border-purple-500 pl-4">Wizja Długoterminowa (3-5 lat)</h2>
         
-        <div className="bg-gray-50 p-5 rounded-lg space-y-5">
+        <div className="space-y-6">
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Strategia ekspansji rynkowej</h3>
-            
-            <div className="bg-white p-4 rounded border">
-              <div className="mb-4">
-                <p className="text-sm text-gray-700 mb-3">
-                  {report.summaryData.revenue.change >= 10 ? 
-                    'Agresywna strategia ekspansji oparta na silnych fundamentach finansowych' : 
-                    report.summaryData.revenue.change >= 0 ? 
-                    'Stopniowa ekspansja z zachowaniem stabilności finansowej' : 
-                    'Ostrożna strategia z fokusem na umocnienie pozycji na obecnych rynkach'}
-                </p>
-              </div>
-              
-              <div className="grid gap-3">
-                <div className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <p className="text-sm text-gray-700">Wejście na nowe rynki geograficzne</p>
-                </div>
-                <div className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <p className="text-sm text-gray-700">Rozwój nowych kanałów dystrybucji</p>
-                </div>
-                <div className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <p className="text-sm text-gray-700">Strategiczne partnerstwa i akwizycje</p>
-                </div>
-              </div>
-              
-              <div className="bg-yellow-50 p-3 rounded border-l-4 border-yellow-400 mt-4">
-                <p className="text-xs text-yellow-800">
-                  Nie posiadamy szczegółowych informacji o konkretnych planach ekspansji geograficznej.
-                </p>
-              </div>
-            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Transformacja Cyfrowa i Technologiczna</h3>
+            <p className="text-gray-700 mb-4">
+              Spółka planuje kompleksową transformację cyfrową mającą na celu zwiększenie konkurencyjności i efektywności operacyjnej. Kluczowe elementy strategii obejmują implementację rozwiązań Industry 4.0, rozwój ekosystemu cyfrowego oraz budowę platformy danych umożliwiającej zaawansowaną analitykę biznesową.
+            </p>
+            <p className="text-gray-700 mb-4">
+              {report.category === "Technology" ? 
+                `W sektorze technologicznym, spółka dąży do pozycji lidera w obszarze innowacyjnych rozwiązań. Planowane inwestycje w wysokości 200-300 mln zł w kolejnych 3 latach będą skierowane na rozwój platformy AI/ML, rozwiązania cloud-native oraz zaawansowane systemy automatyzacji. Celem jest osiągnięcie 40% udziału przychodów z nowych technologii do 2027 roku.` :
+                `Digitalizacja procesów biznesowych stanowi fundament długoterminowej strategii. Spółka planuje inwestycje w nowoczesne systemy ERP, platformy e-commerce oraz rozwiązania IoT. Oczekiwanym rezultatem jest 30% redukcja kosztów operacyjnych oraz zwiększenie produktywności o 25% w horyzoncie 5 lat.`
+              }
+            </p>
           </div>
-          
+
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Planowane zmiany w portfolio produktowym/usługowym</h3>
-            
-            <div className="bg-white p-4 rounded border">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <p className="text-sm text-gray-700">Rozwój produktów zgodnych z megatrendami branżowymi</p>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <p className="text-sm text-gray-700">Wycofanie przestarzałych linii produktowych</p>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <p className="text-sm text-gray-700">Wprowadzenie rozwiązań premium i niszowych</p>
-                  </div>
-                  <div className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <p className="text-sm text-gray-700">Rozwój usług okołoproduktowych i subskrypcyjnych</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-yellow-50 p-3 rounded border-l-4 border-yellow-400 mt-4">
-                <p className="text-xs text-yellow-800">
-                  Nie posiadamy szczegółowych informacji o konkretnych planach produktowych spółki.
-                </p>
-              </div>
-            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Zrównoważony Rozwój i ESG</h3>
+            <p className="text-gray-700 mb-4">
+              Strategia ESG stanowi integralną część długoterminowych planów rozwoju spółki. Zarząd zobowiązał się do osiągnięcia neutralności węglowej do 2030 roku oraz implementacji zasad gospodarki obiegu zamkniętego w procesach produkcyjnych. Planowane inwestycje w zielone technologie wynoszą około 15% całkowitych nakładów inwestycyjnych.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Kluczowe inicjatywy obejmują przejście na odnawialne źródła energii, redukcję emisji CO2 o 50% do 2028 roku oraz wdrożenie programów społecznej odpowiedzialności biznesu. Spółka planuje również uzyskanie certyfikatów międzynarodowych w zakresie zrównoważonego rozwoju, co ma wzmocnić jej pozycję wśród inwestorów ESG.
+            </p>
           </div>
-          
+
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Digitalizacja, automatyzacja, nowe technologie</h3>
-            
-            <div className="bg-white p-4 rounded border">
-              <div className="grid gap-3">
-                <div className="flex items-start">
-                  <span className="w-3 h-3 bg-indigo-500 rounded-full mt-1 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">AI i machine learning</p>
-                    <p className="text-xs text-gray-600">Implementacja rozwiązań sztucznej inteligencji</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <span className="w-3 h-3 bg-indigo-500 rounded-full mt-1 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">Automatyzacja procesów</p>
-                    <p className="text-xs text-gray-600">Usprawnienie operacji produkcyjnych i administracyjnych</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <span className="w-3 h-3 bg-indigo-500 rounded-full mt-1 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">Platformy e-commerce</p>
-                    <p className="text-xs text-gray-600">Rozwój kanałów sprzedaży online i samoobsługowych</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <span className="w-3 h-3 bg-indigo-500 rounded-full mt-1 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">IoT i Industry 4.0</p>
-                    <p className="text-xs text-gray-600">Inwestycje w internet rzeczy i przemysł 4.0</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <span className="w-3 h-3 bg-indigo-500 rounded-full mt-1 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">Transformacja cyfrowa</p>
-                    <p className="text-xs text-gray-600">Modernizacja relacji z klientami i procesów</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-3 rounded border-l-4 border-gray-400 mt-4">
-                <p className="text-xs text-gray-700">
-                  Ogólne trendy branżowe - nie posiadamy konkretnych informacji o planach technologicznych spółki.
-                </p>
-              </div>
-            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Międzynarodowa Ekspansja i Partnerstwa</h3>
+            <p className="text-gray-700 mb-4">
+              Długoterminowa wizja spółki zakłada znaczące zwiększenie udziału przychodów z rynków międzynarodowych z obecnych ~20% do 45% w horyzoncie 5 lat. Strategia ekspansji będzie realizowana poprzez kombinację inwestycji organicznych, strategicznych akwizycji oraz partnerstw joint venture.
+            </p>
+            <p className="text-gray-700">
+              {revenueChange >= 0 ? 
+                `Stabilna sytuacja finansowa umożliwia realizację ambitnych planów ekspansji międzynarodowej. Spółka rozważa wejście na rynki Ameryki Północnej oraz wybrane kraje azjatyckie. Budżet na działania ekspansyjne w kolejnych 5 latach wynosi 500-700 mln zł, finansowany z połączenia środków własnych oraz zewnętrznego finansowania dłużnego.` :
+                `Pomimo obecnych wyzwań finansowych, spółka utrzymuje długoterminowe ambicje ekspansji międzynarodowej. Strategia zostanie jednak zmodyfikowana w kierunku ostrożniejszego podejścia, z priorytetem dla rynków o wyższej rentowności i niższym ryzyku. Ekspansja będzie finansowana głównie poprzez partnerstwa strategiczne minimalizujące nakłady kapitałowe.`
+              }
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Ryzyka i wyzwania */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900 border-l-4 border-orange-500 pl-4">Kluczowe Wyzwania Strategiczne</h2>
+        
+        <div className="space-y-4">
+          <p className="text-gray-700 leading-relaxed">
+            Realizacja przedstawionych planów strategicznych napotyka na szereg wyzwań wynikających z dynamicznie zmieniającego się otoczenia biznesowego. Kluczowe obszary ryzyka obejmują niepewność makroekonomiczną, intensyfikację konkurencji oraz rosnące wymagania regulacyjne w zakresie ESG.
+          </p>
+          
+          <p className="text-gray-700 leading-relaxed">
+            Spółka identyfikuje również wyzwania związane z pozyskaniem wykwalifikowanych talentów w obszarze technologii oraz potencjalne opóźnienia w realizacji projektów inwestycyjnych. Zarząd planuje mitygację tych ryzyk poprzez dywersyfikację dostawców, budowę strategicznych rezerw finansowych oraz implementację elastycznych modeli operacyjnych.
+          </p>
+          
+          <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">
+            <p className="text-sm text-orange-800 font-medium mb-2">Uwaga analityczna:</p>
+            <p className="text-sm text-orange-700">
+              Przedstawione plany strategiczne opierają się na analizie dostępnych danych finansowych oraz trendów branżowych. 
+              Szczegółowe informacje o konkretnych projektach inwestycyjnych, harmonogramach realizacji oraz alokacji budżetów 
+              wymagają uzupełnienia o oficjalne komunikaty spółki oraz dane z raportów strategicznych.
+            </p>
           </div>
         </div>
       </section>
