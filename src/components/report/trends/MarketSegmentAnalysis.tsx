@@ -38,8 +38,8 @@ export const MarketSegmentAnalysis = ({ report }: MarketSegmentAnalysisProps) =>
           aktivności biznesowej. Główne segmenty działalności spółki obejmują:
         </p>
         
-        <div className="space-y-3 pl-4">
-          <p className="text-gray-700">
+        <ul className="space-y-3 pl-4 list-disc marker:text-gray-400">
+          <li className="text-gray-700">
             <strong>Segment podstawowy (około 70-80% przychodów):</strong> Stanowi trzon działalności operacyjnej 
             i wykazuje {report.summaryData.revenue.change >= 0 ? 'tendencję wzrostową' : 'objawy spowolnienia'}. 
             {report.summaryData.revenue.change >= 5 ? 
@@ -48,23 +48,23 @@ export const MarketSegmentAnalysis = ({ report }: MarketSegmentAnalysisProps) =>
               'Umiarkowany wzrost odzwierciedla stabilność rynku przy jednoczesnym wzroście konkurencji.' :
               'Spadek wyników w głównym segmencie sygnalizuje strukturalne wyzwania rynkowe wymagające strategicznej reorientacji.'
             }
-          </p>
+          </li>
           
-          <p className="text-gray-700">
+          <li className="text-gray-700">
             <strong>Segment usług dodatkowych (około 15-20% przychodów):</strong> Wykazuje 
             {report.summaryData.revenue.change >= 0 ? 'potencjał wzrostu' : 'presję na marże'} 
             i stanowi kluczowy element strategii dywersyfikacji. Rozwój tego segmentu jest ściśle powiązany 
             z trendami digitalizacji i automatyzacji procesów biznesowych.
-          </p>
+          </li>
           
-          <p className="text-gray-700">
+          <li className="text-gray-700">
             <strong>Pozostałe działalności (około 5-10% przychodów):</strong> Obejmują działalności 
             komplementarne i eksperymentalne projekty. {report.summaryData.revenue.change >= 0 ?
               'Segment ten może stać się nowym motorem wzrostu w perspektywie średnioterminowej.' :
               'W obliczu wyzwań w podstawowej działalności, segment ten wymaga przeglądu strategicznego.'
             }
-          </p>
-        </div>
+          </li>
+        </ul>
         
         <div className="pl-4 border-l-2 border-blue-300 bg-blue-50 p-3">
           <p className="text-sm text-blue-800">
