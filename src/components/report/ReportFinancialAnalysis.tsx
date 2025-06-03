@@ -178,105 +178,99 @@ export const ReportFinancialAnalysis = ({ report }: ReportFinancialAnalysisProps
             </Table>
           </div>
 
-          {/* Szczegółowa interpretacja */}
+          {/* Uproszczona interpretacja - przystępna i praktyczna */}
           <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Interpretacja Wyników</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Co to oznacza dla inwestora?</h3>
             
             <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
-              <div className="border-l-4 border-blue-400 pl-4">
-                <h4 className="font-semibold text-gray-900 mb-2">📈 Analiza Przychodów</h4>
+              
+              <div className="bg-white p-4 rounded border-l-4 border-blue-400">
+                <h4 className="font-semibold text-gray-900 mb-2">Przychody i Sprzedaż</h4>
                 <p>
                   {report.summaryData.revenue.change >= 5 ? 
-                    `${report.companyName} odnotowała silny wzrost przychodów o ${formatPercentage(report.summaryData.revenue.change)}, co wskazuje na skuteczną strategię ekspansji i umacnianie pozycji rynkowej. Ten wynik odzwierciedla pozytywne trendy sektorowe i zwiększenie udziałów w rynku.` :
+                    `Spółka bardzo dobrze radzi sobie ze sprzedażą - wzrost o ${formatPercentage(report.summaryData.revenue.change)} to mocny sygnał. Firma zwiększa swój udział w rynku i skutecznie rozwija biznes.` :
                     report.summaryData.revenue.change >= 0 ?
-                    `Umiarkowany wzrost przychodów o ${formatPercentage(report.summaryData.revenue.change)} odzwierciedla stabilną pozycję ${report.companyName} w dojrzałym rynku. Pomimo wyzwań makroekonomicznych, spółka utrzymuje pozytywną dynamikę.` :
-                    `Spadek przychodów o ${formatPercentage(Math.abs(report.summaryData.revenue.change))} sygnalizuje wyzwania rynkowe, z którymi zmaga się ${report.companyName}. Wymaga to strategicznych działań naprawczych w kolejnych okresach.`
+                    `Przychody rosną umiarkowanie (${formatPercentage(report.summaryData.revenue.change)}). To pokazuje, że firma utrzymuje stabilną pozycję, ale rozwija się powoli.` :
+                    `Spadek przychodów o ${formatPercentage(Math.abs(report.summaryData.revenue.change))} to niepokojący sygnał. Firma traci klientów lub ceny jej produktów maleją.`
                   }
                 </p>
               </div>
 
-              <div className="border-l-4 border-green-400 pl-4">
-                <h4 className="font-semibold text-gray-900 mb-2">💰 Analiza Rentowności</h4>
+              <div className="bg-white p-4 rounded border-l-4 border-green-400">
+                <h4 className="font-semibold text-gray-900 mb-2">Zyskowność</h4>
                 <p>
-                  <strong>Marża operacyjna:</strong> {operatingMarginChange >= 0 ?
-                    `Poprawa marży operacyjnej o ${operatingMarginChange.toFixed(1)} p.p. do ${formatPercentage(operatingMargin)} potwierdza wysoką efektywność operacyjną spółki. Skuteczne zarządzanie kosztami i optymalizacja procesów biznesowych przyczyniają się do poprawy rentowności.` :
-                    `Spadek marży operacyjnej o ${Math.abs(operatingMarginChange).toFixed(1)} p.p. do ${formatPercentage(operatingMargin)} wskazuje na presję kosztową i konieczność optymalizacji procesów operacyjnych.`
+                  <strong>Zysk netto:</strong> {netIncomeChange >= 0 ?
+                    `Firma zarabia więcej - wzrost o ${formatPercentage(netIncomeChange)}. To dobra wiadomość dla akcjonariuszy, którzy mogą liczyć na wyższe dywidendy i wzrost wartości akcji.` :
+                    `Zyski spadły o ${formatPercentage(Math.abs(netIncomeChange))}. Firma ma problemy z kosztami lub konkurencją. To może wpłynąć negatywnie na cenę akcji.`
                   }
                 </p>
                 <p className="mt-2">
-                  <strong>Marża netto:</strong> {netMarginChange >= 0 ?
-                    `Wzrost marży netto o ${netMarginChange.toFixed(1)} p.p. do ${formatPercentage(netMargin)} potwierdza solidne fundamenty finansowe i skuteczne zarządzanie wszystkimi aspektami działalności.` :
-                    `Spadek marży netto o ${Math.abs(netMarginChange).toFixed(1)} p.p. do ${formatPercentage(netMargin)} wymaga szczególnej uwagi zarządu i wdrożenia programów poprawy efektywności.`
+                  <strong>Marża zysku:</strong> Firma zarabia {formatPercentage(netMargin)} z każdej złotówki sprzedaży. {netMarginChange >= 0 ?
+                    `To więcej niż wcześniej - firma lepiej kontroluje koszty.` :
+                    `To mniej niż wcześniej - koszty rosną szybciej niż przychody.`
                   }
                 </p>
               </div>
 
               {eps !== 0 && (
-                <div className="border-l-4 border-yellow-400 pl-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">📊 Wskaźniki na Akcję</h4>
+                <div className="bg-white p-4 rounded border-l-4 border-yellow-400">
+                  <h4 className="font-semibold text-gray-900 mb-2">Zysk na Akcję</h4>
                   <p>
-                    <strong>Zysk na akcję (EPS):</strong> {epsChange >= 0 ?
-                      `Wzrost EPS o ${formatPercentage(epsChange)} do ${formatNumber(eps, report.summaryData.eps?.unit)} odzwierciedla poprawę rentowności w przeliczeniu na jedną akcję, co jest pozytywnym sygnałem dla akcjonariuszy.` :
-                      `Spadek EPS o ${formatPercentage(Math.abs(epsChange))} do ${formatNumber(eps, report.summaryData.eps?.unit)} może wpływać na atrakcyjność inwestycyjną spółki.`
+                    Na jedną akcję przypada {formatNumber(eps, report.summaryData.eps?.unit)} zysku. {epsChange >= 0 ?
+                      `To więcej niż rok temu o ${formatPercentage(epsChange)} - każda akcja staje się bardziej wartościowa.` :
+                      `To mniej niż rok temu o ${formatPercentage(Math.abs(epsChange))} - wartość pojedynczej akcji maleje.`
                     }
                   </p>
                 </div>
               )}
 
               {roe !== 0 && (
-                <div className="border-l-4 border-purple-400 pl-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">🎯 Efektywność Kapitału</h4>
+                <div className="bg-white p-4 rounded border-l-4 border-purple-400">
+                  <h4 className="font-semibold text-gray-900 mb-2">Efektywność Zarządzania</h4>
                   <p>
-                    <strong>ROE (Return on Equity):</strong> {roeChange >= 0 ?
-                      `Poprawa ROE o ${roeChange.toFixed(1)} p.p. do ${formatPercentage(roe)} wskazuje na zwiększenie efektywności wykorzystania kapitału własnego. Spółka generuje większy zwrot dla akcjonariuszy z każdej złotówki zainwestowanego kapitału.` :
-                      `Spadek ROE o ${Math.abs(roeChange).toFixed(1)} p.p. do ${formatPercentage(roe)} sygnalizuje obniżenie efektywności wykorzystania kapitału własnego, co wymaga analizy przyczyn tego trendu.`
+                    Firma generuje {formatPercentage(roe)} zwrotu z kapitału akcjonariuszy. {roeChange >= 0 ?
+                      `To więcej niż wcześniej - zarząd lepiej wykorzystuje pieniądze inwestorów.` :
+                      `To mniej niż wcześniej - zarząd gorzej radzi sobie z kapitałem akcjonariuszy.`
                     }
                   </p>
                 </div>
               )}
             </div>
 
-            {/* Perspektywy i rekomendacje */}
+            {/* Praktyczne wnioski */}
             <div className="mt-6 pt-4 border-t border-gray-200">
-              <h4 className="font-semibold text-gray-900 mb-3">🔮 Perspektywy i Rekomendacje</h4>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                <div className="bg-white p-4 rounded border">
-                  <h5 className="font-medium text-green-700 mb-2">Mocne Strony</h5>
-                  <ul className="space-y-1 text-gray-600">
-                    {report.summaryData.revenue.change >= 0 && <li>• Pozytywna dynamika przychodów</li>}
-                    {operatingMarginChange >= 0 && <li>• Poprawa marży operacyjnej</li>}
-                    {netMarginChange >= 0 && <li>• Wzrost rentowności netto</li>}
-                    {roeChange >= 0 && roe !== 0 && <li>• Lepsza efektywność kapitału</li>}
-                  </ul>
-                </div>
-                <div className="bg-white p-4 rounded border">
-                  <h5 className="font-medium text-red-700 mb-2">Obszary Uwagi</h5>
-                  <ul className="space-y-1 text-gray-600">
-                    {report.summaryData.revenue.change < 0 && <li>• Spadek przychodów</li>}
-                    {operatingMarginChange < 0 && <li>• Obniżenie marży operacyjnej</li>}
-                    {netMarginChange < 0 && <li>• Pogorszenie rentowności</li>}
-                    {roeChange < 0 && roe !== 0 && <li>• Spadek efektywności kapitału</li>}
-                  </ul>
-                </div>
+              <h4 className="font-semibold text-gray-900 mb-3">Praktyczne Wnioski</h4>
+              <div className="text-sm space-y-2">
+                {report.summaryData.revenue.change >= 0 && netIncomeChange >= 0 ? (
+                  <p className="text-green-700 bg-green-50 p-3 rounded">
+                    <strong>Pozytywny sygnał:</strong> Firma rozwija się i zwiększa zyskowność. To może być dobry moment dla długoterminowych inwestorów.
+                  </p>
+                ) : report.summaryData.revenue.change < 0 && netIncomeChange < 0 ? (
+                  <p className="text-red-700 bg-red-50 p-3 rounded">
+                    <strong>Sygnał ostrzegawczy:</strong> Firma ma problemy z przychodami i zyskami. Inwestorzy powinni być ostrożni i monitorować sytuację.
+                  </p>
+                ) : (
+                  <p className="text-amber-700 bg-amber-50 p-3 rounded">
+                    <strong>Mieszane sygnały:</strong> Wyniki pokazują zarówno pozytywne jak i negatywne trendy. Potrzeba więcej czasu na ocenę kierunku rozwoju.
+                  </p>
+                )}
+                
+                <p className="text-gray-700 mt-3">
+                  {operatingMarginChange >= 0 && netMarginChange >= 0 ?
+                    `Firma poprawia efektywność operacyjną, co jest dobrym fundamentem na przyszłość.` :
+                    `Koszty rosną szybciej niż przychody. Firma powinna skupić się na optymalizacji wydatków.`
+                  }
+                </p>
               </div>
-              
-              <p className="mt-4 text-sm text-gray-700">
-                {report.summaryData.revenue.change >= 0 && netMarginChange >= 0 ?
-                  `Na podstawie aktualnych wyników, ${report.companyName} wykazuje silne fundamenty finansowe z potencjałem do dalszego wzrostu. Kluczowe będzie utrzymanie pozytywnej dynamiki i kontynuacja strategii ekspansji przy zachowaniu dyscypliny kosztowej.` :
-                  `Spółka powinna skoncentrować się na stabilizacji wyników poprzez optymalizację kosztów, wzmocnienie kluczowych segmentów biznesowych i adaptację do zmieniających się warunków rynkowych. Szczególną uwagę należy poświęcić poprawie marż operacyjnych.`
-                }
-              </p>
             </div>
           </div>
         </CardContent>
       </Card>
 
       <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
-        <p className="text-sm text-blue-900 font-medium mb-2">💡 Uwaga metodologiczna:</p>
+        <p className="text-sm text-blue-900 font-medium mb-2">Uwaga:</p>
         <p className="text-sm text-blue-800">
-          Analiza opiera się na dostępnych danych kwartalnych i porównaniach rok do roku. 
-          Marże operacyjna i netto zostały obliczone na podstawie dostępnych danych finansowych.
-          Pełna ocena wymaga dostępu do szczegółowych sprawozdań finansowych i analizy przepływów pieniężnych.
+          Powyższa analiza opiera się na dostępnych danych finansowych. Pełna ocena inwestycyjna wymaga analizy wielu dodatkowych czynników, w tym sytuacji konkurencyjnej, trendów branżowych i planów strategicznych spółki.
         </p>
       </div>
     </div>
