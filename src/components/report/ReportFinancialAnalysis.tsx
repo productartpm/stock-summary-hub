@@ -13,11 +13,21 @@ export const ReportFinancialAnalysis = ({ report }: ReportFinancialAnalysisProps
   const operatingProfit = report.summaryData.operatingProfit?.value ?? 0;
   const netIncomeChange = report.summaryData.netIncome?.change ?? 0;
 
+  // Calculate previous values based on change percentage
+  const calculatePreviousValue = (currentValue: number, changePercent: number) => {
+    if (changePercent === 0) return currentValue;
+    return currentValue / (1 + changePercent / 100);
+  };
+
+  const previousRevenue = calculatePreviousValue(report.summaryData.revenue.value, report.summaryData.revenue.change);
+  const previousOperatingProfit = calculatePreviousValue(operatingProfit, operatingProfitChange);
+  const previousNetIncome = calculatePreviousValue(report.summaryData.netIncome.value, netIncomeChange);
+
   return (
     <div className="space-y-6">
       <div className="border-b border-gray-200 pb-4">
         <h2 className="text-xl font-semibold text-gray-900 border-l-4 border-blue-500 pl-4">Analiza Finansowa</h2>
-        <p className="text-gray-600 mt-2 pl-4">Kluczowe wyniki finansowe i ich interpretacja</p>
+        <p className="text-gray-600 mt-2 pl-4">Porównanie wyników finansowych między okresami</p>
       </div>
 
       <Card>
@@ -32,13 +42,17 @@ export const ReportFinancialAnalysis = ({ report }: ReportFinancialAnalysisProps
               <TableHeader>
                 <TableRow>
                   <TableHead className="font-semibold">Wskaźnik</TableHead>
-                  <TableHead className="text-right font-semibold">Wartość</TableHead>
-                  <TableHead className="text-right font-semibold">Zmiana YoY</TableHead>
+                  <TableHead className="text-right font-semibold">Poprzedni okres</TableHead>
+                  <TableHead className="text-right font-semibold">Bieżący okres</TableHead>
+                  <TableHead className="text-right font-semibold">Zmiana</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium">Przychody</TableCell>
+                  <TableCell className="text-right">
+                    {formatNumber(previousRevenue, report.summaryData.revenue.unit)}
+                  </TableCell>
                   <TableCell className="text-right font-bold">
                     {formatNumber(report.summaryData.revenue.value, report.summaryData.revenue.unit)}
                   </TableCell>
@@ -48,6 +62,9 @@ export const ReportFinancialAnalysis = ({ report }: ReportFinancialAnalysisProps
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Zysk Operacyjny</TableCell>
+                  <TableCell className="text-right">
+                    {formatNumber(previousOperatingProfit, report.summaryData.operatingProfit?.unit)}
+                  </TableCell>
                   <TableCell className="text-right font-bold">
                     {formatNumber(operatingProfit, report.summaryData.operatingProfit?.unit)}
                   </TableCell>
@@ -57,6 +74,9 @@ export const ReportFinancialAnalysis = ({ report }: ReportFinancialAnalysisProps
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Zysk Netto</TableCell>
+                  <TableCell className="text-right">
+                    {formatNumber(previousNetIncome, report.summaryData.netIncome.unit)}
+                  </TableCell>
                   <TableCell className="text-right font-bold">
                     {formatNumber(report.summaryData.netIncome.value, report.summaryData.netIncome.unit)}
                   </TableCell>
