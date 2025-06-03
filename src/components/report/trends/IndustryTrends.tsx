@@ -93,20 +93,20 @@ export const IndustryTrends = ({ report }: IndustryTrendsProps) => {
               Obecne środowisko biznesowe charakteryzuje się zwiększoną niepewnością i zmiennością, 
               co wpływa na wszystkie sektory gospodarki:
             </p>
-            <div className="pl-6 space-y-2">
-              <p className="text-gray-700">
+            <ul className="pl-6 space-y-3 list-disc marker:text-gray-400">
+              <li className="text-gray-700">
                 <strong>Inflacja i koszty:</strong> Rosnące koszty energii, surowców i pracy wpływają negatywnie 
                 na marże operacyjne. Spółki muszą optymalizować strukturę kosztową i podnosić ceny.
-              </p>
-              <p className="text-gray-700">
+              </li>
+              <li className="text-gray-700">
                 <strong>Łańcuchy dostaw:</strong> Globalne zakłócenia w łańcuchach dostaw wymuszają większą 
                 elastyczność i lokalizację produkcji.
-              </p>
-              <p className="text-gray-700">
+              </li>
+              <li className="text-gray-700">
                 <strong>Digitalizacja:</strong> Przyspieszenie procesów cyfrowych we wszystkich branżach 
                 tworzy nowe możliwości biznesowe i wymusza adaptację tradycyjnych modeli.
-              </p>
-            </div>
+              </li>
+            </ul>
           </div>
         )}
       </div>
