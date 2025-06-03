@@ -2,6 +2,7 @@
 import type { FinancialReport } from "@/lib/types";
 import { formatNumber, formatPercentage } from "@/lib/utils/formatters";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface ReportFinancialAnalysisProps {
   report: FinancialReport;
@@ -19,44 +20,52 @@ export const ReportFinancialAnalysis = ({ report }: ReportFinancialAnalysisProps
         <p className="text-gray-600 mt-2 pl-4">Kluczowe wyniki finansowe i ich interpretacja</p>
       </div>
 
-      {/* Główna sekcja finansowa */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">Wyniki Finansowe</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           
-          {/* Kluczowe dane w jednej sekcji */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-sm text-blue-700 mb-1">Przychody</div>
-              <div className="text-2xl font-bold text-blue-900">
-                {formatNumber(report.summaryData.revenue.value, report.summaryData.revenue.unit)}
-              </div>
-              <div className={`text-sm font-medium ${report.summaryData.revenue.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {formatPercentage(report.summaryData.revenue.change)} YoY
-              </div>
-            </div>
-
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <div className="text-sm text-green-700 mb-1">Zysk Operacyjny</div>
-              <div className="text-2xl font-bold text-green-900">
-                {formatNumber(operatingProfit, report.summaryData.operatingProfit?.unit)}
-              </div>
-              <div className={`text-sm font-medium ${operatingProfitChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {formatPercentage(operatingProfitChange)} YoY
-              </div>
-            </div>
-
-            <div className="text-center p-4 bg-emerald-50 rounded-lg">
-              <div className="text-sm text-emerald-700 mb-1">Zysk Netto</div>
-              <div className="text-2xl font-bold text-emerald-900">
-                {formatNumber(report.summaryData.netIncome.value, report.summaryData.netIncome.unit)}
-              </div>
-              <div className={`text-sm font-medium ${netIncomeChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {formatPercentage(netIncomeChange)} YoY
-              </div>
-            </div>
+          {/* Tabela z danymi finansowymi */}
+          <div className="rounded-lg border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="font-semibold">Wskaźnik</TableHead>
+                  <TableHead className="text-right font-semibold">Wartość</TableHead>
+                  <TableHead className="text-right font-semibold">Zmiana YoY</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="font-medium">Przychody</TableCell>
+                  <TableCell className="text-right font-bold">
+                    {formatNumber(report.summaryData.revenue.value, report.summaryData.revenue.unit)}
+                  </TableCell>
+                  <TableCell className={`text-right font-medium ${report.summaryData.revenue.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {formatPercentage(report.summaryData.revenue.change)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">Zysk Operacyjny</TableCell>
+                  <TableCell className="text-right font-bold">
+                    {formatNumber(operatingProfit, report.summaryData.operatingProfit?.unit)}
+                  </TableCell>
+                  <TableCell className={`text-right font-medium ${operatingProfitChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {formatPercentage(operatingProfitChange)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">Zysk Netto</TableCell>
+                  <TableCell className="text-right font-bold">
+                    {formatNumber(report.summaryData.netIncome.value, report.summaryData.netIncome.unit)}
+                  </TableCell>
+                  <TableCell className={`text-right font-medium ${netIncomeChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {formatPercentage(netIncomeChange)}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
 
           {/* Szczegółowa interpretacja */}
